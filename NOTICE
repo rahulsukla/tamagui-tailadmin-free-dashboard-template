@@ -1,0 +1,28 @@
+# Third-party notices
+
+This project is an independent Tamagui (web + React Native) port of the
+**TailAdmin free / community edition** admin dashboard template.
+
+It is **not** affiliated with, endorsed by, or an official product of TailAdmin
+or Tamagui Inc. Do not confuse this template with TailAdmin Pro or Tamagui Pro /
+Bento / Takeout commercial offerings.
+
+## TailAdmin (free / community edition)
+
+- Source: https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template
+- React reference: https://github.com/TailAdmin/free-react-tailwind-admin-dashboard
+- License: MIT
+- Copyright (c) 2023 TailAdmin
+
+Only the free/community edition pages and design tokens are used as reference.
+TailAdmin Pro components and pages are not included.
+
+## Tamagui (open source)
+
+- Source: https://github.com/tamagui/tamagui
+- License: MIT
+- Copyright (c) 2020 Nate Wienert and contributors listed in the upstream LICENSE
+
+## Expo
+
+This project was bootstrapped with Expo templates (MIT). See Expo's LICENSE for details.

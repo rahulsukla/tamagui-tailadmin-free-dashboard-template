@@ -3,19 +3,19 @@ const forGithubPages = process.env.GITHUB_PAGES === '1'
 
 /** @type {import('expo/config').ExpoConfig} */
 const expoConfig = {
-  name: 'TailAdmin Tamagui',
+  name: 'Verdant',
   slug: repoName,
-  version: '0.1.0',
+  version: '0.2.0',
   orientation: 'default',
   icon: './assets/images/icon.png',
-  scheme: 'tamagui-tailadmin',
+  scheme: 'verdant-admin',
   userInterfaceStyle: 'automatic',
   ios: {
     supportsTablet: true,
   },
   android: {
     adaptiveIcon: {
-      backgroundColor: '#E6F4FE',
+      backgroundColor: '#E8F6EF',
       foregroundImage: './assets/images/android-icon-foreground.png',
       backgroundImage: './assets/images/android-icon-background.png',
       monochromeImage: './assets/images/android-icon-monochrome.png',

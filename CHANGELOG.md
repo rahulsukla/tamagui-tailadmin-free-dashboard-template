@@ -1,20 +1,23 @@
 # Changelog
 
-All notable changes to this project are documented in this file.
+## [0.2.0] — 2026-09-10
+
+### Changed
+- Rebrand UI to **Verdant** (generic admin template); TailAdmin mentioned only as inspiration
+- Default brand preset → verdant green (tweakcn Light Green–inspired mood)
+- Profile demo data → John Doe with generated dummy avatars/products
+- Remove sidebar “Purchase Plan” promo widget
+- Fix user dropdown alignment; tighten Demographic + Recent Orders tiles
+- README rewritten (no phase checklist); component docs in `docs/components.md`
+
+### Added
+- KPI stat cards on the home dashboard
+- Documents table page (`/documents`)
+- Progress bars UI page (`/progress`)
+- NOTICE notes for tweakcn Apache-2.0 inspiration
+- `npm run audit:pages` (nav ↔ routes + UI brand check) wired into CI
+- Generated dummy demo images (no TailAdmin stock photos)
 
 ## [0.1.0] — 2026-09-10
 
-First public release of the Tamagui TailAdmin free dashboard template.
-
-### Added
-- Expo SDK 57 + Expo Router app (web / iOS / Android) with Tamagui themes
-- Dashboard shell: sidebar, header, breadcrumbs, theme mode, config panel
-- Free TailAdmin page inventory: UI kit, forms, tables, ecommerce widgets, SVG charts, profile, calendar, auth, 404
-- Template settings drawer: brand presets, density, sticky header, content max width
-- Header notification and user dropdowns (static demo data)
-- SVG demographic map art (no jsVectorMap)
-- GitHub Actions CI (typecheck) and GitHub Pages deploy to `gh-pages` on `main` / releases
-
-### Notes
-- Charts and calendar are custom SVG / grid implementations (no ApexCharts / FullCalendar)
-- Independent community port — not affiliated with TailAdmin or Tamagui commercial products
+First public release (Expo + Tamagui admin template with Pages demo/CI).

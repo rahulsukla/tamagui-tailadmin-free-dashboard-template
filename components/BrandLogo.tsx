@@ -23,7 +23,7 @@ export function BrandLogo() {
           bg={brandColor as any}
         >
           <Text color="#fff" fontWeight="700" fontSize={14}>
-            T
+            V
           </Text>
         </YStack>
         {wide ? (
@@ -34,10 +34,10 @@ export function BrandLogo() {
               color={resolvedTheme === 'dark' ? '#fff' : '#101828'}
               letterSpacing={-0.3}
             >
-              TailAdmin
+              Verdant
             </Text>
             <Text fontSize={10} color="$gray10" mt={-2}>
-              Tamagui edition
+              Admin template
             </Text>
           </YStack>
         ) : null}

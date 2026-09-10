@@ -21,18 +21,18 @@ export function UserDropdown() {
   return (
     <>
       <Pressable onPress={() => setOpen(true)} accessibilityLabel="User menu">
-        <XStack items="center" gap="$2">
+        <XStack items="center" gap={10}>
           <Image
-            source={require('@/assets/demo/user/owner.jpg')}
+            source={require('@/assets/demo/user/john-doe.png')}
             style={{ width: 44, height: 44, borderRadius: 22 }}
             contentFit="cover"
           />
           {showName ? (
-            <Text fontSize={14} fontWeight="500" color="$gray11">
-              Musharof
+            <Text fontSize={14} fontWeight="500" color="$gray11" lineHeight={18}>
+              John Doe
             </Text>
           ) : null}
-          <Text fontSize={12} color="$gray10">
+          <Text fontSize={12} color="$gray10" lineHeight={18}>
             ▾
           </Text>
         </XStack>
@@ -52,34 +52,36 @@ export function UserDropdown() {
         >
           <Pressable onPress={() => {}}>
             <YStack
-              width={260}
+              width={280}
               bg="$backgroundStrong"
               borderWidth={1}
               borderColor="$borderColor"
               rounded={16}
-              p="$3"
-              gap="$3"
+              p={16}
+              gap={12}
             >
-              <YStack gap={2} pb="$3" borderBottomWidth={1} borderColor="$borderColor">
-                <Text fontSize={14} fontWeight="600" color="$color">
-                  Musharof Chowdhury
+              <YStack gap={4} pb={12} borderBottomWidth={1} borderColor="$borderColor">
+                <Text fontSize={14} fontWeight="600" color="$color" lineHeight={20}>
+                  John Doe
                 </Text>
-                <Text fontSize={12} color="$gray10">
-                  randomuser@pimjo.com
+                <Text fontSize={12} color="$gray10" lineHeight={18}>
+                  john.doe@example.com
                 </Text>
               </YStack>
 
-              <YStack gap={2}>
+              <YStack gap={4}>
                 {LINKS.map((item) => (
                   <Link key={item.label} href={item.href} asChild>
                     <Pressable onPress={() => setOpen(false)}>
                       <XStack
-                        px="$3"
-                        py="$2.5"
+                        width="100%"
+                        px={12}
+                        py={10}
                         rounded={8}
+                        items="center"
                         hoverStyle={{ bg: '$backgroundHover' }}
                       >
-                        <Text fontSize={14} fontWeight="500" color="$gray11">
+                        <Text fontSize={14} fontWeight="500" color="$gray11" lineHeight={20}>
                           {item.label}
                         </Text>
                       </XStack>
@@ -91,15 +93,23 @@ export function UserDropdown() {
               <Link href="/signin" asChild>
                 <Pressable onPress={() => setOpen(false)}>
                   <XStack
-                    mt="$1"
-                    px="$3"
-                    py="$2.5"
+                    width="100%"
+                    mt={4}
+                    px={12}
+                    py={10}
                     rounded={8}
                     borderWidth={1}
                     borderColor="$borderColor"
+                    items="center"
                     justify="center"
                   >
-                    <Text fontSize={14} fontWeight="500" color={brandColor as any}>
+                    <Text
+                      fontSize={14}
+                      fontWeight="500"
+                      color={brandColor as any}
+                      lineHeight={20}
+                      text="center"
+                    >
                       Sign out
                     </Text>
                   </XStack>

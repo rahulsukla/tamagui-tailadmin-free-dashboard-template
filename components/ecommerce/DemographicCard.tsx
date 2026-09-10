@@ -5,15 +5,15 @@ import { MoreMenu } from '@/components/charts/MoreMenu'
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 const countries = [
-  { name: 'USA', customers: '2,379 Customers', pct: 79, flag: '🇺🇸' },
-  { name: 'France', customers: '589 Customers', pct: 23, flag: '🇫🇷' },
+  { name: 'USA', customers: '2,379 Customers', pct: 79, code: 'US' },
+  { name: 'France', customers: '589 Customers', pct: 23, code: 'FR' },
+  { name: 'Canada', customers: '412 Customers', pct: 16, code: 'CA' },
 ]
 
 function DemographicMapArt({ color }: { color: string }) {
   return (
     <Svg width="100%" height="100%" viewBox="0 0 360 180" fill="none">
       <Ellipse cx="180" cy="96" rx="150" ry="62" fill={`${color}14`} />
-      {/* Simplified continents silhouette */}
       <Path
         d="M48 78c18-22 42-30 68-22 14 4 22 14 36 12 10-2 16-10 28-12 20-4 38 6 52 18 8 8 22 10 32 4 12-8 30-6 40 6 6 8 4 20-4 28-14 14-36 18-54 12-12-4-22 2-34 6-18 6-40 2-54-10-8-6-18-8-28-4-16 6-34 2-46-10-8-8-10-20-4-28z"
         fill={`${color}33`}
@@ -40,17 +40,19 @@ export function DemographicCard() {
       borderWidth={1}
       borderColor="$borderColor"
       bg="$backgroundStrong"
-      p="$5"
-      gap="$5"
+      p={20}
+      gap={16}
       flex={1}
+      minH={420}
+      width="100%"
     >
-      <XStack justify="space-between" items="flex-start">
-        <YStack gap={4} flex={1}>
+      <XStack justify="space-between" items="flex-start" gap={12}>
+        <YStack gap={4} flex={1} minW={0}>
           <Text fontSize={18} fontWeight="600" color="$color">
             Customers Demographic
           </Text>
           <Text fontSize={14} color="$gray10">
-            Number of customer based on country
+            Customers by country for the last 30 days
           </Text>
         </YStack>
         <MoreMenu />
@@ -60,22 +62,33 @@ export function DemographicCard() {
         borderWidth={1}
         borderColor="$borderColor"
         rounded={16}
-        height={180}
+        height={160}
         items="center"
         justify="center"
         bg="$background"
         overflow="hidden"
-        px="$3"
+        px={12}
       >
         <DemographicMapArt color={brandColor} />
       </YStack>
 
-      <YStack gap="$4">
+      <YStack gap={16} flex={1}>
         {countries.map((c) => (
-          <XStack key={c.name} items="center" justify="space-between" gap="$3">
-            <XStack items="center" gap="$3" flex={1}>
-              <Text fontSize={22}>{c.flag}</Text>
-              <YStack>
+          <XStack key={c.name} items="center" justify="space-between" gap={12}>
+            <XStack items="center" gap={12} flex={1} minW={0}>
+              <YStack
+                width={40}
+                height={40}
+                rounded={999}
+                bg="$gray3"
+                items="center"
+                justify="center"
+              >
+                <Text fontSize={11} fontWeight="700" color="$gray11">
+                  {c.code}
+                </Text>
+              </YStack>
+              <YStack flex={1} minW={0}>
                 <Text fontSize={14} fontWeight="600" color="$color">
                   {c.name}
                 </Text>
@@ -84,7 +97,7 @@ export function DemographicCard() {
                 </Text>
               </YStack>
             </XStack>
-            <XStack items="center" gap="$3" width={140}>
+            <XStack items="center" gap={12} width={132}>
               <YStack flex={1} height={8} rounded={4} bg="$gray3" overflow="hidden">
                 <YStack
                   height="100%"

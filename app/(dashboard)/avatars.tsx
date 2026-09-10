@@ -3,7 +3,7 @@ import { Avatar } from '@/components/ui/Avatar'
 import { ComponentCard } from '@/components/ui/ComponentCard'
 import { XStack, YStack } from 'tamagui'
 
-const user = require('@/assets/demo/user/user-01.jpg')
+const user = require('@/assets/demo/user/john-doe.png')
 const sizes = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'] as const
 
 export default function AvatarsPage() {

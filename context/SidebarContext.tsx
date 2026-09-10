@@ -55,7 +55,7 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const effectiveExpanded = isMobile ? false : isExpanded
-  // Match TailAdmin: content margin follows expanded OR hovered width.
+  // Content margin follows expanded OR hovered sidebar width.
   const showWide = effectiveExpanded || isHovered || isMobileOpen
   const sidebarWidth = showWide ? EXPANDED_WIDTH : COLLAPSED_WIDTH
   // Keep main column offset stable on hover (sidebar overlays when collapsed+hover)

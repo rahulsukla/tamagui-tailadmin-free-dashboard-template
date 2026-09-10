@@ -8,7 +8,6 @@ import { NavIcon } from '@/components/icons'
 import { useSidebar } from '@/context/SidebarContext'
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
-import { SidebarWidget } from '@/layout/SidebarWidget'
 import { mainNav, othersNav, type NavItem } from '@/navigation/navItems'
 
 function pathMatches(pathname: string, href: string) {
@@ -80,7 +79,7 @@ export function AppSidebar() {
           <NavIcon name="dots" color={inactiveIcon} size={20} />
         )}
       </XStack>
-      {/* TailAdmin free: ul gap-4 between items; menu-item px-3 py-2 */}
+      {/* Nav list: gap between items; menu-item padding */}
       <YStack gap={16}>
         {items.map((item) => {
           const hasSubs = !!item.subItems?.length
@@ -230,7 +229,6 @@ export function AppSidebar() {
         <YStack gap={24} pb={24}>
           {renderGroup('Menu', mainNav)}
           {renderGroup('Others', othersNav)}
-          {wide ? <SidebarWidget /> : null}
         </YStack>
       </ScrollView>
     </YStack>

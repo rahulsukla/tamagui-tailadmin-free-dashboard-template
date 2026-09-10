@@ -29,13 +29,10 @@ export function UserAddressCard() {
               Address
             </Text>
             <XStack flexWrap="wrap" gap="$5">
-              <ProfileField label="Country" value="United States." />
-              <ProfileField
-                label="City/State"
-                value="Phoenix, Arizona, United States."
-              />
-              <ProfileField label="Postal Code" value="ERT 2489" />
-              <ProfileField label="TAX ID" value="AS4568384" />
+              <ProfileField label="Country" value="United States" />
+              <ProfileField label="City/State" value="Austin, Texas" />
+              <ProfileField label="Postal Code" value="78701" />
+              <ProfileField label="TAX ID" value="US-100200300" />
             </XStack>
           </YStack>
           <EditPillButton onPress={openModal} />
@@ -55,15 +52,15 @@ export function UserAddressCard() {
           </YStack>
           <YStack flex={1} minW={200}>
             <Label>City/State</Label>
-            <AppInput defaultValue="Phoenix, Arizona" />
+            <AppInput defaultValue="Austin, Texas" />
           </YStack>
           <YStack flex={1} minW={200}>
             <Label>Postal Code</Label>
-            <AppInput defaultValue="ERT 2489" />
+            <AppInput defaultValue="78701" />
           </YStack>
           <YStack flex={1} minW={200}>
             <Label>TAX ID</Label>
-            <AppInput defaultValue="AS4568384" />
+            <AppInput defaultValue="US-100200300" />
           </YStack>
         </XStack>
       </AppModal>

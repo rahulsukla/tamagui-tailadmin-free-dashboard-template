@@ -22,7 +22,7 @@ export default function NotFoundScreen() {
           </AppButton>
         </Link>
         <Text position="absolute" b={24} fontSize={13} color="$gray10">
-          © {new Date().getFullYear()} - TailAdmin Tamagui
+          © {new Date().getFullYear()} - Verdant
         </Text>
       </YStack>
     </>

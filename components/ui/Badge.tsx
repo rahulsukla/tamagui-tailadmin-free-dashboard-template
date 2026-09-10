@@ -123,7 +123,7 @@ export function Badge({
   )
 }
 
-/** Kept for page API parity with TailAdmin demos */
+/** Kept for page API parity with UI kit demos */
 export function PlusGlyph(_props?: { color?: string; size?: number }) {
   return null
 }

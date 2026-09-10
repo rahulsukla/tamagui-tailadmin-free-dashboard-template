@@ -1,21 +1,21 @@
 /**
- * TailAdmin free palette (from community edition CSS tokens).
- * Source: TailAdmin MIT — see NOTICE.
+ * Verdant brand palette — light-green inspired (tweakcn “Light Green” mood),
+ * not a 1:1 copy of any upstream CSS. Blue kept as an optional preset.
  */
 
 export const brand = {
-  25: '#f2f7ff',
-  50: '#ecf3ff',
-  100: '#dde9ff',
-  200: '#c2d6ff',
-  300: '#9cb9ff',
-  400: '#7592ff',
-  500: '#465fff',
-  600: '#3641f5',
-  700: '#2a31d8',
-  800: '#252dae',
-  900: '#262e89',
-  950: '#161950',
+  25: '#f3faf6',
+  50: '#e8f6ef',
+  100: '#d1eedc',
+  200: '#a8dfc0',
+  300: '#74c89a',
+  400: '#4aad78',
+  500: '#3d8b6e',
+  600: '#2f7058',
+  700: '#275a48',
+  800: '#22483b',
+  900: '#1d3c32',
+  950: '#0f211c',
 } as const
 
 export const gray = {
@@ -55,9 +55,10 @@ export const warning = {
   600: '#dc6803',
 } as const
 
-/** Optional brand presets for the template config panel */
+/** Brand presets for the template config panel */
 export const brandPresets = {
-  blue: brand[500],
+  verdant: brand[500],
+  blue: '#465fff',
   indigo: '#4f46e5',
   teal: '#0d9488',
   rose: '#e11d48',

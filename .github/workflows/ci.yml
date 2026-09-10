@@ -27,3 +27,6 @@ jobs:
 
       - name: Typecheck
         run: npm run typecheck
+
+      - name: Page inventory audit
+        run: npm run audit:pages

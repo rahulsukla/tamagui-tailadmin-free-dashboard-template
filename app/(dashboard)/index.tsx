@@ -3,18 +3,20 @@ import { XStack, YStack } from 'tamagui'
 
 import { DemographicCard } from '@/components/ecommerce/DemographicCard'
 import { EcommerceMetrics } from '@/components/ecommerce/EcommerceMetrics'
+import { KpiStatCards } from '@/components/ecommerce/KpiStatCards'
 import { MonthlySalesChart } from '@/components/ecommerce/MonthlySalesChart'
 import { MonthlyTarget } from '@/components/ecommerce/MonthlyTarget'
 import { RecentOrders } from '@/components/ecommerce/RecentOrders'
 import { StatisticsChart } from '@/components/ecommerce/StatisticsChart'
 
-/** Mirrors TailAdmin free Home: 12-col grid → 7 / 5 on xl. */
 export default function HomeScreen() {
   const { width } = useWindowDimensions()
   const xl = width >= 1280
 
   return (
     <YStack gap={16} flex={1} width="100%">
+      <KpiStatCards />
+
       <XStack
         flexDirection={xl ? 'row' : 'column'}
         gap={16}

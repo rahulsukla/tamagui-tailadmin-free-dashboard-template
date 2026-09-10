@@ -38,17 +38,17 @@ export function AuthLayout({ children }: { children: ReactNode }) {
                     justify="center"
                   >
                     <Text color="#fff" fontWeight="700" fontSize={18}>
-                      T
+                      V
                     </Text>
                   </YStack>
                   <Text color="#fff" fontSize={28} fontWeight="700">
-                    TailAdmin
+                    Verdant
                   </Text>
                 </XStack>
               </Link>
               <Text text="center" color="rgba(255,255,255,0.65)" fontSize={14}>
-                Free and Open-Source Tailwind CSS Admin Dashboard Template — Tamagui
-                edition
+                Universal admin dashboard template for web and native — built with
+                Tamagui.
               </Text>
             </YStack>
           </YStack>

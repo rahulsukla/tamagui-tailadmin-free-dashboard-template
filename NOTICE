@@ -1,28 +1,38 @@
 # Third-party notices
 
-This project is an independent Tamagui (web + React Native) port of the
-**TailAdmin free / community edition** admin dashboard template.
+**Verdant** is an independent Tamagui (web + React Native) admin dashboard template.
 
-It is **not** affiliated with, endorsed by, or an official product of TailAdmin
-or Tamagui Inc. Do not confuse this template with TailAdmin Pro or Tamagui Pro /
-Bento / Takeout commercial offerings.
+It is **not** affiliated with, endorsed by, or an official product of TailAdmin,
+tweakcn, or Tamagui Inc. Do not confuse this template with TailAdmin Pro or
+Tamagui Pro / Bento / Takeout commercial offerings.
 
-## TailAdmin (free / community edition)
+## Inspiration
 
-- Source: https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template
+### TailAdmin (free / community edition)
+
+- https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template
 - React reference: https://github.com/TailAdmin/free-react-tailwind-admin-dashboard
 - License: MIT
 - Copyright (c) 2023 TailAdmin
 
-Only the free/community edition pages and design tokens are used as reference.
-TailAdmin Pro components and pages are not included.
+Used as structural/layout inspiration for a free admin page inventory. This
+project does not claim to be TailAdmin and does not ship TailAdmin Pro content.
+
+### tweakcn (Light Green theme mood)
+
+- Theme preview: https://tweakcn.com/themes/cmlhfpjhw000004l4f4ax3m7z?p=dashboard
+- Project: https://github.com/jnsahaj/tweakcn
+- License: Apache License 2.0
+
+Color mood (soft green primary), KPI card rhythm, and documents-table structure
+are inspired by the public Light Green dashboard preview. We did not copy
+proprietary assets; tokens were reinterpreted for Tamagui.
 
 ## Tamagui (open source)
 
-- Source: https://github.com/tamagui/tamagui
+- https://github.com/tamagui/tamagui
 - License: MIT
-- Copyright (c) 2020 Nate Wienert and contributors listed in the upstream LICENSE
 
 ## Expo
 
-This project was bootstrapped with Expo templates (MIT). See Expo's LICENSE for details.
+Bootstrapped with Expo templates (MIT).

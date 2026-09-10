@@ -48,7 +48,7 @@ export function UserMetaCard() {
       >
         <XStack
           flexDirection={stacked ? 'column' : 'row'}
-          items={stacked ? 'center' : 'center'}
+          items="center"
           justify="space-between"
           gap="$4"
         >
@@ -59,13 +59,13 @@ export function UserMetaCard() {
             flex={1}
           >
             <Image
-              source={require('@/assets/demo/user/owner.jpg')}
+              source={require('@/assets/demo/user/john-doe.png')}
               style={{ width: 80, height: 80, borderRadius: 40 }}
               contentFit="cover"
             />
             <YStack items={stacked ? 'center' : 'flex-start'} gap="$2">
               <Text fontSize={18} fontWeight="600" color="$color">
-                Musharof Chowdhury
+                John Doe
               </Text>
               <XStack
                 flexDirection={stacked ? 'column' : 'row'}
@@ -73,21 +73,21 @@ export function UserMetaCard() {
                 gap={stacked ? 4 : 12}
               >
                 <Text fontSize={14} color="$gray10">
-                  Team Manager
+                  Product Designer
                 </Text>
                 {!stacked ? <YStack width={1} height={14} bg="$borderColor" /> : null}
                 <Text fontSize={14} color="$gray10">
-                  Arizona, United States
+                  Austin, United States
                 </Text>
               </XStack>
             </YStack>
           </XStack>
 
           <XStack items="center" gap="$2" flexWrap="wrap" justify="center">
-            <SocialButton label="f" href="https://www.facebook.com/PimjoHQ" />
-            <SocialButton label="X" href="https://x.com/PimjoHQ" />
-            <SocialButton label="in" href="https://www.linkedin.com/company/pimjo" />
-            <SocialButton label="ig" href="https://instagram.com/PimjoHQ" />
+            <SocialButton label="f" href="https://example.com" />
+            <SocialButton label="X" href="https://example.com" />
+            <SocialButton label="in" href="https://example.com" />
+            <SocialButton label="ig" href="https://example.com" />
             <EditPillButton onPress={openModal} />
           </XStack>
         </XStack>
@@ -102,11 +102,11 @@ export function UserMetaCard() {
         <YStack gap="$3">
           <YStack>
             <Label>First Name</Label>
-            <AppInput defaultValue="Musharof" />
+            <AppInput defaultValue="John" />
           </YStack>
           <YStack>
             <Label>Last Name</Label>
-            <AppInput defaultValue="Chowdhury" />
+            <AppInput defaultValue="Doe" />
           </YStack>
         </YStack>
       </AppModal>

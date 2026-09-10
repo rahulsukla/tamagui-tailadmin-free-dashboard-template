@@ -39,7 +39,10 @@ export const mainNav: NavItem[] = [
   {
     name: 'Tables',
     icon: 'table',
-    subItems: [{ name: 'Basic Tables', href: '/basic-tables' }],
+    subItems: [
+      { name: 'Basic Tables', href: '/basic-tables' },
+      { name: 'Documents', href: '/documents' },
+    ],
   },
   {
     name: 'Pages',
@@ -70,6 +73,7 @@ export const othersNav: NavItem[] = [
       { name: 'Buttons', href: '/buttons' },
       { name: 'Images', href: '/images' },
       { name: 'Videos', href: '/videos' },
+      { name: 'Progress', href: '/progress' },
     ],
   },
   {

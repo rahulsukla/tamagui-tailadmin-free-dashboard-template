@@ -4,7 +4,6 @@ import { ScrollView } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
 import { Badge } from '@/components/ui/Badge'
-import { useThemeMode } from '@/context/ThemeContext'
 
 type Order = {
   id: number
@@ -19,15 +18,15 @@ const tableData: Order[] = [
   {
     id: 1,
     user: {
-      image: require('@/assets/demo/user/user-17.jpg'),
-      name: 'Lindsey Curtis',
+      image: require('@/assets/demo/user/user-a.png'),
+      name: 'Alex Kim',
       role: 'Web Designer',
     },
     projectName: 'Agency Website',
     team: [
-      require('@/assets/demo/user/user-22.jpg'),
-      require('@/assets/demo/user/user-23.jpg'),
-      require('@/assets/demo/user/user-24.jpg'),
+      require('@/assets/demo/user/user-b.png'),
+      require('@/assets/demo/user/user-c.png'),
+      require('@/assets/demo/user/user-d.png'),
     ],
     budget: '3.9K',
     status: 'Active',
@@ -35,14 +34,14 @@ const tableData: Order[] = [
   {
     id: 2,
     user: {
-      image: require('@/assets/demo/user/user-18.jpg'),
-      name: 'Kaiya George',
+      image: require('@/assets/demo/user/user-e.png'),
+      name: 'Eden Ortiz',
       role: 'Project Manager',
     },
     projectName: 'Technology',
     team: [
-      require('@/assets/demo/user/user-25.jpg'),
-      require('@/assets/demo/user/user-26.jpg'),
+      require('@/assets/demo/user/user-f.png'),
+      require('@/assets/demo/user/user-g.png'),
     ],
     budget: '24.9K',
     status: 'Pending',
@@ -50,27 +49,27 @@ const tableData: Order[] = [
   {
     id: 3,
     user: {
-      image: require('@/assets/demo/user/user-17.jpg'),
-      name: 'Zain Geidt',
+      image: require('@/assets/demo/user/user-h.png'),
+      name: 'Omar Diaz',
       role: 'Content Writing',
     },
     projectName: 'Blog Writing',
-    team: [require('@/assets/demo/user/user-27.jpg')],
+    team: [require('@/assets/demo/user/user-i.png')],
     budget: '12.7K',
     status: 'Active',
   },
   {
     id: 4,
     user: {
-      image: require('@/assets/demo/user/user-20.jpg'),
-      name: 'Abram Schleifer',
+      image: require('@/assets/demo/user/user-j.png'),
+      name: 'Quinn Brooks',
       role: 'Digital Marketer',
     },
     projectName: 'Social Media',
     team: [
-      require('@/assets/demo/user/user-28.jpg'),
-      require('@/assets/demo/user/user-29.jpg'),
-      require('@/assets/demo/user/user-30.jpg'),
+      require('@/assets/demo/user/user-a.png'),
+      require('@/assets/demo/user/user-b.png'),
+      require('@/assets/demo/user/user-c.png'),
     ],
     budget: '2.8K',
     status: 'Cancel',
@@ -78,15 +77,15 @@ const tableData: Order[] = [
   {
     id: 5,
     user: {
-      image: require('@/assets/demo/user/user-21.jpg'),
-      name: 'Carla George',
-      role: 'Front-end Developer',
+      image: require('@/assets/demo/user/john-doe.png'),
+      name: 'John Doe',
+      role: 'Product Designer',
     },
     projectName: 'Website',
     team: [
-      require('@/assets/demo/user/user-31.jpg'),
-      require('@/assets/demo/user/user-32.jpg'),
-      require('@/assets/demo/user/user-33.jpg'),
+      require('@/assets/demo/user/user-d.png'),
+      require('@/assets/demo/user/user-e.png'),
+      require('@/assets/demo/user/user-f.png'),
     ],
     budget: '4.5K',
     status: 'Active',
@@ -99,34 +98,25 @@ function statusColor(status: Order['status']) {
   return 'error' as const
 }
 
-const COLS = [220, 150, 120, 110, 90] as const
+const COLS = [220, 160, 100, 110, 80] as const
 
 export function BasicTableOne() {
-  const { resolvedTheme } = useThemeMode()
-  const teamBorder = resolvedTheme === 'dark' ? '#101828' : '#fff'
-
   return (
     <YStack
-      overflow="hidden"
-      rounded={12}
+      rounded={16}
       borderWidth={1}
       borderColor="$borderColor"
       bg="$backgroundStrong"
+      overflow="hidden"
     >
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <YStack minW={COLS.reduce((a, b) => a + b, 0)}>
-          <XStack
-            borderBottomWidth={1}
-            borderColor="$borderColor"
-            px="$2"
-            py="$3"
-            bg="$background"
-          >
+        <YStack minW={COLS.reduce((a, b) => a + b, 0) + 32}>
+          <XStack borderBottomWidth={1} borderColor="$borderColor" py={12} px={16}>
             {['User', 'Project Name', 'Team', 'Status', 'Budget'].map((h, i) => (
               <Text
                 key={h}
                 width={COLS[i]}
-                px="$3"
+                px={8}
                 fontSize={12}
                 fontWeight="500"
                 color="$gray10"
@@ -135,62 +125,57 @@ export function BasicTableOne() {
               </Text>
             ))}
           </XStack>
-
-          {tableData.map((order, idx) => (
+          {tableData.map((row, idx) => (
             <XStack
-              key={order.id}
-              px="$2"
-              py="$3"
+              key={row.id}
+              py={14}
+              px={16}
               items="center"
               borderBottomWidth={idx === tableData.length - 1 ? 0 : 1}
               borderColor="$borderColor"
             >
-              <XStack width={COLS[0]} px="$3" items="center" gap="$3">
+              <XStack width={COLS[0]} px={8} items="center" gap={12}>
                 <Image
-                  source={order.user.image}
+                  source={row.user.image}
                   style={{ width: 40, height: 40, borderRadius: 20 }}
                   contentFit="cover"
                 />
-                <YStack>
-                  <Text fontSize={14} fontWeight="500" color="$color">
-                    {order.user.name}
+                <YStack flex={1} minW={0}>
+                  <Text fontSize={14} fontWeight="500" color="$color" numberOfLines={1}>
+                    {row.user.name}
                   </Text>
-                  <Text fontSize={12} color="$gray10">
-                    {order.user.role}
+                  <Text fontSize={12} color="$gray10" numberOfLines={1}>
+                    {row.user.role}
                   </Text>
                 </YStack>
               </XStack>
-
-              <Text width={COLS[1]} px="$3" fontSize={14} color="$gray10">
-                {order.projectName}
+              <Text width={COLS[1]} px={8} fontSize={14} color="$gray11">
+                {row.projectName}
               </Text>
-
-              <XStack width={COLS[2]} px="$3" items="center">
-                {order.team.map((src, i) => (
+              <XStack width={COLS[2]} px={8} items="center">
+                {row.team.map((src, i) => (
                   <Image
                     key={i}
                     source={src}
                     style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: 12,
+                      width: 28,
+                      height: 28,
+                      borderRadius: 14,
                       marginLeft: i === 0 ? 0 : -8,
                       borderWidth: 2,
-                      borderColor: teamBorder,
+                      borderColor: '#fff',
                     }}
                     contentFit="cover"
                   />
                 ))}
               </XStack>
-
-              <XStack width={COLS[3]} px="$3">
-                <Badge size="sm" color={statusColor(order.status)}>
-                  {order.status}
+              <XStack width={COLS[3]} px={8}>
+                <Badge size="sm" color={statusColor(row.status)}>
+                  {row.status}
                 </Badge>
               </XStack>
-
-              <Text width={COLS[4]} px="$3" fontSize={14} color="$gray10">
-                {order.budget}
+              <Text width={COLS[4]} px={8} fontSize={14} color="$gray11">
+                {row.budget}
               </Text>
             </XStack>
           ))}

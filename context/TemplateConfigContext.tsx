@@ -33,7 +33,7 @@ type TemplateConfigContextValue = {
 
 const STORAGE_KEY = 'template.config'
 const defaults: TemplateConfig = {
-  brandPreset: 'blue',
+  brandPreset: 'verdant',
   density: 'comfortable',
   stickyHeader: true,
   contentMaxWidth: 1536,

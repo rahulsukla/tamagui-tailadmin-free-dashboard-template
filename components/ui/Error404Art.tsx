@@ -2,7 +2,7 @@ import Svg, { Rect } from 'react-native-svg'
 
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
-/** TailAdmin-style 404 glyph (react-native-svg; works on web + native). */
+/** 404 glyph (react-native-svg; works on web + native). */
 export function Error404Art({ width = 280, height = 94 }: { width?: number; height?: number }) {
   const { brandColor } = useTemplateConfig()
   const fill = brandColor

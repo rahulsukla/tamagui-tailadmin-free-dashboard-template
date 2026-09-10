@@ -1,13 +1,29 @@
-import { Text } from 'tamagui'
+import { YStack, Text } from 'tamagui'
 
-import { PageShell } from '@/components/PageShell'
+import { PageBreadcrumb } from '@/components/PageBreadcrumb'
+import { UserAddressCard } from '@/components/profile/UserAddressCard'
+import { UserInfoCard } from '@/components/profile/UserInfoCard'
+import { UserMetaCard } from '@/components/profile/UserMetaCard'
 
-export default function Page() {
+export default function ProfilePage() {
   return (
-    <PageShell title="User Profile">
-      <Text color="$gray10" fontSize={14}>
-        User Profile — content ported in a later phase. Navigation and theme shell are live.
-      </Text>
-    </PageShell>
+    <YStack gap="$5" flex={1}>
+      <PageBreadcrumb pageTitle="Profile" />
+      <YStack
+        rounded={16}
+        borderWidth={1}
+        borderColor="$borderColor"
+        bg="$backgroundStrong"
+        p="$5"
+        gap="$5"
+      >
+        <Text fontSize={18} fontWeight="600" color="$color">
+          Profile
+        </Text>
+        <UserMetaCard />
+        <UserInfoCard />
+        <UserAddressCard />
+      </YStack>
+    </YStack>
   )
 }

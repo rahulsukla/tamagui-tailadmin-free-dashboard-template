@@ -1,17 +1,13 @@
-import { Text } from 'tamagui'
+import { YStack } from 'tamagui'
 
-import { PageShell } from '@/components/PageShell'
-
-function Placeholder({ name }: { name: string }) {
-  return (
-    <PageShell title={name}>
-      <Text color="$gray10" fontSize={14}>
-        {name} — ported UI coming in a later phase. Shell, routing, and theme are ready.
-      </Text>
-    </PageShell>
-  )
-}
+import { PageBreadcrumb } from '@/components/PageBreadcrumb'
+import { CalendarBoard } from '@/components/calendar/CalendarBoard'
 
 export default function CalendarPage() {
-  return <Placeholder name="Calendar" />
+  return (
+    <YStack gap="$5" flex={1}>
+      <PageBreadcrumb pageTitle="Calendar" />
+      <CalendarBoard />
+    </YStack>
+  )
 }

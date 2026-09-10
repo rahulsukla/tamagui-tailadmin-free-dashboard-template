@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/verdant-tamagui-admin-template?style=flat-square&color=3d8b6e)](https://www.npmjs.com/package/verdant-tamagui-admin-template)
 [![Demo](https://img.shields.io/badge/demo-live-3d8b6e?style=flat-square)](https://rahulsukla.github.io/verdant-tamagui-admin-template/)
 [![CI](https://img.shields.io/github/actions/workflow/status/rahulsukla/verdant-tamagui-admin-template/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/rahulsukla/verdant-tamagui-admin-template/actions)
-[![License: MIT](https://img.shields.io/badge/license-MIT-gray?style=flat-square)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-gray?style=flat-square)](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/LICENSE)
 [![Expo SDK](https://img.shields.io/badge/Expo-SDK%2057-000?style=flat-square)](https://docs.expo.dev/versions/v57.0.0/)
 
 **Verdant** is a free, open-source admin dashboard template for **iOS, Android, and Web**.
@@ -17,7 +17,7 @@ Built with [Expo](https://expo.dev) SDK 57, [Expo Router](https://docs.expo.dev/
   ·
   <a href="https://rahulsukla.github.io/verdant-tamagui-admin-template/"><strong>Live demo →</strong></a>
   ·
-  <a href="./docs/components.md"><strong>Component docs →</strong></a>
+  <a href="https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/docs/components.md"><strong>Component docs →</strong></a>
   ·
   <a href="https://github.com/rahulsukla/verdant-tamagui-admin-template/releases"><strong>Releases →</strong></a>
 </p>
@@ -32,7 +32,7 @@ Built with [Expo](https://expo.dev) SDK 57, [Expo Router](https://docs.expo.dev/
 - **Ready pages** — ecommerce dashboard, forms, tables, profile, calendar, auth, UI kit
 - **MIT licensed** — fork it, ship it, customize it
 
-> Inspired by free [TailAdmin](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template) layout inventory and the [tweakcn Light Green](https://tweakcn.com/themes/cmlhfpjhw000004l4f4ax3m7z?p=dashboard) dashboard mood. Not affiliated with TailAdmin, tweakcn, or Tamagui commercial products. See [NOTICE](./NOTICE).
+> Inspired by free [TailAdmin](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template) layout inventory and the [tweakcn Light Green](https://tweakcn.com/themes/cmlhfpjhw000004l4f4ax3m7z?p=dashboard) dashboard mood. Not affiliated with TailAdmin, tweakcn, or Tamagui commercial products. See [NOTICE](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/NOTICE).
 
 ## Quick start
 
@@ -121,7 +121,7 @@ export function Example() {
 }
 ```
 
-Full guide: [docs/components.md](./docs/components.md)
+Full guide: [Component usage docs](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/docs/components.md)
 
 ## Requirements
 
@@ -130,14 +130,14 @@ Full guide: [docs/components.md](./docs/components.md)
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md). Issues and PRs welcome.
+See [CONTRIBUTING.md](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/CONTRIBUTING.md). Issues and PRs welcome.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+See [CHANGELOG.md](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/CHANGELOG.md).
 
 ## License
 
-[MIT](./LICENSE) © contributors
+[MIT](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/LICENSE) © contributors
 
-Third-party inspiration notes: [NOTICE](./NOTICE)
+Third-party inspiration notes: [NOTICE](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/NOTICE)

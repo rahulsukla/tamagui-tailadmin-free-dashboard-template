@@ -1,6 +1,16 @@
 # Component usage
 
-Verdant ships Tamagui-based primitives and page sections. Import from `@/components/...` using the path aliases in `tsconfig.json`.
+Verdant is an **Expo app template** (not a separate component library npm import). After scaffolding, import from `@/components/...` using the path alias in `tsconfig.json`.
+
+- Repo: https://github.com/rahulsukla/verdant-tamagui-admin-template
+- Demo: https://rahulsukla.github.io/verdant-tamagui-admin-template/
+- npm: https://www.npmjs.com/package/verdant-tamagui-admin-template
+
+```bash
+npx create-expo-app@latest my-admin --template verdant-tamagui-admin-template
+cd my-admin
+npm run web
+```
 
 ## Theming
 
@@ -31,6 +41,16 @@ Auth pages use:
 ```tsx
 import { AuthLayout } from '@/components/auth/AuthLayout'
 ```
+
+## Modals & dropdown portals
+
+React Native `Modal` portals outside the main Tamagui root on web (fonts/theme drop off). Wrap portal content with:
+
+```tsx
+import { PortalProviders } from '@/components/PortalProviders'
+```
+
+Already used by `AppModal`, user/notification dropdowns, and the config panel.
 
 ## Buttons
 
@@ -70,15 +90,7 @@ import { AppTextArea } from '@/components/form/TextArea'
 <Checkbox label="Remember me" checked={on} onChange={setOn} />
 ```
 
-Demo gallery: `/form-elements`.
-
-## Page inventory audit
-
-```bash
-npm run audit:pages
-```
-
-Fails CI if a nav `href` has no matching Expo Router file, or if `TailAdmin` / `Musharof` branding appears under `app/`, `components/`, or `layout/`.
+Demo gallery route: `/form-elements`
 
 ## Progress
 
@@ -88,7 +100,7 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 <ProgressBar label="Onboarding" value={72} hint="3 of 4 steps" />
 ```
 
-Demo: `/progress`.
+Demo route: `/progress`
 
 ## Charts (SVG)
 
@@ -104,15 +116,17 @@ Cross-platform via `react-native-svg` — no ApexCharts.
 
 ## Tables
 
-- `BasicTableOne` — team/project table (`/basic-tables`)
-- `DocumentsTable` — document checklist inspired by tweakcn Light Green (`/documents`)
-- `RecentOrders` — ecommerce orders widget on the home dashboard
+| Component | Route / use |
+|-----------|-------------|
+| `BasicTableOne` | `/basic-tables` |
+| `DocumentsTable` | `/documents` (tweakcn Light Green–inspired checklist) |
+| `RecentOrders` | Home ecommerce widget |
 
 ## Ecommerce widgets
 
 | Component | Role |
 |-----------|------|
-| `KpiStatCards` | Four KPI tiles (revenue / customers / accounts / growth) |
+| `KpiStatCards` | Four KPI tiles |
 | `EcommerceMetrics` | Customers + Orders |
 | `MonthlySalesChart` | Bar chart card |
 | `MonthlyTarget` | Radial progress target |
@@ -120,17 +134,37 @@ Cross-platform via `react-native-svg` — no ApexCharts.
 | `DemographicCard` | Map silhouette + country bars |
 | `RecentOrders` | Product orders table |
 
-Compose them like `app/(dashboard)/index.tsx`.
+Compose them like [`app/(dashboard)/index.tsx`](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/app/(dashboard)/index.tsx).
 
 ## Profile & calendar
 
-- Profile cards: `UserMetaCard`, `UserInfoCard`, `UserAddressCard` + `AppModal`
+- Profile: `UserMetaCard`, `UserInfoCard`, `UserAddressCard` + `AppModal` from `@/components/profile/shared`
 - Calendar: `CalendarBoard` month grid with create/edit events
+
+## UI kit routes
+
+| Route | Content |
+|-------|---------|
+| `/alerts` | Alert variants |
+| `/avatars` | Avatar sizes |
+| `/badge` | Badges |
+| `/buttons` | Buttons |
+| `/images` | Image grids |
+| `/videos` | Video embeds |
+| `/progress` | Progress bars |
+
+## Page inventory audit
+
+```bash
+npm run audit:pages
+```
+
+Fails CI if a nav `href` has no matching Expo Router file, or if `TailAdmin` / `Musharof` branding appears under `app/`, `components/`, or `layout/`.
 
 ## Adding a page
 
 1. Create `app/(dashboard)/my-page.tsx`
-2. Add a link in `navigation/navItems.ts`
+2. Add a link in [`navigation/navItems.ts`](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/navigation/navItems.ts)
 3. Prefer `PageBreadcrumb` + existing cards/primitives
 4. Run `npm run typecheck`
 

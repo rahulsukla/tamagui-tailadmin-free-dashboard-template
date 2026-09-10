@@ -1,13 +1,28 @@
-import { Text } from 'tamagui'
+import { PageBreadcrumb } from '@/components/PageBreadcrumb'
+import { ComponentCard } from '@/components/ui/ComponentCard'
+import {
+  ResponsiveImage,
+  ThreeColumnImageGrid,
+  TwoColumnImageGrid,
+} from '@/components/ui/ImageGrids'
+import { YStack } from 'tamagui'
 
-import { PageShell } from '@/components/PageShell'
-
-export default function Page() {
+export default function ImagesPage() {
   return (
-    <PageShell title="Images">
-      <Text color="$gray10" fontSize={14}>
-        Images — content ported in a later phase. Navigation and theme shell are live.
-      </Text>
-    </PageShell>
+    <YStack gap="$5" flex={1}>
+      <PageBreadcrumb pageTitle="Images" />
+
+      <ComponentCard title="Responsive image">
+        <ResponsiveImage />
+      </ComponentCard>
+
+      <ComponentCard title="Image in 2 Grid">
+        <TwoColumnImageGrid />
+      </ComponentCard>
+
+      <ComponentCard title="Image in 3 Grid">
+        <ThreeColumnImageGrid />
+      </ComponentCard>
+    </YStack>
   )
 }

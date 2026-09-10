@@ -1,13 +1,36 @@
-import { Text } from 'tamagui'
+import { useWindowDimensions } from 'react-native'
+import { XStack, YStack } from 'tamagui'
 
-import { PageShell } from '@/components/PageShell'
+import { PageBreadcrumb } from '@/components/PageBreadcrumb'
+import { AspectRatioVideo } from '@/components/ui/AspectRatioVideo'
+import { ComponentCard } from '@/components/ui/ComponentCard'
 
-export default function Page() {
+export default function VideosPage() {
+  const { width } = useWindowDimensions()
+  const twoCol = width >= 1280
+
   return (
-    <PageShell title="Videos">
-      <Text color="$gray10" fontSize={14}>
-        Videos — content ported in a later phase. Navigation and theme shell are live.
-      </Text>
-    </PageShell>
+    <YStack gap="$5" flex={1}>
+      <PageBreadcrumb pageTitle="Videos" />
+
+      <XStack flexWrap="wrap" gap="$5">
+        <YStack width={twoCol ? '48%' : '100%'} gap="$5" grow={1}>
+          <ComponentCard title="Video Ratio 16:9">
+            <AspectRatioVideo ratio={16 / 9} />
+          </ComponentCard>
+          <ComponentCard title="Video Ratio 4:3">
+            <AspectRatioVideo ratio={4 / 3} />
+          </ComponentCard>
+        </YStack>
+        <YStack width={twoCol ? '48%' : '100%'} gap="$5" grow={1}>
+          <ComponentCard title="Video Ratio 21:9">
+            <AspectRatioVideo ratio={21 / 9} />
+          </ComponentCard>
+          <ComponentCard title="Video Ratio 1:1">
+            <AspectRatioVideo ratio={1} />
+          </ComponentCard>
+        </YStack>
+      </XStack>
+    </YStack>
   )
 }

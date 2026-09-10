@@ -1,13 +1,95 @@
-import { Text } from 'tamagui'
+import { PageBreadcrumb } from '@/components/PageBreadcrumb'
+import { AppButton, BoxIcon } from '@/components/ui/Button'
+import { ComponentCard } from '@/components/ui/ComponentCard'
+import { brand } from '@/theme/colors'
+import { XStack, YStack } from 'tamagui'
 
-import { PageShell } from '@/components/PageShell'
-
-export default function Page() {
+export default function ButtonsPage() {
   return (
-    <PageShell title="Buttons">
-      <Text color="$gray10" fontSize={14}>
-        Buttons — content ported in a later phase. Navigation and theme shell are live.
-      </Text>
-    </PageShell>
+    <YStack gap="$5" flex={1}>
+      <PageBreadcrumb pageTitle="Buttons" />
+
+      <ComponentCard title="Primary Button">
+        <XStack items="center" gap="$5" flexWrap="wrap">
+          <AppButton size="sm" variant="primary">
+            Button Text
+          </AppButton>
+          <AppButton size="md" variant="primary">
+            Button Text
+          </AppButton>
+        </XStack>
+      </ComponentCard>
+
+      <ComponentCard title="Primary Button with Left Icon">
+        <XStack items="center" gap="$5" flexWrap="wrap">
+          <AppButton size="sm" variant="primary" startIcon={<BoxIcon color="#fff" />}>
+            Button Text
+          </AppButton>
+          <AppButton size="md" variant="primary" startIcon={<BoxIcon color="#fff" />}>
+            Button Text
+          </AppButton>
+        </XStack>
+      </ComponentCard>
+
+      <ComponentCard title="Primary Button with Right Icon">
+        <XStack items="center" gap="$5" flexWrap="wrap">
+          <AppButton size="sm" variant="primary" endIcon={<BoxIcon color="#fff" />}>
+            Button Text
+          </AppButton>
+          <AppButton size="md" variant="primary" endIcon={<BoxIcon color="#fff" />}>
+            Button Text
+          </AppButton>
+        </XStack>
+      </ComponentCard>
+
+      <ComponentCard title="Secondary Button">
+        <XStack items="center" gap="$5" flexWrap="wrap">
+          <AppButton size="sm" variant="outline">
+            Button Text
+          </AppButton>
+          <AppButton size="md" variant="outline">
+            Button Text
+          </AppButton>
+        </XStack>
+      </ComponentCard>
+
+      <ComponentCard title="Outline Button with Left Icon">
+        <XStack items="center" gap="$5" flexWrap="wrap">
+          <AppButton
+            size="sm"
+            variant="outline"
+            startIcon={<BoxIcon color={brand[500]} />}
+          >
+            Button Text
+          </AppButton>
+          <AppButton
+            size="md"
+            variant="outline"
+            startIcon={<BoxIcon color={brand[500]} />}
+          >
+            Button Text
+          </AppButton>
+        </XStack>
+      </ComponentCard>
+
+      <ComponentCard title="Outline Button with Right Icon">
+        <XStack items="center" gap="$5" flexWrap="wrap">
+          <AppButton
+            size="sm"
+            variant="outline"
+            endIcon={<BoxIcon color={brand[500]} />}
+          >
+            Button Text
+          </AppButton>
+          <AppButton
+            size="md"
+            variant="outline"
+            endIcon={<BoxIcon color={brand[500]} />}
+          >
+            Button Text
+          </AppButton>
+        </XStack>
+      </ComponentCard>
+    </YStack>
   )
 }

@@ -30,7 +30,8 @@ Clear Metro cache if styles look stale: `npx expo start -c`
 |-------|--------|
 | 0 Scaffold + MIT/NOTICE + tokens | Done |
 | 1 Shell (sidebar, header, theme, routes) | Done |
-| 2–5 Port UI/forms/tables/charts/auth pages | Placeholders linked |
+| 2 UI kit pages: buttons, alerts, badges, avatars, images, videos | Done |
+| 3–5 Forms/tables/charts/auth pages | Placeholders linked |
 | 6 Config panel + polish | Partial (config context ready) |
 
 ## Licensing

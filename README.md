@@ -10,7 +10,11 @@
 
 Built with [Expo](https://expo.dev) SDK 57, [Expo Router](https://docs.expo.dev/router/introduction/), and [Tamagui](https://tamagui.dev).
 
+**npm:** [`verdant-tamagui-admin-template`](https://www.npmjs.com/package/verdant-tamagui-admin-template)
+
 <p align="center">
+  <a href="https://www.npmjs.com/package/verdant-tamagui-admin-template"><strong>npm package →</strong></a>
+  ·
   <a href="https://rahulsukla.github.io/verdant-tamagui-admin-template/"><strong>Live demo →</strong></a>
   ·
   <a href="./docs/components.md"><strong>Component docs →</strong></a>
@@ -32,15 +36,7 @@ Built with [Expo](https://expo.dev) SDK 57, [Expo Router](https://docs.expo.dev/
 
 ## Quick start
 
-### Option A — Expo template from GitHub (works now)
-
-```bash
-npx create-expo-app@latest my-admin --template https://github.com/rahulsukla/verdant-tamagui-admin-template
-cd my-admin
-npm run web
-```
-
-### Option B — Expo template from npm
+### Option A — Expo template from npm (recommended)
 
 ```bash
 npx create-expo-app@latest my-admin --template verdant-tamagui-admin-template
@@ -48,7 +44,15 @@ cd my-admin
 npm run web
 ```
 
-> Package: [`verdant-tamagui-admin-template`](https://www.npmjs.com/package/verdant-tamagui-admin-template) on npm (Expo template). Publish via `npm publish` or the `Publish npm` GitHub Action (`NPM_TOKEN` secret).
+Package on npm: https://www.npmjs.com/package/verdant-tamagui-admin-template
+
+### Option B — Expo template from GitHub
+
+```bash
+npx create-expo-app@latest my-admin --template https://github.com/rahulsukla/verdant-tamagui-admin-template
+cd my-admin
+npm run web
+```
 
 ### Option C — Clone from GitHub
 

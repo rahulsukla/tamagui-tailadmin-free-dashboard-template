@@ -3,12 +3,16 @@ import { Button, Input, Text, XStack, YStack } from 'tamagui'
 
 import { CloseIcon, MenuIcon } from '@/components/icons'
 import { ThemeToggleButton } from '@/components/ThemeToggleButton'
+import { useConfigPanel } from '@/context/ConfigPanelContext'
 import { useSidebar } from '@/context/SidebarContext'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 export function AppHeader() {
   const { width } = useWindowDimensions()
   const isLg = width >= 1024
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar()
+  const { toggle: toggleConfig } = useConfigPanel()
+  const { brandColor } = useTemplateConfig()
 
   const onToggle = () => {
     if (isLg) toggleSidebar()
@@ -91,6 +95,24 @@ export function AppHeader() {
         </XStack>
 
         <XStack items="center" gap="$2">
+          <Button
+            unstyled
+            width={44}
+            height={44}
+            items="center"
+            justify="center"
+            rounded={8}
+            borderWidth={1}
+            borderColor="$borderColor"
+            bg="$backgroundStrong"
+            onPress={toggleConfig}
+            aria-label="Open template settings"
+            hoverStyle={{ bg: '$backgroundHover' }}
+          >
+            <Text fontSize={16} color="$gray11">
+              ⚙
+            </Text>
+          </Button>
           <ThemeToggleButton />
           <XStack
             width={44}
@@ -102,7 +124,7 @@ export function AppHeader() {
             borderWidth={1}
             borderColor="$borderColor"
           >
-            <Text fontWeight="700" color="$blue10" fontSize={14}>
+            <Text fontWeight="700" color={brandColor as any} fontSize={14}>
               RS
             </Text>
           </XStack>

@@ -1,0 +1,53 @@
+name: Deploy GitHub Pages
+
+# Publishes the static web demo to the `gh-pages` branch.
+# Preferred triggers: every push to main, and whenever a GitHub Release is published.
+# Also available via workflow_dispatch for manual refreshes.
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Export static web
+        run: npm run export:web
+        env:
+          GITHUB_PAGES: '1'
+
+      - name: Disable Jekyll
+        run: touch dist/.nojekyll
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true
+          commit_message: 'Deploy web demo ${{ github.sha }}'

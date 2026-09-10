@@ -28,6 +28,7 @@ type TemplateConfigContextValue = {
   setDensity: (density: Density) => void
   setStickyHeader: (sticky: boolean) => void
   updateConfig: (partial: Partial<TemplateConfig>) => void
+  resetConfig: () => void
 }
 
 const STORAGE_KEY = 'template.config'
@@ -72,6 +73,10 @@ export function TemplateConfigProvider({ children }: { children: ReactNode }) {
     [config, persist]
   )
 
+  const resetConfig = useCallback(() => {
+    persist(defaults)
+  }, [persist])
+
   const value = useMemo<TemplateConfigContextValue>(
     () => ({
       config,
@@ -80,8 +85,9 @@ export function TemplateConfigProvider({ children }: { children: ReactNode }) {
       setDensity: (density) => updateConfig({ density }),
       setStickyHeader: (stickyHeader) => updateConfig({ stickyHeader }),
       updateConfig,
+      resetConfig,
     }),
-    [config, updateConfig]
+    [config, updateConfig, resetConfig]
   )
 
   return (

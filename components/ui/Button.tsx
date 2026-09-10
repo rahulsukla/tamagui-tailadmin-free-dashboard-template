@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import Svg, { Path, Rect } from 'react-native-svg'
 import { Button as TButton, Text } from 'tamagui'
 
-import { brand } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
 
 type ButtonSize = 'sm' | 'md'
@@ -35,6 +35,7 @@ export function AppButton({
   const sizing = sizeStyles[size]
   const isPrimary = variant === 'primary'
   const { resolvedTheme } = useThemeMode()
+  const { brandColor } = useTemplateConfig()
 
   return (
     <TButton
@@ -52,14 +53,14 @@ export function AppButton({
       py={sizing.py}
       bg={
         isPrimary
-          ? brand[500]
+          ? (brandColor as any)
           : resolvedTheme === 'dark'
             ? '$gray2'
             : '$backgroundStrong'
       }
       borderWidth={isPrimary ? 0 : 1}
       borderColor="$borderColor"
-      hoverStyle={isPrimary ? { bg: brand[600] } : { bg: '$backgroundHover' }}
+      hoverStyle={isPrimary ? { opacity: 0.92 } : { bg: '$backgroundHover' }}
       pressStyle={{ opacity: 0.9 }}
     >
       {startIcon}

@@ -2,6 +2,8 @@ import { Slot } from 'expo-router'
 import { ScrollView, useWindowDimensions } from 'react-native'
 import { YStack } from 'tamagui'
 
+import { ConfigPanel } from '@/components/ConfigPanel'
+import { ConfigPanelProvider } from '@/context/ConfigPanelContext'
 import { SidebarProvider, useSidebar } from '@/context/SidebarContext'
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { AppHeader } from '@/layout/AppHeader'
@@ -14,29 +16,43 @@ function LayoutContent() {
   const { config } = useTemplateConfig()
   const pad = config.density === 'compact' ? '$3' : width >= 768 ? '$5' : '$4'
 
+  const page = (
+    <YStack
+      p={pad}
+      maxW={config.contentMaxWidth}
+      width="100%"
+      self="center"
+      flex={1}
+    >
+      <Slot />
+    </YStack>
+  )
+
   return (
     <YStack flex={1} bg="$background" minH="100%">
       <AppSidebar />
       <Backdrop />
+      <ConfigPanel />
       <YStack flex={1} pl={contentOffset} style={{ minHeight: '100%' }}>
-        <AppHeader />
-        <ScrollView
-          contentContainerStyle={{
-            padding: 0,
-            flexGrow: 1,
-          }}
-          showsVerticalScrollIndicator={false}
-        >
-          <YStack
-            p={pad}
-            maxW={config.contentMaxWidth}
-            width="100%"
-            self="center"
-            flex={1}
+        {config.stickyHeader ? (
+          <>
+            <AppHeader />
+            <ScrollView
+              contentContainerStyle={{ padding: 0, flexGrow: 1 }}
+              showsVerticalScrollIndicator={false}
+            >
+              {page}
+            </ScrollView>
+          </>
+        ) : (
+          <ScrollView
+            contentContainerStyle={{ padding: 0, flexGrow: 1 }}
+            showsVerticalScrollIndicator={false}
           >
-            <Slot />
-          </YStack>
-        </ScrollView>
+            <AppHeader />
+            {page}
+          </ScrollView>
+        )}
       </YStack>
     </YStack>
   )
@@ -45,7 +61,9 @@ function LayoutContent() {
 export function AppLayout() {
   return (
     <SidebarProvider>
-      <LayoutContent />
+      <ConfigPanelProvider>
+        <LayoutContent />
+      </ConfigPanelProvider>
     </SidebarProvider>
   )
 }

@@ -22,19 +22,23 @@ export function TrafficPieCard() {
       flex={1}
       minH={420}
       width="100%"
+      minW={0}
+      overflow="hidden"
     >
-      <XStack justify="space-between" items="flex-start" gap={12}>
+      <XStack justify="space-between" items="flex-start" gap={12} minW={0} width="100%">
         <YStack gap={4} flex={1} minW={0}>
-          <Text fontSize={18} fontWeight="600" color="$color">
+          <Text fontSize={18} fontWeight="600" color="$color" numberOfLines={1}>
             Traffic by device
           </Text>
-          <Text fontSize={14} color="$gray10">
+          <Text fontSize={14} color="$gray10" numberOfLines={2}>
             Sessions split across devices this month
           </Text>
         </YStack>
         <MoreMenu />
       </XStack>
-      <SimplePieChart data={SLICES} size={220} />
+      <YStack flex={1} minW={0} width="100%" overflow="hidden">
+        <SimplePieChart data={SLICES} size={220} />
+      </YStack>
     </YStack>
   )
 }

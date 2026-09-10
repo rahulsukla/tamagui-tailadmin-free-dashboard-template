@@ -144,7 +144,7 @@ Includes hero + live preview, feature grid, how-it-works, route showcase, trust 
 
 Cards, tables, and charts should fill their container without spilling text:
 
-- Tables (`BasicTableOne`, `DocumentsTable`, `RecentOrders`) flex columns on wide screens and scroll horizontally when compact
+- Tables (`BasicTableOne`, `DocumentsTable`, `RecentOrders`) flex columns on wide screens; **only** wrap in a horizontal `ScrollView` when compact — never `horizontal={compact}` (vertical nested scroll collapses on web)
 - Charts measure parent width via `useContainerWidth` instead of the viewport
 - Flex text rows use `minW={0}` + `numberOfLines` so labels stay inside cards
 
@@ -160,6 +160,7 @@ Cards, tables, and charts should fill their container without spilling text:
 | `DemographicCard` | Map silhouette + country bars |
 | `RecentOrders` | Product orders table |
 | `TrafficPieCard` | Donut / pie traffic split (`SimplePieChart`) |
+| `TemplateStatsCard` | Real OSS metrics from `docs/template-stats.json` |
 
 Compose them like [`app/(dashboard)/index.tsx`](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/app/(dashboard)/index.tsx).
 
@@ -180,13 +181,18 @@ Compose them like [`app/(dashboard)/index.tsx`](https://github.com/rahulsukla/ve
 | `/videos` | Video embeds |
 | `/progress` | Progress bars |
 
-## Page inventory audit
+## Page inventory + UI audits
 
 ```bash
-npm run audit:pages
+npm run audit:pages   # nav hrefs ↔ Expo Router files + brand guard
+npm run audit:ui      # demo data markers, table scroll safety, template-stats.json
+npm run audit         # both
+npm run stats:template  # refresh docs/template-stats.json (npm pack size + file counts)
 ```
 
-Fails CI if a nav `href` has no matching Expo Router file, or if `TailAdmin` / `Musharof` branding appears under `app/`, `components/`, or `layout/`.
+CI runs `stats:template` then `audit` on every push/PR. `prepack` runs typecheck + stats + audit so empty tables / broken key demos fail before publish.
+
+`audit:ui` specifically fails if tables use `horizontal={compact}` (nested vertical `ScrollView` collapses to 0 height on desktop web — the 0.2.4 Basic Table bug).
 
 ## Adding a page
 

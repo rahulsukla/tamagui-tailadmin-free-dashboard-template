@@ -75,6 +75,101 @@ export function RecentOrders() {
   const { width } = useWindowDimensions()
   const compact = width < 900
 
+  const tableBody = (
+    <YStack
+      width={compact ? COLS.reduce((a, b) => a + b, 0) : '100%'}
+      minW={compact ? undefined : '100%'}
+    >
+      <XStack borderBottomWidth={1} borderColor="$borderColor" pb={12}>
+        {['Products', 'Category', 'Price', 'Status', ''].map((h, i) => (
+          <Text
+            key={`${h}-${i}`}
+            width={compact ? COLS[i] : undefined}
+            flex={compact ? undefined : i === 0 ? 2 : 1}
+            px={8}
+            fontSize={12}
+            fontWeight="500"
+            color="$gray10"
+          >
+            {h}
+          </Text>
+        ))}
+      </XStack>
+      {tableData.map((row, idx) => (
+        <XStack
+          key={row.id}
+          py={14}
+          items="center"
+          borderBottomWidth={idx === tableData.length - 1 ? 0 : 1}
+          borderColor="$borderColor"
+        >
+          <XStack
+            width={compact ? COLS[0] : undefined}
+            flex={compact ? undefined : 2}
+            px={8}
+            items="center"
+            gap={12}
+            minW={0}
+          >
+            <Image
+              source={row.image}
+              style={{ width: 48, height: 48, borderRadius: 8 }}
+              contentFit="cover"
+            />
+            <YStack flex={1} minW={0}>
+              <Text fontSize={14} fontWeight="500" color="$color" numberOfLines={1}>
+                {row.name}
+              </Text>
+              <Text fontSize={12} color="$gray10">
+                {row.variants}
+              </Text>
+            </YStack>
+          </XStack>
+          <Text
+            width={compact ? COLS[1] : undefined}
+            flex={compact ? undefined : 1}
+            px={8}
+            fontSize={14}
+            color="$gray10"
+            numberOfLines={1}
+            minW={0}
+          >
+            {row.category}
+          </Text>
+          <Text
+            width={compact ? COLS[2] : undefined}
+            flex={compact ? undefined : 1}
+            px={8}
+            fontSize={14}
+            color="$gray10"
+            numberOfLines={1}
+            minW={0}
+          >
+            {row.price}
+          </Text>
+          <XStack
+            width={compact ? COLS[3] : undefined}
+            flex={compact ? undefined : 1}
+            px={8}
+            minW={0}
+          >
+            <Badge size="sm" color={statusColor(row.status)}>
+              {row.status}
+            </Badge>
+          </XStack>
+          <Text
+            width={compact ? COLS[4] : undefined}
+            flex={compact ? undefined : 0.4}
+            px={8}
+            color="$gray8"
+          >
+            ⋯
+          </Text>
+        </XStack>
+      ))}
+    </YStack>
+  )
+
   return (
     <YStack
       rounded={16}
@@ -86,6 +181,8 @@ export function RecentOrders() {
       flex={1}
       minH={420}
       width="100%"
+      minW={0}
+      overflow="hidden"
     >
       <XStack items="center" justify="space-between" gap={12} flexWrap="wrap">
         <Text fontSize={18} fontWeight="600" color="$color">
@@ -119,106 +216,14 @@ export function RecentOrders() {
         </XStack>
       </XStack>
 
-      <ScrollView
-        horizontal={compact}
-        showsHorizontalScrollIndicator={false}
-        style={{ flex: 1 }}
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
-        <YStack
-          width={compact ? COLS.reduce((a, b) => a + b, 0) : '100%'}
-          minW={compact ? undefined : '100%'}
-          flex={1}
-        >
-          <XStack borderBottomWidth={1} borderColor="$borderColor" pb={12}>
-            {['Products', 'Category', 'Price', 'Status', ''].map((h, i) => (
-              <Text
-                key={`${h}-${i}`}
-                width={compact ? COLS[i] : undefined}
-                flex={compact ? undefined : i === 0 ? 2 : 1}
-                px={8}
-                fontSize={12}
-                fontWeight="500"
-                color="$gray10"
-              >
-                {h}
-              </Text>
-            ))}
-          </XStack>
-          {tableData.map((row, idx) => (
-            <XStack
-              key={row.id}
-              py={14}
-              items="center"
-              borderBottomWidth={idx === tableData.length - 1 ? 0 : 1}
-              borderColor="$borderColor"
-            >
-              <XStack
-                width={compact ? COLS[0] : undefined}
-                flex={compact ? undefined : 2}
-                px={8}
-                items="center"
-                gap={12}
-                minW={0}
-              >
-                <Image
-                  source={row.image}
-                  style={{ width: 48, height: 48, borderRadius: 8 }}
-                  contentFit="cover"
-                />
-                <YStack flex={1} minW={0}>
-                  <Text fontSize={14} fontWeight="500" color="$color" numberOfLines={1}>
-                    {row.name}
-                  </Text>
-                  <Text fontSize={12} color="$gray10">
-                    {row.variants}
-                  </Text>
-                </YStack>
-              </XStack>
-              <Text
-                width={compact ? COLS[1] : undefined}
-                flex={compact ? undefined : 1}
-                px={8}
-                fontSize={14}
-                color="$gray10"
-                numberOfLines={1}
-                minW={0}
-              >
-                {row.category}
-              </Text>
-              <Text
-                width={compact ? COLS[2] : undefined}
-                flex={compact ? undefined : 1}
-                px={8}
-                fontSize={14}
-                color="$gray10"
-                numberOfLines={1}
-                minW={0}
-              >
-                {row.price}
-              </Text>
-              <XStack
-                width={compact ? COLS[3] : undefined}
-                flex={compact ? undefined : 1}
-                px={8}
-                minW={0}
-              >
-                <Badge size="sm" color={statusColor(row.status)}>
-                  {row.status}
-                </Badge>
-              </XStack>
-              <Text
-                width={compact ? COLS[4] : undefined}
-                flex={compact ? undefined : 0.4}
-                px={8}
-                color="$gray8"
-              >
-                ⋯
-              </Text>
-            </XStack>
-          ))}
-        </YStack>
-      </ScrollView>
+      {/* Avoid nested vertical ScrollView (horizontal={false}) — collapses on web. */}
+      {compact ? (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {tableBody}
+        </ScrollView>
+      ) : (
+        tableBody
+      )}
     </YStack>
   )
 }

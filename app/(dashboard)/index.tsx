@@ -8,6 +8,7 @@ import { MonthlySalesChart } from '@/components/ecommerce/MonthlySalesChart'
 import { MonthlyTarget } from '@/components/ecommerce/MonthlyTarget'
 import { RecentOrders } from '@/components/ecommerce/RecentOrders'
 import { StatisticsChart } from '@/components/ecommerce/StatisticsChart'
+import { TemplateStatsCard } from '@/components/ecommerce/TemplateStatsCard'
 import { TrafficPieCard } from '@/components/ecommerce/TrafficPieCard'
 
 export default function HomeScreen() {
@@ -15,8 +16,9 @@ export default function HomeScreen() {
   const xl = width >= 1280
 
   return (
-    <YStack gap={16} flex={1} width="100%">
+    <YStack gap={16} flex={1} width="100%" pb={24}>
       <KpiStatCards />
+      <TemplateStatsCard />
 
       <XStack
         flexDirection={xl ? 'row' : 'column'}

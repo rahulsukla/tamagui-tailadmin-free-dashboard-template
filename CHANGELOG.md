@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.5] — 2026-09-11
+
+### Fixed
+- Basic / documents / recent-orders tables empty on desktop web: nested vertical `ScrollView` (`horizontal={compact}`) collapsed to 0 height — only use horizontal scroll when compact
+- Dashboard demographic / traffic pie overflow: contain map + legend rows, scale pie to card width, home footer `pb={24}`
+
+### Added
+- `npm run audit:ui` (+ `npm run audit`) gates: demo row data, Dropzone/Calendar/Landing markers, ban on `horizontal={compact}`, `template-stats.json` presence
+- `npm run stats:template` writes measured pack size + file/route counts to `docs/template-stats.json`
+- Dashboard `TemplateStatsCard` tile (real metrics, light/dark Tamagui card)
+- CI + publish workflows run stats refresh + full audit
+
 ## [0.2.4] — 2026-09-11
 
 ### Fixed

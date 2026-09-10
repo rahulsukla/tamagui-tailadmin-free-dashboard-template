@@ -28,10 +28,11 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Typecheck + page audit
+      - name: Typecheck + audits
         run: |
           npm run typecheck
-          npm run audit:pages
+          npm run stats:template
+          npm run audit
 
       - name: Publish to npmjs
         run: npm publish --access public
@@ -59,10 +60,11 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Typecheck + page audit
+      - name: Typecheck + audits
         run: |
           npm run typecheck
-          npm run audit:pages
+          npm run stats:template
+          npm run audit
 
       - name: Scope package for GitHub Packages
         run: |

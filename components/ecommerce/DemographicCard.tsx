@@ -12,7 +12,7 @@ const countries = [
 
 function DemographicMapArt({ color }: { color: string }) {
   return (
-    <Svg width="100%" height="100%" viewBox="0 0 360 180" fill="none">
+    <Svg width="100%" height="100%" viewBox="0 0 360 180" fill="none" preserveAspectRatio="xMidYMid meet">
       <Ellipse cx="180" cy="96" rx="150" ry="62" fill={`${color}14`} />
       <Path
         d="M48 78c18-22 42-30 68-22 14 4 22 14 36 12 10-2 16-10 28-12 20-4 38 6 52 18 8 8 22 10 32 4 12-8 30-6 40 6 6 8 4 20-4 28-14 14-36 18-54 12-12-4-22 2-34 6-18 6-40 2-54-10-8-6-18-8-28-4-16 6-34 2-46-10-8-8-10-20-4-28z"
@@ -45,13 +45,15 @@ export function DemographicCard() {
       flex={1}
       minH={420}
       width="100%"
+      minW={0}
+      overflow="hidden"
     >
-      <XStack justify="space-between" items="flex-start" gap={12}>
+      <XStack justify="space-between" items="flex-start" gap={12} minW={0} width="100%">
         <YStack gap={4} flex={1} minW={0}>
-          <Text fontSize={18} fontWeight="600" color="$color">
+          <Text fontSize={18} fontWeight="600" color="$color" numberOfLines={1}>
             Customers Demographic
           </Text>
-          <Text fontSize={14} color="$gray10">
+          <Text fontSize={14} color="$gray10" numberOfLines={2}>
             Customers by country for the last 30 days
           </Text>
         </YStack>
@@ -63,19 +65,28 @@ export function DemographicCard() {
         borderColor="$borderColor"
         rounded={16}
         height={160}
+        width="100%"
         items="center"
         justify="center"
         bg="$background"
         overflow="hidden"
         px={12}
+        minW={0}
       >
         <DemographicMapArt color={brandColor} />
       </YStack>
 
-      <YStack gap={16} flex={1}>
+      <YStack gap={16} flex={1} minW={0} width="100%" overflow="hidden">
         {countries.map((c) => (
-          <XStack key={c.name} items="center" justify="space-between" gap={12}>
-            <XStack items="center" gap={12} flex={1} minW={0}>
+          <XStack
+            key={c.name}
+            items="center"
+            justify="space-between"
+            gap={12}
+            width="100%"
+            minW={0}
+          >
+            <XStack items="center" gap={12} flex={1} minW={0} overflow="hidden">
               <YStack
                 width={40}
                 height={40}
@@ -83,6 +94,7 @@ export function DemographicCard() {
                 bg="$gray3"
                 items="center"
                 justify="center"
+                shrink={0}
               >
                 <Text fontSize={11} fontWeight="700" color="$gray11">
                   {c.code}
@@ -97,8 +109,8 @@ export function DemographicCard() {
                 </Text>
               </YStack>
             </XStack>
-            <XStack items="center" gap={12} width={132}>
-              <YStack flex={1} height={8} rounded={4} bg="$gray3" overflow="hidden">
+            <XStack items="center" gap={8} width={112} shrink={0}>
+              <YStack flex={1} height={8} rounded={4} bg="$gray3" overflow="hidden" minW={0}>
                 <YStack
                   height="100%"
                   width={`${c.pct}%`}
@@ -106,7 +118,7 @@ export function DemographicCard() {
                   rounded={4}
                 />
               </YStack>
-              <Text fontSize={13} fontWeight="500" color="$gray11" width={36}>
+              <Text fontSize={13} fontWeight="500" color="$gray11" width={36} text="right">
                 {c.pct}%
               </Text>
             </XStack>

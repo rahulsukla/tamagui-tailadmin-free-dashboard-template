@@ -1,6 +1,6 @@
 {
   "name": "verdant-tamagui-admin-template",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Verdant — universal Expo + Tamagui admin dashboard template (iOS, Android, Web)",
   "license": "MIT",
   "author": "Rahul Sukla",
@@ -86,11 +86,14 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
+    "stats:template": "node scripts/generate-template-stats.cjs",
     "audit:pages": "node scripts/audit-pages.cjs",
+    "audit:ui": "node scripts/audit-ui.cjs",
+    "audit": "npm run audit:pages && npm run audit:ui",
     "export:web": "expo export -p web",
     "export:web:pages": "GITHUB_PAGES=1 expo export -p web",
     "serve:web": "expo serve",
-    "prepack": "npm run typecheck && npm run audit:pages",
+    "prepack": "npm run typecheck && npm run stats:template && npm run audit",
     "smoke:template": "node scripts/smoke-template.cjs",
     "release:npm": "npm publish --access public",
     "release:github-packages": "node scripts/publish-github-packages.cjs"

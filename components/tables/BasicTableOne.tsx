@@ -105,6 +105,115 @@ export function BasicTableOne() {
   const { width } = useWindowDimensions()
   const compact = width < 900
 
+  const tableBody = (
+    <YStack width={compact ? COLS.reduce((a, b) => a + b, 0) + 32 : '100%'} minW={compact ? undefined : '100%'}>
+      <XStack borderBottomWidth={1} borderColor="$borderColor" py={12} px={16}>
+        {['User', 'Project Name', 'Team', 'Status', 'Budget'].map((h, i) => (
+          <Text
+            key={h}
+            width={compact ? COLS[i] : undefined}
+            flex={compact ? undefined : FLEX[i]}
+            px={8}
+            fontSize={12}
+            fontWeight="500"
+            color="$gray10"
+            numberOfLines={1}
+          >
+            {h}
+          </Text>
+        ))}
+      </XStack>
+      {tableData.map((row, idx) => (
+        <XStack
+          key={row.id}
+          py={14}
+          px={16}
+          items="center"
+          borderBottomWidth={idx === tableData.length - 1 ? 0 : 1}
+          borderColor="$borderColor"
+        >
+          <XStack
+            width={compact ? COLS[0] : undefined}
+            flex={compact ? undefined : FLEX[0]}
+            px={8}
+            items="center"
+            gap={12}
+            minW={0}
+          >
+            <Image
+              source={row.user.image}
+              style={{ width: 40, height: 40, borderRadius: 20 }}
+              contentFit="cover"
+            />
+            <YStack flex={1} minW={0}>
+              <Text fontSize={14} fontWeight="500" color="$color" numberOfLines={1}>
+                {row.user.name}
+              </Text>
+              <Text fontSize={12} color="$gray10" numberOfLines={1}>
+                {row.user.role}
+              </Text>
+            </YStack>
+          </XStack>
+          <Text
+            width={compact ? COLS[1] : undefined}
+            flex={compact ? undefined : FLEX[1]}
+            px={8}
+            fontSize={14}
+            color="$gray11"
+            numberOfLines={1}
+            minW={0}
+          >
+            {row.projectName}
+          </Text>
+          <XStack
+            width={compact ? COLS[2] : undefined}
+            flex={compact ? undefined : FLEX[2]}
+            px={8}
+            items="center"
+            minW={0}
+          >
+            {row.team.map((src, i) => (
+              <Image
+                key={i}
+                source={src}
+                style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: 14,
+                  marginLeft: i === 0 ? 0 : -8,
+                  borderWidth: 2,
+                  borderColor: '#fff',
+                }}
+                contentFit="cover"
+              />
+            ))}
+          </XStack>
+          <XStack
+            width={compact ? COLS[3] : undefined}
+            flex={compact ? undefined : FLEX[3]}
+            px={8}
+            minW={0}
+          >
+            <Badge size="sm" color={statusColor(row.status)}>
+              {row.status}
+            </Badge>
+          </XStack>
+          <Text
+            width={compact ? COLS[4] : undefined}
+            flex={compact ? undefined : FLEX[4]}
+            px={8}
+            fontSize={14}
+            color="$gray11"
+            numberOfLines={1}
+            minW={0}
+          >
+            {row.budget}
+          </Text>
+        </XStack>
+      ))}
+    </YStack>
+  )
+
   return (
     <YStack
       rounded={16}
@@ -114,122 +223,19 @@ export function BasicTableOne() {
       overflow="hidden"
       width="100%"
     >
-      <ScrollView
-        horizontal={compact}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
-        <YStack
-          width={compact ? COLS.reduce((a, b) => a + b, 0) + 32 : '100%'}
-          minW={compact ? undefined : '100%'}
-          flex={1}
-        >
-          <XStack borderBottomWidth={1} borderColor="$borderColor" py={12} px={16}>
-            {['User', 'Project Name', 'Team', 'Status', 'Budget'].map((h, i) => (
-              <Text
-                key={h}
-                width={compact ? COLS[i] : undefined}
-                flex={compact ? undefined : FLEX[i]}
-                px={8}
-                fontSize={12}
-                fontWeight="500"
-                color="$gray10"
-                numberOfLines={1}
-              >
-                {h}
-              </Text>
-            ))}
-          </XStack>
-          {tableData.map((row, idx) => (
-            <XStack
-              key={row.id}
-              py={14}
-              px={16}
-              items="center"
-              borderBottomWidth={idx === tableData.length - 1 ? 0 : 1}
-              borderColor="$borderColor"
-            >
-              <XStack
-                width={compact ? COLS[0] : undefined}
-                flex={compact ? undefined : FLEX[0]}
-                px={8}
-                items="center"
-                gap={12}
-                minW={0}
-              >
-                <Image
-                  source={row.user.image}
-                  style={{ width: 40, height: 40, borderRadius: 20 }}
-                  contentFit="cover"
-                />
-                <YStack flex={1} minW={0}>
-                  <Text fontSize={14} fontWeight="500" color="$color" numberOfLines={1}>
-                    {row.user.name}
-                  </Text>
-                  <Text fontSize={12} color="$gray10" numberOfLines={1}>
-                    {row.user.role}
-                  </Text>
-                </YStack>
-              </XStack>
-              <Text
-                width={compact ? COLS[1] : undefined}
-                flex={compact ? undefined : FLEX[1]}
-                px={8}
-                fontSize={14}
-                color="$gray11"
-                numberOfLines={1}
-                minW={0}
-              >
-                {row.projectName}
-              </Text>
-              <XStack
-                width={compact ? COLS[2] : undefined}
-                flex={compact ? undefined : FLEX[2]}
-                px={8}
-                items="center"
-                minW={0}
-              >
-                {row.team.map((src, i) => (
-                  <Image
-                    key={i}
-                    source={src}
-                    style={{
-                      width: 28,
-                      height: 28,
-                      borderRadius: 14,
-                      marginLeft: i === 0 ? 0 : -8,
-                      borderWidth: 2,
-                      borderColor: '#fff',
-                    }}
-                    contentFit="cover"
-                  />
-                ))}
-              </XStack>
-              <XStack
-                width={compact ? COLS[3] : undefined}
-                flex={compact ? undefined : FLEX[3]}
-                px={8}
-                minW={0}
-              >
-                <Badge size="sm" color={statusColor(row.status)}>
-                  {row.status}
-                </Badge>
-              </XStack>
-              <Text
-                width={compact ? COLS[4] : undefined}
-                flex={compact ? undefined : FLEX[4]}
-                px={8}
-                fontSize={14}
-                color="$gray11"
-                numberOfLines={1}
-                minW={0}
-              >
-                {row.budget}
-              </Text>
-            </XStack>
-          ))}
-        </YStack>
-      </ScrollView>
+      {/*
+        Only use a horizontal ScrollView when compact. A vertical ScrollView
+        (horizontal={false}) nested in the dashboard layout ScrollView collapses
+        to 0 height on web when children use flex — that emptied the basic table
+        on desktop in 0.2.4.
+      */}
+      {compact ? (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {tableBody}
+        </ScrollView>
+      ) : (
+        tableBody
+      )}
     </YStack>
   )
 }

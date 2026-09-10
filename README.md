@@ -77,6 +77,9 @@ Package pages: [npmjs](https://www.npmjs.com/package/verdant-tamagui-admin-templ
 | `npm run ios` / `android` | Native simulators |
 | `npm run typecheck` | TypeScript |
 | `npm run audit:pages` | Nav ↔ routes + brand guard |
+| `npm run audit:ui` | Demo data + table scroll safety + stats artifact |
+| `npm run audit` | pages + ui |
+| `npm run stats:template` | Refresh `docs/template-stats.json` (npm pack size) |
 | `npm run export:web` | Static web export → `dist/` |
 | `npm run smoke:template` | Pack + create app + typecheck smoke |
 

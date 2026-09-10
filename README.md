@@ -32,7 +32,8 @@ Clear Metro cache if styles look stale: `npx expo start -c`
 | 1 Shell (sidebar, header, theme, routes) | Done |
 | 2 UI kit pages: buttons, alerts, badges, avatars, images, videos | Done |
 | 3 Forms + basic tables | Done |
-| 4–5 Charts / profile / calendar / auth polish | Placeholders linked |
+| 4 Ecommerce dashboard widgets + charts | Done |
+| 5 Profile / calendar / auth polish | Placeholders linked |
 | 6 Config panel + polish | Partial (config context ready) |
 
 ## Licensing

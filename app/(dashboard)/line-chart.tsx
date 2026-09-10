@@ -1,13 +1,30 @@
-import { Text } from 'tamagui'
+import { YStack } from 'tamagui'
 
-import { PageShell } from '@/components/PageShell'
+import { PageBreadcrumb } from '@/components/PageBreadcrumb'
+import { SimpleAreaChart } from '@/components/charts/SimpleAreaChart'
+import { ComponentCard } from '@/components/ui/ComponentCard'
+import { brand } from '@/theme/colors'
 
-export default function Page() {
+const series = [
+  {
+    name: 'Sales',
+    data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
+    color: brand[500],
+  },
+  {
+    name: 'Revenue',
+    data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
+    color: brand[300],
+  },
+]
+
+export default function LineChartPage() {
   return (
-    <PageShell title="Line Chart">
-      <Text color="$gray10" fontSize={14}>
-        Line Chart — content ported in a later phase. Navigation and theme shell are live.
-      </Text>
-    </PageShell>
+    <YStack gap="$5" flex={1}>
+      <PageBreadcrumb pageTitle="Line Chart" />
+      <ComponentCard title="Line Chart 1">
+        <SimpleAreaChart series={series} height={310} />
+      </ComponentCard>
+    </YStack>
   )
 }

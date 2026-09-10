@@ -1,13 +1,18 @@
-import { Text } from 'tamagui'
+import { YStack } from 'tamagui'
 
-import { PageShell } from '@/components/PageShell'
+import { PageBreadcrumb } from '@/components/PageBreadcrumb'
+import { SimpleBarChart } from '@/components/charts/SimpleBarChart'
+import { ComponentCard } from '@/components/ui/ComponentCard'
 
-export default function Page() {
+const sales = [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112]
+
+export default function BarChartPage() {
   return (
-    <PageShell title="Bar Chart">
-      <Text color="$gray10" fontSize={14}>
-        Bar Chart — content ported in a later phase. Navigation and theme shell are live.
-      </Text>
-    </PageShell>
+    <YStack gap="$5" flex={1}>
+      <PageBreadcrumb pageTitle="Bar Chart" />
+      <ComponentCard title="Bar Chart 1">
+        <SimpleBarChart data={sales} height={200} />
+      </ComponentCard>
+    </YStack>
   )
 }

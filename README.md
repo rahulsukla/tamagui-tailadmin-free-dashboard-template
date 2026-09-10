@@ -1,5 +1,9 @@
 # Tamagui TailAdmin Free Dashboard Template
 
+[![Demo](https://img.shields.io/badge/demo-GitHub%20Pages-465fff?style=flat-square)](https://rahulsukla.github.io/tamagui-tailadmin-free-dashboard-template/)
+[![Release](https://img.shields.io/badge/release-v0.1.0-0d9488?style=flat-square)](https://github.com/rahulsukla/tamagui-tailadmin-free-dashboard-template/releases/tag/v0.1.0)
+[![License: MIT](https://img.shields.io/badge/license-MIT-gray?style=flat-square)](./LICENSE)
+
 Universal (iOS / Android / Web) admin dashboard template. Visual design and free page inventory are ported from the [TailAdmin free MIT edition](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template); UI is built with [Tamagui](https://github.com/tamagui/tamagui).
 
 > Independent community port — not affiliated with TailAdmin or Tamagui commercial products. See [NOTICE](./NOTICE).
@@ -8,7 +12,7 @@ Universal (iOS / Android / Web) admin dashboard template. Visual design and free
 
 **[https://rahulsukla.github.io/tamagui-tailadmin-free-dashboard-template/](https://rahulsukla.github.io/tamagui-tailadmin-free-dashboard-template/)**
 
-The demo is a static Expo web export hosted on GitHub Pages (`gh-pages` branch). It redeploys automatically on every push to `main` and when a GitHub Release is published (see [`.github/workflows/deploy-pages.yml`](./.github/workflows/deploy-pages.yml)).
+Current release: **v0.1.0**. The demo is a static Expo web export on GitHub Pages (`gh-pages`). It redeploys on every push to `main` and when a GitHub Release is published.
 
 ## Stack
 
@@ -41,10 +45,7 @@ Clear Metro cache if styles look stale: `npx expo start -c`
 | `CI` | PR + push to `main` | `npm ci` + typecheck |
 | `Deploy GitHub Pages` | push to `main`, published release, or manual | Export web with `baseUrl` and publish `dist/` to `gh-pages` |
 
-One-time repo setup (already scripted where possible):
-
-1. Settings → Pages → **Deploy from a branch** → Branch: `gh-pages` / `/` (root)
-2. Optional: set repository Homepage to the demo URL above
+See [CONTRIBUTING.md](./CONTRIBUTING.md) and [CHANGELOG.md](./CHANGELOG.md).
 
 ## Phase status
 
@@ -57,6 +58,7 @@ One-time repo setup (already scripted where possible):
 | 4 Ecommerce dashboard widgets + charts | Done |
 | 5 Profile / calendar / auth polish | Done |
 | 6 Config panel + polish + Pages demo/CI | Done |
+| 7 Release polish & v0.1.0 | Done |
 
 ## Licensing
 

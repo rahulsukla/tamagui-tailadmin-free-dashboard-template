@@ -1,7 +1,7 @@
 import { Pressable } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
-import { brand } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 type RadioProps = {
   label: string
@@ -11,6 +11,8 @@ type RadioProps = {
 }
 
 export function Radio({ label, checked, onChange, disabled }: RadioProps) {
+  const { brandColor } = useTemplateConfig()
+
   return (
     <Pressable
       disabled={disabled}
@@ -23,8 +25,8 @@ export function Radio({ label, checked, onChange, disabled }: RadioProps) {
           height={20}
           rounded={999}
           borderWidth={1.25}
-          borderColor={checked ? brand[500] : '$borderColor'}
-          bg={checked ? brand[500] : 'transparent'}
+          borderColor={checked ? (brandColor as any) : '$borderColor'}
+          bg={checked ? (brandColor as any) : 'transparent'}
           items="center"
           justify="center"
         >

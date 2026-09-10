@@ -1,6 +1,7 @@
 import { Text, TextArea as TTextArea, YStack } from 'tamagui'
 
-import { brand, error as errorPalette } from '@/theme/colors'
+import { error as errorPalette } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 type AppTextAreaProps = {
   value?: string
@@ -21,6 +22,7 @@ export function AppTextArea({
   hint,
   numberOfLines = 4,
 }: AppTextAreaProps) {
+  const { brandColor } = useTemplateConfig()
   return (
     <YStack gap={8} width="100%">
       <TTextArea
@@ -41,7 +43,7 @@ export function AppTextArea({
         fontSize={14}
         opacity={disabled ? 0.55 : 1}
         focusStyle={{
-          borderColor: (error ? errorPalette[500] : brand[300]) as any,
+          borderColor: (error ? errorPalette[500] : brandColor) as any,
           outlineWidth: 0,
         }}
       />

@@ -3,11 +3,12 @@ import { Pressable } from 'react-native'
 import { Text, YStack } from 'tamagui'
 
 import { ComponentCard } from '@/components/ui/ComponentCard'
-import { brand } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 export function DropzoneComponent() {
   const [active, setActive] = useState(false)
   const [files, setFiles] = useState<string[]>([])
+  const { brandColor } = useTemplateConfig()
 
   return (
     <ComponentCard title="Dropzone">
@@ -21,7 +22,7 @@ export function DropzoneComponent() {
         <YStack
           borderWidth={1}
           borderStyle="dashed"
-          borderColor={active ? brand[500] : '$borderColor'}
+          borderColor={active ? (brandColor as any) : '$borderColor'}
           bg={active ? '$accentBackground' : '$background'}
           rounded={12}
           p="$6"
@@ -47,7 +48,7 @@ export function DropzoneComponent() {
             Drag and drop your PNG, JPG, WebP, SVG images here or browse
           </Text>
           {files.length ? (
-            <Text fontSize={12} color={brand[500] as any}>
+            <Text fontSize={12} color={brandColor as any}>
               Selected: {files.join(', ')}
             </Text>
           ) : null}

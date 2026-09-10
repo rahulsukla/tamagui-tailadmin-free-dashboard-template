@@ -1,14 +1,39 @@
+import Svg, { Circle, Ellipse, Path } from 'react-native-svg'
 import { Text, XStack, YStack } from 'tamagui'
 
 import { MoreMenu } from '@/components/charts/MoreMenu'
-import { brand } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 const countries = [
   { name: 'USA', customers: '2,379 Customers', pct: 79, flag: '🇺🇸' },
   { name: 'France', customers: '589 Customers', pct: 23, flag: '🇫🇷' },
 ]
 
+function DemographicMapArt({ color }: { color: string }) {
+  return (
+    <Svg width="100%" height="100%" viewBox="0 0 360 180" fill="none">
+      <Ellipse cx="180" cy="96" rx="150" ry="62" fill={`${color}14`} />
+      {/* Simplified continents silhouette */}
+      <Path
+        d="M48 78c18-22 42-30 68-22 14 4 22 14 36 12 10-2 16-10 28-12 20-4 38 6 52 18 8 8 22 10 32 4 12-8 30-6 40 6 6 8 4 20-4 28-14 14-36 18-54 12-12-4-22 2-34 6-18 6-40 2-54-10-8-6-18-8-28-4-16 6-34 2-46-10-8-8-10-20-4-28z"
+        fill={`${color}33`}
+        stroke={color}
+        strokeWidth={1.25}
+      />
+      <Path
+        d="M92 118c10-4 22-2 30 6 6 6 16 8 24 4 12-6 28-4 36 6 4 6 2 14-4 18-14 10-36 8-50 0-8-4-18-4-26 0-10 4-20 0-24-8-4-8 2-18 14-26z"
+        fill={`${color}55`}
+      />
+      <Circle cx="118" cy="72" r="5" fill={color} opacity={0.9} />
+      <Circle cx="210" cy="88" r="4" fill={color} opacity={0.75} />
+      <Circle cx="268" cy="78" r="3.5" fill={color} opacity={0.7} />
+    </Svg>
+  )
+}
+
 export function DemographicCard() {
+  const { brandColor } = useTemplateConfig()
+
   return (
     <YStack
       rounded={16}
@@ -40,11 +65,9 @@ export function DemographicCard() {
         justify="center"
         bg="$background"
         overflow="hidden"
+        px="$3"
       >
-        <Text fontSize={48}>🗺️</Text>
-        <Text mt="$2" fontSize={13} color="$gray10">
-          Map placeholder (jsVectorMap skipped for lean native support)
-        </Text>
+        <DemographicMapArt color={brandColor} />
       </YStack>
 
       <YStack gap="$4">
@@ -66,7 +89,7 @@ export function DemographicCard() {
                 <YStack
                   height="100%"
                   width={`${c.pct}%`}
-                  bg={brand[500] as any}
+                  bg={brandColor as any}
                   rounded={4}
                 />
               </YStack>

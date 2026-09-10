@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Pressable } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
-import { brand } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 export type SelectOption = { value: string; label: string }
 
@@ -25,6 +25,7 @@ export function AppSelect({
   const [internal, setInternal] = useState(defaultValue)
   const selected = value ?? internal
   const label = options.find((o) => o.value === selected)?.label
+  const { brandColor } = useTemplateConfig()
 
   return (
     <YStack width="100%" position="relative" z={open ? 20 : 1}>
@@ -79,7 +80,7 @@ export function AppSelect({
                 >
                   <Text
                     fontSize={14}
-                    color={active ? (brand[500] as any) : '$color'}
+                    color={active ? (brandColor as any) : '$color'}
                     fontWeight={active ? '600' : '400'}
                   >
                     {option.label}

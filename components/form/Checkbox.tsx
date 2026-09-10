@@ -2,7 +2,7 @@ import { Pressable } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
 import { Text, XStack, YStack } from 'tamagui'
 
-import { brand } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 type CheckboxProps = {
   label?: string
@@ -12,6 +12,8 @@ type CheckboxProps = {
 }
 
 export function Checkbox({ label, checked, onChange, disabled }: CheckboxProps) {
+  const { brandColor } = useTemplateConfig()
+
   return (
     <Pressable
       disabled={disabled}
@@ -24,8 +26,8 @@ export function Checkbox({ label, checked, onChange, disabled }: CheckboxProps) 
           height={20}
           rounded={6}
           borderWidth={1}
-          borderColor={checked ? brand[500] : '$borderColor'}
-          bg={checked ? brand[500] : 'transparent'}
+          borderColor={checked ? (brandColor as any) : '$borderColor'}
+          bg={checked ? (brandColor as any) : 'transparent'}
           items="center"
           justify="center"
         >

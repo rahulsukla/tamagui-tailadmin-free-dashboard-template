@@ -3,24 +3,24 @@ import { Text, XStack, YStack } from 'tamagui'
 
 import { ChartTab } from '@/components/charts/ChartTab'
 import { SimpleAreaChart } from '@/components/charts/SimpleAreaChart'
-import { brand } from '@/theme/colors'
-
-const series = [
-  {
-    name: 'Sales',
-    data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
-    color: brand[500],
-  },
-  {
-    name: 'Revenue',
-    data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
-    color: brand[300],
-  },
-]
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 export function StatisticsChart() {
   const { width } = useWindowDimensions()
   const stacked = width < 640
+  const { brandColor } = useTemplateConfig()
+  const series = [
+    {
+      name: 'Sales',
+      data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
+      color: brandColor,
+    },
+    {
+      name: 'Revenue',
+      data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
+      color: `${brandColor}99`,
+    },
+  ]
 
   return (
     <YStack
@@ -44,7 +44,7 @@ export function StatisticsChart() {
             Statistics
           </Text>
           <Text fontSize={14} color="$gray10">
-            Target you've set for each month
+            Target you&apos;ve set for each month
           </Text>
         </YStack>
         <XStack items="center" gap="$3" flexWrap="wrap">

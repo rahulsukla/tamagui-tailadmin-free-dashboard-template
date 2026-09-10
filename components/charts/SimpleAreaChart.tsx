@@ -3,7 +3,8 @@ import { ScrollView, useWindowDimensions } from 'react-native'
 import Svg, { Defs, LinearGradient, Line, Path, Stop, Text as SvgText } from 'react-native-svg'
 import { Text, XStack, YStack } from 'tamagui'
 
-import { brand, gray } from '@/theme/colors'
+import { gray } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -127,6 +128,7 @@ export function RadialProgress({
   value?: number
   size?: number
 }) {
+  const { brandColor } = useTemplateConfig()
   const stroke = 14
   const r = (size - stroke) / 2
   const cx = size / 2
@@ -165,7 +167,7 @@ export function RadialProgress({
         />
         <Path
           d={prog}
-          stroke={brand[500]}
+          stroke={brandColor}
           strokeWidth={stroke}
           fill="none"
           strokeLinecap="round"

@@ -3,7 +3,8 @@ import { ScrollView, useWindowDimensions } from 'react-native'
 import Svg, { Line, Rect, Text as SvgText } from 'react-native-svg'
 import { Text, XStack, YStack } from 'tamagui'
 
-import { brand, gray } from '@/theme/colors'
+import { gray } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -18,11 +19,13 @@ type SimpleBarChartProps = {
 export function SimpleBarChart({
   data,
   height = 180,
-  color = brand[500],
+  color,
   categories = MONTHS,
 }: SimpleBarChartProps) {
   const { width: screenW } = useWindowDimensions()
   const { resolvedTheme } = useThemeMode()
+  const { brandColor } = useTemplateConfig()
+  const barColor = color ?? brandColor
   const chartW = Math.max(screenW - 80, 650)
   const padL = 36
   const padB = 28
@@ -70,7 +73,7 @@ export function SimpleBarChart({
             width={Math.max(barW, 4)}
             height={Math.max(b.h, 2)}
             rx={5}
-            fill={color}
+            fill={barColor}
           />
         ))}
         {bars.map((b) => (

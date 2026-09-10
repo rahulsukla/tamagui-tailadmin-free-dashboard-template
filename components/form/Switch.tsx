@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Pressable } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
-import { brand, gray } from '@/theme/colors'
+import { gray } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
 
 type SwitchProps = {
@@ -22,10 +23,11 @@ export function Switch({
 }: SwitchProps) {
   const [checked, setChecked] = useState(defaultChecked)
   const { resolvedTheme } = useThemeMode()
+  const { brandColor } = useTemplateConfig()
 
   const trackOn =
     color === 'blue'
-      ? brand[500]
+      ? brandColor
       : resolvedTheme === 'dark'
         ? 'rgba(255,255,255,0.1)'
         : gray[800]
@@ -47,7 +49,7 @@ export function Switch({
           width={44}
           height={24}
           rounded={999}
-          bg={checked ? trackOn : trackOff}
+          bg={checked ? (trackOn as any) : (trackOff as any)}
           justify="center"
           px={2}
         >

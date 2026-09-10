@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react'
 import { Text, XStack } from 'tamagui'
 
-import { brand, error, gray, success, warning } from '@/theme/colors'
+import { error, gray, success, warning } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
 
 type BadgeVariant = 'light' | 'solid'
@@ -26,10 +27,15 @@ type BadgeProps = {
 
 const info = { 50: '#f0f9ff', 500: '#0ba5ec' }
 
-function useBadgeColors(variant: BadgeVariant, color: BadgeColor, isDark: boolean) {
+function useBadgeColors(
+  variant: BadgeVariant,
+  color: BadgeColor,
+  isDark: boolean,
+  brandColor: string
+) {
   if (variant === 'solid') {
     const map: Record<BadgeColor, { bg: string; fg: string }> = {
-      primary: { bg: brand[500], fg: '#fff' },
+      primary: { bg: brandColor, fg: '#fff' },
       success: { bg: success[500], fg: '#fff' },
       error: { bg: error[500], fg: '#fff' },
       warning: { bg: warning[500], fg: '#fff' },
@@ -42,8 +48,8 @@ function useBadgeColors(variant: BadgeVariant, color: BadgeColor, isDark: boolea
 
   const map: Record<BadgeColor, { bg: string; fg: string }> = {
     primary: {
-      bg: isDark ? 'rgba(70,95,255,0.15)' : brand[50],
-      fg: isDark ? brand[400] : brand[500],
+      bg: isDark ? `${brandColor}26` : `${brandColor}1a`,
+      fg: brandColor,
     },
     success: {
       bg: isDark ? 'rgba(18,183,106,0.15)' : success[50],
@@ -82,7 +88,8 @@ export function Badge({
   children,
 }: BadgeProps) {
   const { resolvedTheme } = useThemeMode()
-  const palette = useBadgeColors(variant, color, resolvedTheme === 'dark')
+  const { brandColor } = useTemplateConfig()
+  const palette = useBadgeColors(variant, color, resolvedTheme === 'dark', brandColor)
 
   return (
     <XStack

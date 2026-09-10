@@ -4,11 +4,13 @@ import { Link } from 'expo-router'
 import { Text, XStack, YStack } from 'tamagui'
 
 import { ThemeToggleButton } from '@/components/ThemeToggleButton'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { brand } from '@/theme/colors'
 
 export function AuthLayout({ children }: { children: ReactNode }) {
   const { width } = useWindowDimensions()
   const showAside = width >= 1024
+  const { brandColor } = useTemplateConfig()
 
   return (
     <YStack flex={1} bg="$backgroundStrong" minH="100%">
@@ -31,7 +33,7 @@ export function AuthLayout({ children }: { children: ReactNode }) {
                     width={40}
                     height={40}
                     rounded={10}
-                    bg={brand[500] as any}
+                    bg={brandColor as any}
                     items="center"
                     justify="center"
                   >

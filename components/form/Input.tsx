@@ -1,10 +1,10 @@
 import { Input as TInput, Text, YStack } from 'tamagui'
 
 import {
-  brand,
   error as errorPalette,
   success as successPalette,
 } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 type AppInputProps = {
   value?: string
@@ -35,6 +35,7 @@ export function AppInput({
   paddingLeft,
   paddingRight,
 }: AppInputProps) {
+  const { brandColor } = useTemplateConfig()
   const border = error
     ? errorPalette[500]
     : success
@@ -67,7 +68,7 @@ export function AppInput({
             ? errorPalette[500]
             : success
               ? successPalette[500]
-              : brand[300]) as any,
+              : brandColor) as any,
           outlineWidth: 0,
         }}
         {...(paddingLeft != null ? { pl: paddingLeft } : null)}

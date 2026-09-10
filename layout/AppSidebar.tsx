@@ -6,9 +6,9 @@ import { Button, Text, XStack, YStack } from 'tamagui'
 import { BrandLogo } from '@/components/BrandLogo'
 import { NavIcon } from '@/components/icons'
 import { useSidebar } from '@/context/SidebarContext'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
 import { mainNav, othersNav, type NavItem } from '@/navigation/navItems'
-import { brand } from '@/theme/colors'
 
 function pathMatches(pathname: string, href: string) {
   if (href === '/') return pathname === '/' || pathname === ''
@@ -21,6 +21,7 @@ export function AppSidebar() {
   const { width } = useWindowDimensions()
   const isLg = width >= 1024
   const { resolvedTheme } = useThemeMode()
+  const { brandColor } = useTemplateConfig()
   const {
     isExpanded,
     isHovered,
@@ -42,7 +43,7 @@ export function AppSidebar() {
     }
   }, [pathname])
 
-  const activeColor = resolvedTheme === 'dark' ? brand[400] : brand[500]
+  const activeColor = brandColor
   const inactiveIcon = resolvedTheme === 'dark' ? '#98a2b3' : '#667085'
 
   // Off-canvas on < lg when closed
@@ -95,7 +96,7 @@ export function AppSidebar() {
                 >
                   <NavIcon name={item.icon} color={active ? activeColor : inactiveIcon} />
                   {wide ? (
-                    <Text fontSize={14} fontWeight="500" color={active ? activeColor : '$gray11'}>
+                    <Text fontSize={14} fontWeight="500" color={(active ? activeColor : '$gray11') as any}>
                       {item.name}
                     </Text>
                   ) : null}
@@ -130,7 +131,7 @@ export function AppSidebar() {
                       text="left"
                       fontSize={14}
                       fontWeight="500"
-                      color={active || isOpen ? activeColor : '$gray11'}
+                      color={(active || isOpen ? activeColor : '$gray11') as any}
                     >
                       {item.name}
                     </Text>
@@ -166,7 +167,7 @@ export function AppSidebar() {
                         <Text
                           fontSize={14}
                           fontWeight="500"
-                          color={subActive ? activeColor : '$gray10'}
+                          color={(subActive ? activeColor : '$gray10') as any}
                         >
                           {sub.name}
                         </Text>

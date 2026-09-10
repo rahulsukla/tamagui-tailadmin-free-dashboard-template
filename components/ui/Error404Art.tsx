@@ -1,12 +1,11 @@
 import Svg, { Rect } from 'react-native-svg'
 
-import { brand } from '@/theme/colors'
-import { useThemeMode } from '@/context/ThemeContext'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 /** TailAdmin-style 404 glyph (react-native-svg; works on web + native). */
 export function Error404Art({ width = 280, height = 94 }: { width?: number; height?: number }) {
-  const { resolvedTheme } = useThemeMode()
-  const fill = resolvedTheme === 'dark' ? brand[400] : brand[500]
+  const { brandColor } = useTemplateConfig()
+  const fill = brandColor
 
   return (
     <Svg width={width} height={height} viewBox="0 0 472 158" fill="none">

@@ -5,7 +5,7 @@ import { Text, XStack, YStack } from 'tamagui'
 import { Label } from '@/components/form/Label'
 import { AppSelect } from '@/components/form/Select'
 import { ComponentCard } from '@/components/ui/ComponentCard'
-import { brand } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 const options = [
   { value: 'marketing', label: 'Marketing' },
@@ -23,6 +23,7 @@ const multiOptions = [
 
 export function SelectInputs() {
   const [selected, setSelected] = useState<string[]>(['1', '3'])
+  const { brandColor } = useTemplateConfig()
 
   return (
     <ComponentCard title="Select Inputs">
@@ -52,13 +53,13 @@ export function SelectInputs() {
                     py={8}
                     rounded={8}
                     borderWidth={1}
-                    borderColor={active ? brand[500] : '$borderColor'}
+                    borderColor={active ? (brandColor as any) : '$borderColor'}
                     bg={active ? '$accentBackground' : '$background'}
                   >
                     <Text
                       fontSize={13}
                       fontWeight="500"
-                      color={active ? (brand[500] as any) : '$color'}
+                      color={active ? (brandColor as any) : '$color'}
                     >
                       {opt.label}
                     </Text>

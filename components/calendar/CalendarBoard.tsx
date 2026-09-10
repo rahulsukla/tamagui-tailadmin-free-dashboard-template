@@ -6,7 +6,8 @@ import { AppInput } from '@/components/form/Input'
 import { Label } from '@/components/form/Label'
 import { AppSelect } from '@/components/form/Select'
 import { AppModal, useModal } from '@/components/profile/shared'
-import { brand, error, success, warning } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
+import { error, success, warning } from '@/theme/colors'
 
 type CalEvent = {
   id: string
@@ -14,13 +15,6 @@ type CalEvent = {
   date: string // YYYY-MM-DD
   level: 'Danger' | 'Success' | 'Primary' | 'Warning'
 }
-
-const levelColor = {
-  Danger: error[500],
-  Success: success[500],
-  Primary: brand[500],
-  Warning: warning[500],
-} as const
 
 function toKey(d: Date) {
   return d.toISOString().slice(0, 10)
@@ -36,6 +30,13 @@ function daysInMonth(d: Date) {
 
 export function CalendarBoard() {
   const { width } = useWindowDimensions()
+  const { brandColor } = useTemplateConfig()
+  const levelColor = {
+    Danger: error[500],
+    Success: success[500],
+    Primary: brandColor,
+    Warning: warning[500],
+  } as const
   const cellMin = width < 640 ? 44 : 72
   const [cursor, setCursor] = useState(() => startOfMonth(new Date()))
   const [events, setEvents] = useState<CalEvent[]>(() => {
@@ -187,7 +188,7 @@ export function CalendarBoard() {
                 px={12}
                 height={36}
                 rounded={8}
-                bg={brand[500] as any}
+                bg={brandColor as any}
                 items="center"
               >
                 <Text color="#fff" fontWeight="600" fontSize={13}>

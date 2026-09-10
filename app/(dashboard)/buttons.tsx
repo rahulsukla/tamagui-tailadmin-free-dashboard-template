@@ -1,10 +1,11 @@
 import { PageBreadcrumb } from '@/components/PageBreadcrumb'
 import { AppButton, BoxIcon } from '@/components/ui/Button'
 import { ComponentCard } from '@/components/ui/ComponentCard'
-import { brand } from '@/theme/colors'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { XStack, YStack } from 'tamagui'
 
 export default function ButtonsPage() {
+  const { brandColor } = useTemplateConfig()
   return (
     <YStack gap="$5" flex={1}>
       <PageBreadcrumb pageTitle="Buttons" />
@@ -58,14 +59,14 @@ export default function ButtonsPage() {
           <AppButton
             size="sm"
             variant="outline"
-            startIcon={<BoxIcon color={brand[500]} />}
+            startIcon={<BoxIcon color={brandColor} />}
           >
             Button Text
           </AppButton>
           <AppButton
             size="md"
             variant="outline"
-            startIcon={<BoxIcon color={brand[500]} />}
+            startIcon={<BoxIcon color={brandColor} />}
           >
             Button Text
           </AppButton>
@@ -77,14 +78,14 @@ export default function ButtonsPage() {
           <AppButton
             size="sm"
             variant="outline"
-            endIcon={<BoxIcon color={brand[500]} />}
+            endIcon={<BoxIcon color={brandColor} />}
           >
             Button Text
           </AppButton>
           <AppButton
             size="md"
             variant="outline"
-            endIcon={<BoxIcon color={brand[500]} />}
+            endIcon={<BoxIcon color={brandColor} />}
           >
             Button Text
           </AppButton>

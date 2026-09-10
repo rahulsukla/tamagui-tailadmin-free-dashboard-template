@@ -23,6 +23,7 @@ function LayoutContent() {
       width="100%"
       self="center"
       flex={1}
+      minW={0}
     >
       <Slot />
     </YStack>

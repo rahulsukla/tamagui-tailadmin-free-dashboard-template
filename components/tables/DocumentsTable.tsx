@@ -1,3 +1,4 @@
+import { ScrollView, useWindowDimensions } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
 import { Badge } from '@/components/ui/Badge'
@@ -45,54 +46,114 @@ const ROWS: DocRow[] = [
   },
 ]
 
+const COLS = [180, 120, 72, 72, 120] as const
+const FLEX = [2.2, 1.4, 0.8, 0.8, 1.2] as const
+
 /** Documents-style table inspired by the tweakcn Light Green dashboard preview. */
 export function DocumentsTable() {
   const { brandColor } = useTemplateConfig()
+  const { width } = useWindowDimensions()
+  const compact = width < 900
 
   return (
     <ComponentCard title="Documents">
-      <YStack gap={12}>
+      <YStack gap={12} width="100%">
         <Text fontSize={13} color="$gray10">
           Structured document checklist with targets, limits, and reviewers.
         </Text>
         <YStack borderWidth={1} borderColor="$borderColor" rounded={12} overflow="hidden">
-          <XStack bg="$gray3" px={16} py={12} gap={8}>
-            {['Header', 'Section', 'Target', 'Limit', 'Reviewer'].map((h) => (
-              <Text key={h} flex={h === 'Header' ? 2 : 1} fontSize={12} fontWeight="600" color="$gray10">
-                {h}
-              </Text>
-            ))}
-          </XStack>
-          {ROWS.map((row, i) => (
-            <XStack
-              key={row.title}
-              px={16}
-              py={14}
-              gap={8}
-              items="center"
-              borderTopWidth={i === 0 ? 0 : 1}
-              borderColor="$borderColor"
-              bg="$backgroundStrong"
+          <ScrollView
+            horizontal={compact}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ flexGrow: 1 }}
+          >
+            <YStack
+              width={compact ? COLS.reduce((a, b) => a + b, 0) + 32 : '100%'}
+              minW={compact ? undefined : '100%'}
             >
-              <Text flex={2} fontSize={14} fontWeight="500" color="$color" numberOfLines={1}>
-                {row.title}
-              </Text>
-              <YStack flex={1}>
-                <Badge size="sm" color="light">
-                  {row.section}
-                </Badge>
-              </YStack>
-              <Text flex={1} fontSize={14} color="$gray11">
-                {row.target}
-              </Text>
-              <Text flex={1} fontSize={14} color="$gray11">
-                {row.limit}
-              </Text>
-              <Text flex={1} fontSize={13} color={brandColor as any} fontWeight="500" numberOfLines={1}>
-                {row.reviewer}
-              </Text>
-            </XStack>
-          ))}
+              <XStack bg="$gray3" px={16} py={12} gap={8}>
+                {['Header', 'Section', 'Target', 'Limit', 'Reviewer'].map((h, i) => (
+                  <Text
+                    key={h}
+                    width={compact ? COLS[i] : undefined}
+                    flex={compact ? undefined : FLEX[i]}
+                    fontSize={12}
+                    fontWeight="600"
+                    color="$gray10"
+                    numberOfLines={1}
+                    minW={0}
+                  >
+                    {h}
+                  </Text>
+                ))}
+              </XStack>
+              {ROWS.map((row, i) => (
+                <XStack
+                  key={row.title}
+                  px={16}
+                  py={14}
+                  gap={8}
+                  items="center"
+                  borderTopWidth={i === 0 ? 0 : 1}
+                  borderColor="$borderColor"
+                  bg="$backgroundStrong"
+                >
+                  <Text
+                    width={compact ? COLS[0] : undefined}
+                    flex={compact ? undefined : FLEX[0]}
+                    fontSize={14}
+                    fontWeight="500"
+                    color="$color"
+                    numberOfLines={1}
+                    minW={0}
+                  >
+                    {row.title}
+                  </Text>
+                  <YStack
+                    width={compact ? COLS[1] : undefined}
+                    flex={compact ? undefined : FLEX[1]}
+                    minW={0}
+                    overflow="hidden"
+                  >
+                    <Badge size="sm" color="light">
+                      {row.section}
+                    </Badge>
+                  </YStack>
+                  <Text
+                    width={compact ? COLS[2] : undefined}
+                    flex={compact ? undefined : FLEX[2]}
+                    fontSize={14}
+                    color="$gray11"
+                    numberOfLines={1}
+                    minW={0}
+                  >
+                    {row.target}
+                  </Text>
+                  <Text
+                    width={compact ? COLS[3] : undefined}
+                    flex={compact ? undefined : FLEX[3]}
+                    fontSize={14}
+                    color="$gray11"
+                    numberOfLines={1}
+                    minW={0}
+                  >
+                    {row.limit}
+                  </Text>
+                  <Text
+                    width={compact ? COLS[4] : undefined}
+                    flex={compact ? undefined : FLEX[4]}
+                    fontSize={13}
+                    color={brandColor as any}
+                    fontWeight="500"
+                    numberOfLines={1}
+                    minW={0}
+                  >
+                    {row.reviewer}
+                  </Text>
+                </XStack>
+              ))}
+            </YStack>
+          </ScrollView>
         </YStack>
       </YStack>
     </ComponentCard>

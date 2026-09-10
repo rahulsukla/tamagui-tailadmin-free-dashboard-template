@@ -17,7 +17,10 @@ type CalEvent = {
 }
 
 function toKey(d: Date) {
-  return d.toISOString().slice(0, 10)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
 }
 
 function startOfMonth(d: Date) {
@@ -37,7 +40,7 @@ export function CalendarBoard() {
     Primary: brandColor,
     Warning: warning[500],
   } as const
-  const cellMin = width < 640 ? 44 : 72
+  const cellH = width < 640 ? 56 : 96
   const [cursor, setCursor] = useState(() => startOfMonth(new Date()))
   const [events, setEvents] = useState<CalEvent[]>(() => {
     const today = new Date()
@@ -206,8 +209,16 @@ export function CalendarBoard() {
         </XStack>
 
         <XStack borderBottomWidth={1} borderColor="$borderColor">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => (
-            <YStack key={d} flex={1} py="$2" items="center">
+          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d, i) => (
+            <YStack
+              key={d}
+              flex={1}
+              minW={0}
+              py="$2"
+              items="center"
+              borderRightWidth={i === 6 ? 0 : 1}
+              borderColor="$borderColor"
+            >
               <Text fontSize={12} fontWeight="500" color="$gray10">
                 {d}
               </Text>
@@ -216,57 +227,67 @@ export function CalendarBoard() {
         </XStack>
 
         <YStack>
-          {Array.from({ length: Math.ceil(grid.length / 7) }, (_, row) => (
-            <XStack key={`row-${row}`}>
-              {grid.slice(row * 7, row * 7 + 7).map((cell) => {
-                const dayEvents = cell.day
-                  ? events.filter((e) => e.date === cell.key)
-                  : []
-                return (
-                  <Pressable
-                    key={cell.key}
-                    style={{ flex: 1 }}
-                    onPress={() => {
-                      if (!cell.day) return
-                      if (dayEvents[0]) openEdit(dayEvents[0])
-                      else openCreate(cell.key)
-                    }}
-                  >
-                    <YStack
-                      minH={cellMin}
-                      borderRightWidth={1}
-                      borderBottomWidth={1}
-                      borderColor="$borderColor"
-                      p="$1.5"
-                      bg={cell.day ? '$backgroundStrong' : '$background'}
-                      opacity={cell.day ? 1 : 0.45}
+          {Array.from({ length: Math.ceil(grid.length / 7) }, (_, row) => {
+            const rowCells = grid.slice(row * 7, row * 7 + 7)
+            const isLastRow = row === Math.ceil(grid.length / 7) - 1
+            return (
+              <XStack key={`row-${row}`} items="stretch">
+                {rowCells.map((cell, col) => {
+                  const dayEvents = cell.day
+                    ? events.filter((e) => e.date === cell.key)
+                    : []
+                  const isLastCol = col === 6
+                  return (
+                    <Pressable
+                      key={cell.key}
+                      style={{ flex: 1, minWidth: 0 }}
+                      onPress={() => {
+                        if (!cell.day) return
+                        if (dayEvents[0]) openEdit(dayEvents[0])
+                        else openCreate(cell.key)
+                      }}
                     >
-                      {cell.day ? (
-                        <Text fontSize={12} color="$gray11" mb={4}>
-                          {cell.day}
-                        </Text>
-                      ) : null}
-                      <YStack gap={2}>
-                        {dayEvents.slice(0, 2).map((ev) => (
-                          <YStack
-                            key={ev.id}
-                            px={4}
-                            py={2}
-                            rounded={4}
-                            bg={levelColor[ev.level] as any}
-                          >
-                            <Text fontSize={10} color="#fff" numberOfLines={1}>
-                              {ev.title}
+                      <YStack
+                        height={cellH}
+                        borderRightWidth={isLastCol ? 0 : 1}
+                        borderBottomWidth={isLastRow ? 0 : 1}
+                        borderColor="$borderColor"
+                        px="$1.5"
+                        pt="$1.5"
+                        pb="$1"
+                        bg={cell.day ? '$backgroundStrong' : '$background'}
+                        opacity={cell.day ? 1 : 0.45}
+                        overflow="hidden"
+                      >
+                        <XStack width="100%" justify="flex-end" mb={4} minH={16}>
+                          {cell.day != null ? (
+                            <Text fontSize={12} fontWeight="500" color="$gray11">
+                              {cell.day}
                             </Text>
-                          </YStack>
-                        ))}
+                          ) : null}
+                        </XStack>
+                        <YStack gap={2} flex={1} overflow="hidden">
+                          {dayEvents.slice(0, 2).map((ev) => (
+                            <YStack
+                              key={ev.id}
+                              px={4}
+                              py={2}
+                              rounded={4}
+                              bg={levelColor[ev.level] as any}
+                            >
+                              <Text fontSize={10} color="#fff" numberOfLines={1}>
+                                {ev.title}
+                              </Text>
+                            </YStack>
+                          ))}
+                        </YStack>
                       </YStack>
-                    </YStack>
-                  </Pressable>
-                )
-              })}
-            </XStack>
-          ))}
+                    </Pressable>
+                  )
+                })}
+              </XStack>
+            )
+          })}
         </YStack>
       </YStack>
 

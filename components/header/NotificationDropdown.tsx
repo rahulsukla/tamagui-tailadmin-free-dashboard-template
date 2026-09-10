@@ -1,9 +1,17 @@
 import { useState } from 'react'
-import { Modal, Pressable, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native'
+import {
+  Modal,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from 'react-native'
 import Svg, { Path } from 'react-native-svg'
 import { Text, XStack, YStack } from 'tamagui'
 
-import { PortalProviders } from '@/components/PortalProviders'
+import { PortalProviders, usePortalChrome } from '@/components/PortalProviders'
 
 const NOTES = [
   {
@@ -44,6 +52,82 @@ export function NotificationDropdown() {
   const [notifying, setNotifying] = useState(true)
   const { width } = useWindowDimensions()
   const panelW = Math.min(360, width - 24)
+  const chrome = usePortalChrome()
+
+  const panel = (
+    <View
+      style={[
+        styles.overlay,
+        {
+          backgroundColor: chrome.overlayDimSoft,
+          ...(Platform.OS === 'web'
+            ? ({
+                position: 'fixed',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                zIndex: 10000,
+              } as object)
+            : null),
+        },
+      ]}
+    >
+      <Pressable
+        accessibilityLabel="Close notifications"
+        onPress={() => setOpen(false)}
+        style={StyleSheet.absoluteFill}
+      />
+      <View
+        style={[
+          styles.panel,
+          {
+            width: panelW,
+            backgroundColor: chrome.panelBg,
+            borderColor: chrome.panelBorder,
+          },
+        ]}
+      >
+        <YStack width="100%" gap="$3">
+          <XStack
+            items="center"
+            justify="space-between"
+            pb="$2"
+            borderBottomWidth={1}
+            borderColor={chrome.panelBorder as any}
+          >
+            <Text fontSize={18} fontWeight="600" color={chrome.text as any}>
+              Notification
+            </Text>
+            <Pressable onPress={() => setOpen(false)}>
+              <Text fontSize={18} color={chrome.muted as any}>
+                ✕
+              </Text>
+            </Pressable>
+          </XStack>
+          <ScrollView style={{ maxHeight: 380 }} keyboardShouldPersistTaps="handled">
+            <YStack gap="$1">
+              {NOTES.map((n) => (
+                <Pressable key={n.name} onPress={() => setOpen(false)}>
+                  <YStack p="$3" rounded={12} gap={6} hoverStyle={{ bg: '$backgroundHover' }}>
+                    <Text fontSize={14} color={chrome.muted as any}>
+                      <Text fontWeight="600" color={chrome.text as any}>
+                        {n.name}{' '}
+                      </Text>
+                      {n.action}
+                    </Text>
+                    <Text fontSize={12} color={chrome.muted as any}>
+                      {n.meta}
+                    </Text>
+                  </YStack>
+                </Pressable>
+              ))}
+            </YStack>
+          </ScrollView>
+        </YStack>
+      </View>
+    </View>
+  )
 
   return (
     <>
@@ -80,65 +164,15 @@ export function NotificationDropdown() {
         </XStack>
       </Pressable>
 
-      <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
-        <PortalProviders>
-          <View style={styles.overlay}>
-            <Pressable
-              accessibilityLabel="Close notifications"
-              onPress={() => setOpen(false)}
-              style={StyleSheet.absoluteFill}
-            />
-            <YStack
-              width={panelW}
-              maxH={480}
-              bg="$backgroundStrong"
-              borderWidth={1}
-              borderColor="$borderColor"
-              rounded={16}
-              p="$3"
-              gap="$3"
-              z={1}
-              elevation={8}
-            >
-              <XStack
-                items="center"
-                justify="space-between"
-                pb="$2"
-                borderBottomWidth={1}
-                borderColor="$borderColor"
-              >
-                <Text fontSize={18} fontWeight="600" color="$color">
-                  Notification
-                </Text>
-                <Pressable onPress={() => setOpen(false)}>
-                  <Text fontSize={18} color="$gray10">
-                    ✕
-                  </Text>
-                </Pressable>
-              </XStack>
-              <ScrollView style={{ maxHeight: 380 }} keyboardShouldPersistTaps="handled">
-                <YStack gap="$1">
-                  {NOTES.map((n) => (
-                    <Pressable key={n.name} onPress={() => setOpen(false)}>
-                      <YStack p="$3" rounded={12} gap={6} hoverStyle={{ bg: '$backgroundHover' }}>
-                        <Text fontSize={14} color="$gray10">
-                          <Text fontWeight="600" color="$color">
-                            {n.name}{' '}
-                          </Text>
-                          {n.action}
-                        </Text>
-                        <Text fontSize={12} color="$gray8">
-                          {n.meta}
-                        </Text>
-                      </YStack>
-                    </Pressable>
-                  ))}
-                </YStack>
-              </ScrollView>
-            </YStack>
-          </View>
-        </PortalProviders>
-      </Modal>
+      {open ? (
+        Platform.OS === 'web' ? (
+          panel
+        ) : (
+          <Modal visible transparent animationType="fade" onRequestClose={() => setOpen(false)}>
+            <PortalProviders>{panel}</PortalProviders>
+          </Modal>
+        )
+      ) : null}
     </>
   )
 }
@@ -146,10 +180,17 @@ export function NotificationDropdown() {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(16,24,40,0.35)',
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
     paddingTop: 64,
     paddingRight: 12,
+  },
+  panel: {
+    maxHeight: 480,
+    borderWidth: 1,
+    borderRadius: 16,
+    padding: 12,
+    zIndex: 1,
+    elevation: 12,
   },
 })

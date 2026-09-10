@@ -1,6 +1,6 @@
 {
   "name": "verdant-tamagui-admin-template",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Verdant — universal Expo + Tamagui admin dashboard template (iOS, Android, Web)",
   "license": "MIT",
   "author": "Rahul Sukla",
@@ -55,6 +55,7 @@
     "@tamagui/metro-plugin": "^2.7.7",
     "expo": "~57.0.21",
     "expo-constants": "~57.0.17",
+    "expo-document-picker": "~57.0.1",
     "expo-font": "~57.0.3",
     "expo-image": "~57.0.4",
     "expo-linking": "~57.0.9",

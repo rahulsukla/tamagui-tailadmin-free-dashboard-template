@@ -59,12 +59,19 @@ function MetricCard({
       p={20}
     >
       <MetricIcon kind={kind} />
-      <XStack mt={20} items="flex-end" justify="space-between" gap={12}>
+      <XStack mt={20} items="flex-end" justify="space-between" gap={12} width="100%">
         <YStack flex={1} minW={0}>
-          <Text fontSize={14} color="$gray10">
+          <Text fontSize={14} color="$gray10" numberOfLines={1}>
             {label}
           </Text>
-          <Text mt={8} fontSize={28} fontWeight="700" color="$color" letterSpacing={-0.4}>
+          <Text
+            mt={8}
+            fontSize={28}
+            fontWeight="700"
+            color="$color"
+            letterSpacing={-0.4}
+            numberOfLines={1}
+          >
             {value}
           </Text>
         </YStack>

@@ -1,6 +1,6 @@
 import { Image } from 'expo-image'
 import type { ImageSource } from 'expo-image'
-import { ScrollView } from 'react-native'
+import { ScrollView, useWindowDimensions } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
 import { Badge } from '@/components/ui/Badge'
@@ -99,8 +99,12 @@ function statusColor(status: Order['status']) {
 }
 
 const COLS = [220, 160, 100, 110, 80] as const
+const FLEX = [2.2, 1.6, 1.1, 1, 0.7] as const
 
 export function BasicTableOne() {
+  const { width } = useWindowDimensions()
+  const compact = width < 900
+
   return (
     <YStack
       rounded={16}
@@ -108,18 +112,29 @@ export function BasicTableOne() {
       borderColor="$borderColor"
       bg="$backgroundStrong"
       overflow="hidden"
+      width="100%"
     >
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <YStack minW={COLS.reduce((a, b) => a + b, 0) + 32}>
+      <ScrollView
+        horizontal={compact}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
+        <YStack
+          width={compact ? COLS.reduce((a, b) => a + b, 0) + 32 : '100%'}
+          minW={compact ? undefined : '100%'}
+          flex={1}
+        >
           <XStack borderBottomWidth={1} borderColor="$borderColor" py={12} px={16}>
             {['User', 'Project Name', 'Team', 'Status', 'Budget'].map((h, i) => (
               <Text
                 key={h}
-                width={COLS[i]}
+                width={compact ? COLS[i] : undefined}
+                flex={compact ? undefined : FLEX[i]}
                 px={8}
                 fontSize={12}
                 fontWeight="500"
                 color="$gray10"
+                numberOfLines={1}
               >
                 {h}
               </Text>
@@ -134,7 +149,14 @@ export function BasicTableOne() {
               borderBottomWidth={idx === tableData.length - 1 ? 0 : 1}
               borderColor="$borderColor"
             >
-              <XStack width={COLS[0]} px={8} items="center" gap={12}>
+              <XStack
+                width={compact ? COLS[0] : undefined}
+                flex={compact ? undefined : FLEX[0]}
+                px={8}
+                items="center"
+                gap={12}
+                minW={0}
+              >
                 <Image
                   source={row.user.image}
                   style={{ width: 40, height: 40, borderRadius: 20 }}
@@ -149,10 +171,24 @@ export function BasicTableOne() {
                   </Text>
                 </YStack>
               </XStack>
-              <Text width={COLS[1]} px={8} fontSize={14} color="$gray11">
+              <Text
+                width={compact ? COLS[1] : undefined}
+                flex={compact ? undefined : FLEX[1]}
+                px={8}
+                fontSize={14}
+                color="$gray11"
+                numberOfLines={1}
+                minW={0}
+              >
                 {row.projectName}
               </Text>
-              <XStack width={COLS[2]} px={8} items="center">
+              <XStack
+                width={compact ? COLS[2] : undefined}
+                flex={compact ? undefined : FLEX[2]}
+                px={8}
+                items="center"
+                minW={0}
+              >
                 {row.team.map((src, i) => (
                   <Image
                     key={i}
@@ -169,12 +205,25 @@ export function BasicTableOne() {
                   />
                 ))}
               </XStack>
-              <XStack width={COLS[3]} px={8}>
+              <XStack
+                width={compact ? COLS[3] : undefined}
+                flex={compact ? undefined : FLEX[3]}
+                px={8}
+                minW={0}
+              >
                 <Badge size="sm" color={statusColor(row.status)}>
                   {row.status}
                 </Badge>
               </XStack>
-              <Text width={COLS[4]} px={8} fontSize={14} color="$gray11">
+              <Text
+                width={compact ? COLS[4] : undefined}
+                flex={compact ? undefined : FLEX[4]}
+                px={8}
+                fontSize={14}
+                color="$gray11"
+                numberOfLines={1}
+                minW={0}
+              >
                 {row.budget}
               </Text>
             </XStack>

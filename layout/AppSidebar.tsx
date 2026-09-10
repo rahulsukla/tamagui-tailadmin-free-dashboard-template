@@ -121,10 +121,18 @@ export function AppSidebar() {
           }
 
           return (
-            <YStack key={item.name} width="100%">
+            <YStack key={item.name} width="100%" position="relative">
               <Button
                 unstyled
-                onPress={() => setOpenKey(isOpen ? null : item.name)}
+                onPress={() => {
+                  if (!wide) {
+                    // Collapsed icon rail: expand via hover width + open flyout
+                    setIsHovered(true)
+                    setOpenKey(item.name)
+                    return
+                  }
+                  setOpenKey(isOpen ? null : item.name)
+                }}
                 flexDirection="row"
                 items="center"
                 gap={12}
@@ -170,6 +178,67 @@ export function AppSidebar() {
                         key={sub.href}
                         unstyled
                         onPress={() => {
+                          closeMobileSidebar()
+                          router.push(sub.href as any)
+                        }}
+                        px={12}
+                        py={10}
+                        rounded={8}
+                        width="100%"
+                        items="flex-start"
+                        bg={subActive ? '$accentBackground' : 'transparent'}
+                        hoverStyle={{ bg: '$backgroundHover' }}
+                      >
+                        <Text
+                          fontSize={14}
+                          fontWeight="500"
+                          color={(subActive ? activeColor : '$gray10') as any}
+                        >
+                          {sub.name}
+                        </Text>
+                      </Button>
+                    )
+                  })}
+                </YStack>
+              ) : null}
+              {!wide && isOpen && item.subItems ? (
+                <YStack
+                  position="absolute"
+                  l={64}
+                  t={0}
+                  width={200}
+                  p={8}
+                  gap={4}
+                  rounded={12}
+                  borderWidth={1}
+                  borderColor="$borderColor"
+                  bg="$backgroundStrong"
+                  z={100}
+                  elevation={12}
+                  style={
+                    Platform.OS === 'web'
+                      ? ({ boxShadow: '0 8px 24px rgba(16,24,40,0.18)' } as any)
+                      : undefined
+                  }
+                >
+                  <Text
+                    fontSize={11}
+                    fontWeight="600"
+                    color="$gray8"
+                    textTransform="uppercase"
+                    px={8}
+                    py={4}
+                  >
+                    {item.name}
+                  </Text>
+                  {item.subItems.map((sub) => {
+                    const subActive = pathMatches(pathname, sub.href)
+                    return (
+                      <Button
+                        key={sub.href}
+                        unstyled
+                        onPress={() => {
+                          setOpenKey(null)
                           closeMobileSidebar()
                           router.push(sub.href as any)
                         }}

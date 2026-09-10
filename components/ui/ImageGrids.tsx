@@ -4,12 +4,7 @@ import { XStack, YStack } from 'tamagui'
 
 export function ResponsiveImage() {
   return (
-    <YStack
-      borderWidth={1}
-      borderColor="$borderColor"
-      rounded={12}
-      overflow="hidden"
-    >
+    <YStack borderWidth={1} borderColor="$borderColor" rounded={12} overflow="hidden" width="100%">
       <Image
         source={require('@/assets/demo/grid-image/image-01.png')}
         style={{ width: '100%', aspectRatio: 16 / 9 }}
@@ -22,18 +17,19 @@ export function ResponsiveImage() {
 
 export function TwoColumnImageGrid() {
   const { width } = useWindowDimensions()
-  const cols = width >= 640 ? 2 : 1
+  const two = width >= 640
 
   return (
-    <XStack flexWrap="wrap" gap="$4">
+    <XStack flexDirection={two ? 'row' : 'column'} gap="$4" width="100%">
       {[
         require('@/assets/demo/grid-image/image-02.png'),
         require('@/assets/demo/grid-image/image-03.png'),
       ].map((src, i) => (
         <YStack
           key={i}
-          width={cols === 1 ? '100%' : '47%'}
-          grow={1}
+          flex={1}
+          minW={0}
+          width={two ? undefined : '100%'}
           borderWidth={1}
           borderColor="$borderColor"
           rounded={12}
@@ -56,7 +52,7 @@ export function ThreeColumnImageGrid() {
   const cols = width >= 1280 ? 3 : width >= 640 ? 2 : 1
 
   return (
-    <XStack flexWrap="wrap" gap="$4">
+    <XStack flexWrap="wrap" gap="$4" width="100%">
       {[
         require('@/assets/demo/grid-image/image-04.png'),
         require('@/assets/demo/grid-image/image-05.png'),
@@ -64,8 +60,8 @@ export function ThreeColumnImageGrid() {
       ].map((src, i) => (
         <YStack
           key={i}
-          width={cols === 1 ? '100%' : cols === 2 ? '47%' : '31%'}
-          grow={1}
+          flex={1}
+          minW={cols === 1 ? '100%' : cols === 2 ? '45%' : '30%'}
           borderWidth={1}
           borderColor="$borderColor"
           rounded={12}

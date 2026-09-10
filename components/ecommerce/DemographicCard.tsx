@@ -89,10 +89,10 @@ export function DemographicCard() {
                 </Text>
               </YStack>
               <YStack flex={1} minW={0}>
-                <Text fontSize={14} fontWeight="600" color="$color">
+                <Text fontSize={14} fontWeight="600" color="$color" numberOfLines={1}>
                   {c.name}
                 </Text>
-                <Text fontSize={12} color="$gray10">
+                <Text fontSize={12} color="$gray10" numberOfLines={1}>
                   {c.customers}
                 </Text>
               </YStack>

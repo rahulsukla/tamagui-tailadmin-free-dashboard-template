@@ -8,8 +8,16 @@ export function PageBreadcrumb({
   items?: { label: string }[]
 }) {
   return (
-    <XStack items="center" justify="space-between" flexWrap="wrap" gap="$3" mb="$5">
-      <Text fontSize={24} fontWeight="600" color="$color" letterSpacing={-0.3}>
+    <XStack items="center" justify="space-between" flexWrap="wrap" gap="$3" mb="$5" width="100%">
+      <Text
+        flex={1}
+        minW={0}
+        fontSize={24}
+        fontWeight="600"
+        color="$color"
+        letterSpacing={-0.3}
+        numberOfLines={1}
+      >
         {pageTitle}
       </Text>
       <XStack items="center" gap="$2">
@@ -21,7 +29,7 @@ export function PageBreadcrumb({
             <Text fontSize={14} color="$gray8">
               /
             </Text>
-            <Text fontSize={14} color="$gray10">
+            <Text fontSize={14} color="$gray10" numberOfLines={1}>
               {item.label}
             </Text>
           </XStack>

@@ -44,13 +44,11 @@ import { AuthLayout } from '@/components/auth/AuthLayout'
 
 ## Modals & dropdown portals
 
-React Native `Modal` portals outside the main Tamagui root on web (fonts/theme drop off). Wrap portal content with:
+On **web**, `AppModal` and header dropdowns use a fixed in-tree overlay (RN `Modal` drops Tamagui theme CSS). On **native**, they still use `Modal` + `PortalProviders`.
 
 ```tsx
 import { PortalProviders } from '@/components/PortalProviders'
 ```
-
-Already used by `AppModal`, user/notification dropdowns, and the config panel.
 
 ## Buttons
 
@@ -138,7 +136,17 @@ Demo route: `/cards`
 
 ## Landing page
 
-Marketing-style hero + feature strip inside the admin shell: `/landing` (Pages → Landing).
+Rich marketing-style page inside the admin shell: `/landing` (Menu → **Pages** → **Landing**).
+
+Includes hero + live preview, feature grid, how-it-works, route showcase, trust checklist, FAQ accordion, and final CTA. With the sidebar collapsed, click the document/page icon for a flyout.
+
+## Layout & overflow
+
+Cards, tables, and charts should fill their container without spilling text:
+
+- Tables (`BasicTableOne`, `DocumentsTable`, `RecentOrders`) flex columns on wide screens and scroll horizontally when compact
+- Charts measure parent width via `useContainerWidth` instead of the viewport
+- Flex text rows use `minW={0}` + `numberOfLines` so labels stay inside cards
 
 ## Ecommerce widgets
 

@@ -46,28 +46,30 @@ export function UserInfoCard() {
         title="Edit Personal Information"
         subtitle="Update your details to keep your profile up-to-date."
       >
-        <XStack flexWrap="wrap" gap="$3">
-          <YStack flex={1} minW={200}>
-            <Label>First Name</Label>
-            <AppInput defaultValue="John" />
-          </YStack>
-          <YStack flex={1} minW={200}>
-            <Label>Last Name</Label>
-            <AppInput defaultValue="Doe" />
-          </YStack>
-          <YStack flex={1} minW={200}>
+        <YStack gap="$3">
+          <XStack flexWrap="wrap" gap="$3">
+            <YStack flex={1} minW={200} gap="$2">
+              <Label>First Name</Label>
+              <AppInput defaultValue="John" />
+            </YStack>
+            <YStack flex={1} minW={200} gap="$2">
+              <Label>Last Name</Label>
+              <AppInput defaultValue="Doe" />
+            </YStack>
+          </XStack>
+          <YStack gap="$2">
             <Label>Email</Label>
             <AppInput defaultValue="john.doe@example.com" />
           </YStack>
-          <YStack flex={1} minW={200}>
+          <YStack gap="$2">
             <Label>Phone</Label>
             <AppInput defaultValue="+1 (555) 010-2030" />
           </YStack>
-          <YStack width="100%">
+          <YStack gap="$2">
             <Label>Bio</Label>
             <AppInput defaultValue="Product Designer" />
           </YStack>
-        </XStack>
+        </YStack>
       </AppModal>
     </>
   )

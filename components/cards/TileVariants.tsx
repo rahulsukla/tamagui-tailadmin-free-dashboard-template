@@ -31,11 +31,19 @@ export function MetricTile({
       p={20}
       gap={10}
     >
-      <Text fontSize={14} color="$gray10">
+      <Text fontSize={14} color="$gray10" numberOfLines={1}>
         {label}
       </Text>
-      <XStack items="flex-end" gap={10} flexWrap="wrap">
-        <Text fontSize={28} fontWeight="700" color="$color" letterSpacing={-0.4}>
+      <XStack items="flex-end" gap={10} flexWrap="wrap" width="100%">
+        <Text
+          flex={1}
+          minW={0}
+          fontSize={28}
+          fontWeight="700"
+          color="$color"
+          letterSpacing={-0.4}
+          numberOfLines={1}
+        >
           {value}
         </Text>
         {delta ? (
@@ -44,13 +52,14 @@ export function MetricTile({
             fontWeight="600"
             color={positive ? '$green10' : '$red10'}
             mb={4}
+           
           >
             {delta}
           </Text>
         ) : null}
       </XStack>
       {hint ? (
-        <Text fontSize={12} color="$gray10">
+        <Text fontSize={12} color="$gray10" numberOfLines={2}>
           {hint}
         </Text>
       ) : null}
@@ -312,6 +321,7 @@ export function ChatTile() {
       >
         <YStack
           flex={1}
+          minW={0}
           bg={inputBg}
           rounded={12}
           px={12}
@@ -341,6 +351,7 @@ export function ChatTile() {
             bg={brandColor as any}
             items="center"
             justify="center"
+           
           >
             <Text color="#fff" fontSize={16} fontWeight="700">
               ↑

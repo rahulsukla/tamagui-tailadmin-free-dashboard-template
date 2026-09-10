@@ -29,7 +29,8 @@ Built with [Expo](https://expo.dev) SDK 57, [Expo Router](https://docs.expo.dev/
 - **Universal** — one codebase for web + native (Expo Router)
 - **Themeable** — light / dark / system, brand presets, density, sticky header
 - **Lean charts** — SVG area/bar charts (no ApexCharts / FullCalendar / jsVectorMap)
-- **Ready pages** — ecommerce dashboard, forms, tables, profile, calendar, auth, UI kit
+- **Ready pages** — ecommerce dashboard, rich landing, forms, tables, profile, calendar, auth, UI kit
+- **Contained layouts** — tables/charts fill cards; text truncates instead of overflowing
 - **MIT licensed** — fork it, ship it, customize it
 
 > Inspired by free [TailAdmin](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template) layout inventory and the [tweakcn Light Green](https://tweakcn.com/themes/cmlhfpjhw000004l4f4ax3m7z?p=dashboard) dashboard mood. Not affiliated with TailAdmin, tweakcn, or Tamagui commercial products. See [NOTICE](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/NOTICE).

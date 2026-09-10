@@ -181,6 +181,8 @@ export function RecentOrders() {
                 px={8}
                 fontSize={14}
                 color="$gray10"
+                numberOfLines={1}
+                minW={0}
               >
                 {row.category}
               </Text>
@@ -190,6 +192,8 @@ export function RecentOrders() {
                 px={8}
                 fontSize={14}
                 color="$gray10"
+                numberOfLines={1}
+                minW={0}
               >
                 {row.price}
               </Text>
@@ -197,6 +201,7 @@ export function RecentOrders() {
                 width={compact ? COLS[3] : undefined}
                 flex={compact ? undefined : 1}
                 px={8}
+                minW={0}
               >
                 <Badge size="sm" color={statusColor(row.status)}>
                   {row.status}

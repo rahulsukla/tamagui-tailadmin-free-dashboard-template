@@ -51,30 +51,41 @@ export function KpiStatCards() {
         <YStack
           key={kpi.label}
           flex={1}
-          minW={200}
+          minW={180}
+         
           rounded={16}
           borderWidth={1}
           borderColor="$borderColor"
           bg="$backgroundStrong"
           p={20}
           gap={10}
+          overflow="hidden"
         >
-          <Text fontSize={14} color="$gray10">
+          <Text fontSize={14} color="$gray10" numberOfLines={1}>
             {kpi.label}
           </Text>
-          <XStack items="flex-end" justify="space-between" gap={8}>
-            <Text fontSize={28} fontWeight="700" color="$color" letterSpacing={-0.4}>
+          <XStack items="flex-end" justify="space-between" gap={8} width="100%">
+            <Text
+              flex={1}
+              minW={0}
+              fontSize={28}
+              fontWeight="700"
+              color="$color"
+              letterSpacing={-0.4}
+              numberOfLines={1}
+            >
               {kpi.value}
             </Text>
             <Text
               fontSize={13}
               fontWeight="600"
               color={(kpi.positive ? brandColor : '#f04438') as any}
+             
             >
               {kpi.delta}
             </Text>
           </XStack>
-          <Text fontSize={12} color="$gray10">
+          <Text fontSize={12} color="$gray10" numberOfLines={2}>
             {kpi.hint}
           </Text>
         </YStack>

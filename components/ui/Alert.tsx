@@ -90,8 +90,8 @@ export function Alert({
         <YStack mt={-2}>
           <AlertIcon variant={variant} color={theme.icon} />
         </YStack>
-        <YStack flex={1} gap="$1">
-          <Text fontSize={14} fontWeight="600" color="$color">
+        <YStack flex={1} gap="$1" minW={0}>
+          <Text fontSize={14} fontWeight="600" color="$color" numberOfLines={2}>
             {title}
           </Text>
           <Text fontSize={14} color="$gray10">

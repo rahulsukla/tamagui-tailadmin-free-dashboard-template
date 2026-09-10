@@ -41,7 +41,13 @@ export function AppSelect({
           borderColor="$borderColor"
           bg="$background"
         >
-          <Text fontSize={14} color={label ? '$color' : '$placeholderColor'}>
+          <Text
+            flex={1}
+            minW={0}
+            fontSize={14}
+            numberOfLines={1}
+            color={label ? '$color' : '$placeholderColor'}
+          >
             {label ?? placeholder}
           </Text>
           <Text color="$gray10">{open ? '▴' : '▾'}</Text>

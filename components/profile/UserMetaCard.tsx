@@ -57,26 +57,28 @@ export function UserMetaCard() {
             items="center"
             gap="$4"
             flex={1}
+            minW={0}
           >
             <Image
               source={require('@/assets/demo/user/john-doe.png')}
               style={{ width: 80, height: 80, borderRadius: 40 }}
               contentFit="cover"
             />
-            <YStack items={stacked ? 'center' : 'flex-start'} gap="$2">
-              <Text fontSize={18} fontWeight="600" color="$color">
+            <YStack items={stacked ? 'center' : 'flex-start'} gap="$2" flex={1} minW={0}>
+              <Text fontSize={18} fontWeight="600" color="$color" numberOfLines={1}>
                 John Doe
               </Text>
               <XStack
                 flexDirection={stacked ? 'column' : 'row'}
                 items="center"
                 gap={stacked ? 4 : 12}
+                flexWrap="wrap"
               >
-                <Text fontSize={14} color="$gray10">
+                <Text fontSize={14} color="$gray10" numberOfLines={1}>
                   Product Designer
                 </Text>
                 {!stacked ? <YStack width={1} height={14} bg="$borderColor" /> : null}
-                <Text fontSize={14} color="$gray10">
+                <Text fontSize={14} color="$gray10" numberOfLines={1}>
                   Austin, United States
                 </Text>
               </XStack>

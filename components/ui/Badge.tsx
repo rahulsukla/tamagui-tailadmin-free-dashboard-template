@@ -100,6 +100,7 @@ export function Badge({
       py={2}
       rounded={999}
       bg={palette.bg as any}
+      maxW="100%"
     >
       {startIcon ? (
         <Text fontSize={12} color={palette.fg as any} fontWeight="700" lineHeight={14}>
@@ -111,6 +112,7 @@ export function Badge({
         fontWeight="500"
         color={palette.fg as any}
         lineHeight={size === 'sm' ? 18 : 20}
+        numberOfLines={1}
       >
         {children}
       </Text>

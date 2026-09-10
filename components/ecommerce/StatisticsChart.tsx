@@ -39,11 +39,11 @@ export function StatisticsChart() {
         gap="$4"
         mb="$4"
       >
-        <YStack gap={4} flex={1}>
-          <Text fontSize={18} fontWeight="600" color="$color">
+        <YStack gap={4} flex={1} minW={0}>
+          <Text fontSize={18} fontWeight="600" color="$color" numberOfLines={1}>
             Statistics
           </Text>
-          <Text fontSize={14} color="$gray10">
+          <Text fontSize={14} color="$gray10" numberOfLines={2}>
             Target you&apos;ve set for each month
           </Text>
         </YStack>

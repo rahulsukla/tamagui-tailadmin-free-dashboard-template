@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.4] — 2026-09-11
+
+### Fixed
+- Text overflow in KPI, metrics, profile fields, alerts, badges, and chat composer
+- Tables fill card width on desktop (`BasicTableOne`, `DocumentsTable`); compact horizontal scroll
+- Charts size to card width (`useContainerWidth`) instead of viewport
+- Monthly Target radial scales to container; image/video grids no longer overflow with % + gap
+
+### Changed
+- Landing page redesigned as a richer multi-section marketing layout (hero, features, steps, showcase, FAQ, CTA)
+
+### Added
+- Docs note on layout/overflow conventions
+
 ## [0.2.3] — 2026-09-10
 
 ### Fixed

@@ -1,7 +1,15 @@
-import { Modal, Pressable, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native'
+import {
+  Modal,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
-import { PortalProviders } from '@/components/PortalProviders'
+import { PortalProviders, usePortalChrome } from '@/components/PortalProviders'
 import { useConfigPanel } from '@/context/ConfigPanelContext'
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode, type ColorMode } from '@/context/ThemeContext'
@@ -67,33 +75,53 @@ export function ConfigPanel() {
     resetConfig,
   } = useTemplateConfig()
   const { colorMode, setColorMode } = useThemeMode()
+  const chrome = usePortalChrome()
 
-  return (
-    <Modal visible={isOpen} transparent animationType="fade" onRequestClose={close}>
-      <PortalProviders>
-        <View style={styles.overlay}>
-          <Pressable
-            accessibilityLabel="Close settings"
-            onPress={close}
-            style={StyleSheet.absoluteFill}
-          />
-          <View style={{ width: panelW, height: '100%', zIndex: 1 }}>
-            <YStack
-              flex={1}
-              bg="$backgroundStrong"
-              borderLeftWidth={1}
-              borderColor="$borderColor"
-              p="$5"
-              height="100%"
-            >
+  if (!isOpen) return null
+
+  const panel = (
+    <View
+      style={[
+        styles.overlay,
+        {
+          backgroundColor: chrome.overlayDim,
+          ...(Platform.OS === 'web'
+            ? ({
+                position: 'fixed',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                zIndex: 10000,
+              } as object)
+            : null),
+        },
+      ]}
+    >
+      <Pressable
+        accessibilityLabel="Close settings"
+        onPress={close}
+        style={StyleSheet.absoluteFill}
+      />
+      <View
+        style={{
+          width: panelW,
+          height: '100%',
+          zIndex: 1,
+          backgroundColor: chrome.panelBg,
+          borderLeftWidth: 1,
+          borderLeftColor: chrome.panelBorder,
+        }}
+      >
+        <YStack flex={1} p="$5" height="100%">
               <ScrollView keyboardShouldPersistTaps="handled">
                 <YStack gap="$5" pb="$6">
                   <XStack items="center" justify="space-between">
                     <YStack gap={4} flex={1} minW={0}>
-                      <Text fontSize={18} fontWeight="600" color="$color">
+                      <Text fontSize={18} fontWeight="600" color={chrome.text as any}>
                         Template settings
                       </Text>
-                      <Text fontSize={13} color="$gray10">
+                      <Text fontSize={13} color={chrome.muted as any}>
                         Preview brand, density, and layout options
                       </Text>
                     </YStack>
@@ -103,11 +131,11 @@ export function ConfigPanel() {
                         height={36}
                         rounded={8}
                         borderWidth={1}
-                        borderColor="$borderColor"
+                        borderColor={chrome.panelBorder as any}
                         items="center"
                         justify="center"
                       >
-                        <Text fontSize={16} color="$gray11">
+                        <Text fontSize={16} color={chrome.muted as any}>
                           ✕
                         </Text>
                       </XStack>
@@ -211,7 +239,15 @@ export function ConfigPanel() {
             </YStack>
           </View>
         </View>
-      </PortalProviders>
+  )
+
+  if (Platform.OS === 'web') {
+    return panel
+  }
+
+  return (
+    <Modal visible transparent animationType="fade" onRequestClose={close}>
+      <PortalProviders>{panel}</PortalProviders>
     </Modal>
   )
 }
@@ -219,7 +255,6 @@ export function ConfigPanel() {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(16,24,40,0.4)',
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },

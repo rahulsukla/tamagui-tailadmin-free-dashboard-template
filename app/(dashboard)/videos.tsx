@@ -10,11 +10,11 @@ export default function VideosPage() {
   const twoCol = width >= 1280
 
   return (
-    <YStack gap="$5" flex={1}>
+    <YStack gap="$5" flex={1} width="100%">
       <PageBreadcrumb pageTitle="Videos" />
 
-      <XStack flexWrap="wrap" gap="$5">
-        <YStack width={twoCol ? '48%' : '100%'} gap="$5" grow={1}>
+      <XStack flexDirection={twoCol ? 'row' : 'column'} gap="$5" width="100%" items="stretch">
+        <YStack flex={1} minW={0} width={twoCol ? undefined : '100%'} gap="$5">
           <ComponentCard title="Video Ratio 16:9">
             <AspectRatioVideo ratio={16 / 9} />
           </ComponentCard>
@@ -22,7 +22,7 @@ export default function VideosPage() {
             <AspectRatioVideo ratio={4 / 3} />
           </ComponentCard>
         </YStack>
-        <YStack width={twoCol ? '48%' : '100%'} gap="$5" grow={1}>
+        <YStack flex={1} minW={0} width={twoCol ? undefined : '100%'} gap="$5">
           <ComponentCard title="Video Ratio 21:9">
             <AspectRatioVideo ratio={21 / 9} />
           </ComponentCard>

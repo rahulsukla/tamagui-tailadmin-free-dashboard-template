@@ -1,13 +1,15 @@
 import { useMemo } from 'react'
-import { ScrollView, useWindowDimensions } from 'react-native'
+import { ScrollView } from 'react-native'
 import Svg, { Defs, LinearGradient, Line, Path, Stop, Text as SvgText } from 'react-native-svg'
 import { Text, XStack, YStack } from 'tamagui'
 
+import { useContainerWidth } from '@/components/useContainerWidth'
 import { gray } from '@/theme/colors'
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const MIN_CHART_W = 640
 
 type Series = { name: string; data: number[]; color: string }
 
@@ -32,9 +34,10 @@ export function SimpleAreaChart({
   height = 310,
   categories = MONTHS,
 }: SimpleAreaChartProps) {
-  const { width: screenW } = useWindowDimensions()
+  const { width: containerW, onLayout } = useContainerWidth(0)
   const { resolvedTheme } = useThemeMode()
-  const chartW = Math.max(screenW - 80, 900)
+  const needsScroll = containerW > 0 && containerW < MIN_CHART_W
+  const chartW = needsScroll || containerW === 0 ? MIN_CHART_W : containerW
   const padL = 40
   const padB = 28
   const padT = 16
@@ -55,19 +58,7 @@ export function SimpleAreaChart({
     [series, max, innerH, step]
   )
 
-  return (
-    <YStack gap="$3">
-      <XStack gap="$4" flexWrap="wrap">
-        {series.map((s) => (
-          <XStack key={s.name} items="center" gap="$2">
-            <YStack width={10} height={10} rounded={999} bg={s.color as any} />
-            <Text fontSize={13} color="$gray10">
-              {s.name}
-            </Text>
-          </XStack>
-        ))}
-      </XStack>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+  const svg = (
         <Svg width={chartW} height={height}>
           <Defs>
             {paths.map((p) => (
@@ -116,7 +107,27 @@ export function SimpleAreaChart({
             </SvgText>
           ))}
         </Svg>
-      </ScrollView>
+  )
+
+  return (
+    <YStack gap="$3" width="100%" onLayout={onLayout} overflow="hidden">
+      <XStack gap="$4" flexWrap="wrap">
+        {series.map((s) => (
+          <XStack key={s.name} items="center" gap="$2">
+            <YStack width={10} height={10} rounded={999} bg={s.color as any} />
+            <Text fontSize={13} color="$gray10">
+              {s.name}
+            </Text>
+          </XStack>
+        ))}
+      </XStack>
+      {containerW === 0 ? null : needsScroll ? (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {svg}
+        </ScrollView>
+      ) : (
+        svg
+      )}
     </YStack>
   )
 }

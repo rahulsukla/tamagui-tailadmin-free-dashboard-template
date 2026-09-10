@@ -1,61 +1,141 @@
 # Verdant — Tamagui Admin Template
 
-[![Demo](https://img.shields.io/badge/demo-GitHub%20Pages-3d8b6e?style=flat-square)](https://rahulsukla.github.io/verdant-tamagui-admin-template/)
-[![Release](https://img.shields.io/badge/release-v0.2.0-0d9488?style=flat-square)](https://github.com/rahulsukla/verdant-tamagui-admin-template/releases)
+[![npm](https://img.shields.io/npm/v/verdant-tamagui-admin-template?style=flat-square&color=3d8b6e)](https://www.npmjs.com/package/verdant-tamagui-admin-template)
+[![Demo](https://img.shields.io/badge/demo-live-3d8b6e?style=flat-square)](https://rahulsukla.github.io/verdant-tamagui-admin-template/)
+[![CI](https://img.shields.io/github/actions/workflow/status/rahulsukla/verdant-tamagui-admin-template/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/rahulsukla/verdant-tamagui-admin-template/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-gray?style=flat-square)](./LICENSE)
+[![Expo SDK](https://img.shields.io/badge/Expo-SDK%2057-000?style=flat-square)](https://docs.expo.dev/versions/v57.0.0/)
 
-**Verdant** is a universal (iOS / Android / Web) admin dashboard template built with **Expo SDK 57**, **Expo Router**, and **Tamagui**.
+**Verdant** is a free, open-source admin dashboard template for **iOS, Android, and Web**.
 
-> Inspired by the free [TailAdmin](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template) layout inventory and the [tweakcn Light Green](https://tweakcn.com/themes/cmlhfpjhw000004l4f4ax3m7z?p=dashboard) dashboard mood. Independent project — not affiliated with TailAdmin, tweakcn, or Tamagui commercial products. See [NOTICE](./NOTICE).
+Built with [Expo](https://expo.dev) SDK 57, [Expo Router](https://docs.expo.dev/router/introduction/), and [Tamagui](https://tamagui.dev).
 
-## Live demo
+<p align="center">
+  <a href="https://rahulsukla.github.io/verdant-tamagui-admin-template/"><strong>Live demo →</strong></a>
+  ·
+  <a href="./docs/components.md"><strong>Component docs →</strong></a>
+  ·
+  <a href="https://github.com/rahulsukla/verdant-tamagui-admin-template/releases"><strong>Releases →</strong></a>
+</p>
 
-**https://rahulsukla.github.io/verdant-tamagui-admin-template/**
+---
 
-Static Expo web export on GitHub Pages (`gh-pages`). Redeploys on push to `main` and on published releases.
+## Why Verdant?
 
-## Stack
+- **Universal** — one codebase for web + native (Expo Router)
+- **Themeable** — light / dark / system, brand presets, density, sticky header
+- **Lean charts** — SVG area/bar charts (no ApexCharts / FullCalendar / jsVectorMap)
+- **Ready pages** — ecommerce dashboard, forms, tables, profile, calendar, auth, UI kit
+- **MIT licensed** — fork it, ship it, customize it
 
-- Expo SDK 57 + Expo Router (web + native)
-- Tamagui OSS UI + themes (Outfit font)
-- Light / dark / system theme with persistence
-- Config panel: brand presets (default **verdant** green), density, sticky header, content width
-- Lean SVG charts and calendar (no ApexCharts / FullCalendar / jsVectorMap)
+> Inspired by free [TailAdmin](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template) layout inventory and the [tweakcn Light Green](https://tweakcn.com/themes/cmlhfpjhw000004l4f4ax3m7z?p=dashboard) dashboard mood. Not affiliated with TailAdmin, tweakcn, or Tamagui commercial products. See [NOTICE](./NOTICE).
 
 ## Quick start
 
+### Option A — Expo template from GitHub (works now)
+
 ```bash
-npm install
-npm run web              # web (dev)
-npm run ios              # iOS simulator
-npm run android          # Android emulator
-npm run typecheck
-npm run audit:pages      # nav ↔ routes + UI brand check
-npm run export:web       # static export → dist/
-npm run export:web:pages # export with GitHub Pages base path
+npx create-expo-app@latest my-admin --template https://github.com/rahulsukla/verdant-tamagui-admin-template
+cd my-admin
+npm run web
 ```
 
-Component usage docs: [docs/components.md](./docs/components.md)  
-Contributing: [CONTRIBUTING.md](./CONTRIBUTING.md)  
-Changelog: [CHANGELOG.md](./CHANGELOG.md)
+### Option B — Expo template from npm
 
-## Inspiration & licensing
+```bash
+npx create-expo-app@latest my-admin --template verdant-tamagui-admin-template
+cd my-admin
+npm run web
+```
 
-| Source | License | How we use it |
-|--------|---------|----------------|
-| [TailAdmin free](https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template) | MIT | Page inventory / shell inspiration only — UI does not brand as TailAdmin |
-| [tweakcn Light Green](https://tweakcn.com/themes/cmlhfpjhw000004l4f4ax3m7z?p=dashboard) ([repo](https://github.com/jnsahaj/tweakcn), Apache-2.0) | Apache-2.0 | Color mood, KPI card rhythm, documents table structure |
-| [Tamagui](https://github.com/tamagui/tamagui) | MIT | UI primitives |
+> Package: [`verdant-tamagui-admin-template`](https://www.npmjs.com/package/verdant-tamagui-admin-template) on npm (Expo template). Publish via `npm publish` or the `Publish npm` GitHub Action (`NPM_TOKEN` secret).
 
-Do **not** copy TailAdmin Pro or Tamagui Bento/Takeout Pro assets into this repo.
+### Option C — Clone from GitHub
 
-## Routes (high level)
+```bash
+git clone https://github.com/rahulsukla/verdant-tamagui-admin-template.git
+cd verdant-tamagui-admin-template
+npm install
+npm run web
+```
 
-Dashboard, Calendar, Profile, Forms, Basic Tables, Documents, Blank, 404, Line/Bar charts, UI kit (alerts, avatars, badges, buttons, images, videos, progress), Sign In / Sign Up.
+### Option D — Local tarball (offline / CI smoke)
 
-## CI / demo hosting
+```bash
+npm pack
+npx create-expo-app@latest my-admin --template ./verdant-tamagui-admin-template-*.tgz
+```
 
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
-| `CI` | PR + push to `main` | typecheck + `audit:pages` |
-| `Deploy GitHub Pages` | `main`, release, or manual | export web + publish `gh-pages` |
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run web` | Start Expo web (dev) |
+| `npm run ios` / `android` | Native simulators |
+| `npm run typecheck` | TypeScript |
+| `npm run audit:pages` | Nav ↔ routes + brand guard |
+| `npm run export:web` | Static web export → `dist/` |
+| `npm run smoke:template` | Pack + create app + typecheck smoke |
+
+## Features
+
+- Sidebar + header shell with notifications, user menu, config panel
+- Ecommerce home (KPIs, sales charts, demographics, recent orders)
+- Forms, tables, documents checklist, progress bars
+- Profile cards with edit modals, calendar board
+- UI kit: alerts, avatars, badges, buttons, images, videos
+- Sign in / sign up + 404
+- Outfit font, verdant green default brand
+
+## Project structure
+
+```
+app/                 Expo Router screens
+components/          UI kit, forms, charts, ecommerce, profile
+layout/              App shell (sidebar, header)
+context/             Theme + template config
+navigation/          Sidebar nav model
+theme/               Colors + brand presets
+docs/components.md   Usage guide
+```
+
+## Using components
+
+Path alias `@/*` maps to the project root (`tsconfig.json`).
+
+```tsx
+import { AppButton } from '@/components/ui/Button'
+import { ProgressBar } from '@/components/ui/ProgressBar'
+import { useTemplateConfig } from '@/context/TemplateConfigContext'
+
+export function Example() {
+  const { brandColor } = useTemplateConfig()
+  return (
+    <>
+      <AppButton variant="primary">Save</AppButton>
+      <ProgressBar label="Onboarding" value={72} />
+    </>
+  )
+}
+```
+
+Full guide: [docs/components.md](./docs/components.md)
+
+## Requirements
+
+- Node 22+
+- Expo SDK **57** — https://docs.expo.dev/versions/v57.0.0/
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md). Issues and PRs welcome.
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md).
+
+## License
+
+[MIT](./LICENSE) © contributors
+
+Third-party inspiration notes: [NOTICE](./NOTICE)

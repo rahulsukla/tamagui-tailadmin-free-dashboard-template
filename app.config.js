@@ -5,7 +5,7 @@ const forGithubPages = process.env.GITHUB_PAGES === '1'
 const expoConfig = {
   name: 'Verdant',
   slug: repoName,
-  version: '0.2.0',
+  version: '0.2.1',
   orientation: 'default',
   icon: './assets/images/icon.png',
   scheme: 'verdant-admin',

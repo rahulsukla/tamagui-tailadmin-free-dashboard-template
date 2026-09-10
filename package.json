@@ -1,7 +1,53 @@
 {
   "name": "verdant-tamagui-admin-template",
+  "version": "0.2.1",
+  "description": "Verdant — universal Expo + Tamagui admin dashboard template (iOS, Android, Web)",
+  "license": "MIT",
+  "author": "Rahul Sukla",
+  "keywords": [
+    "expo",
+    "expo-template",
+    "tamagui",
+    "admin",
+    "dashboard",
+    "react-native",
+    "expo-router",
+    "verdant"
+  ],
+  "homepage": "https://rahulsukla.github.io/verdant-tamagui-admin-template/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulsukla/verdant-tamagui-admin-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rahulsukla/verdant-tamagui-admin-template/issues"
+  },
   "main": "expo-router/entry",
-  "version": "0.2.0",
+  "files": [
+    "app",
+    "assets",
+    "components",
+    "context",
+    "layout",
+    "navigation",
+    "theme",
+    "docs",
+    "scripts",
+    "app.config.js",
+    "metro.config.js",
+    "tamagui.config.ts",
+    "tsconfig.json",
+    "NOTICE",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@expo-google-fonts/outfit": "^0.4.3",
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -42,8 +88,9 @@
     "audit:pages": "node scripts/audit-pages.cjs",
     "export:web": "expo export -p web",
     "export:web:pages": "GITHUB_PAGES=1 expo export -p web",
-    "serve:web": "expo serve"
-  },
-  "license": "MIT",
-  "private": true
+    "serve:web": "expo serve",
+    "prepack": "npm run typecheck && npm run audit:pages",
+    "smoke:template": "node scripts/smoke-template.cjs",
+    "release:npm": "npm publish --access public"
+  }
 }

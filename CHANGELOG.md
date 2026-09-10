@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.1] — 2026-09-10
+
+### Changed
+- README rewritten as an open-source project page (install via `create-expo-app`)
+- Package prepared for public npm as an Expo template
+
+### Added
+- `npm run smoke:template` (pack → scaffold → typecheck + UI inventory)
+
 ## [0.2.0] — 2026-09-10
 
 ### Changed

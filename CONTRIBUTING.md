@@ -12,8 +12,8 @@ npm install
 npm run web
 npm run typecheck
 npm run audit:pages
+npm run smoke:template   # pack → create-expo-app → typecheck
 npm run export:web
-npm run export:web:pages
 ```
 
 ## Guidelines
@@ -24,6 +24,21 @@ npm run export:web:pages
 - Prefer `useTemplateConfig().brandColor` for accents
 - Update `docs/components.md` when adding shared primitives
 - Update `CHANGELOG.md` for user-facing changes
+
+## Publishing
+
+This repo is an **Expo template** npm package (`verdant-tamagui-admin-template`).
+
+```bash
+npm run smoke:template
+npm publish --access public
+```
+
+Consumers scaffold with:
+
+```bash
+npx create-expo-app@latest my-admin --template verdant-tamagui-admin-template
+```
 
 ## Intentionally omitted heavy deps
 

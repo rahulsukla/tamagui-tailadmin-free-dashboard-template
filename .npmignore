@@ -1,0 +1,19 @@
+# Ignore everything by default for npm pack, then whitelist via negation.
+# (npm uses .npmignore OR files in package.json — we use .npmignore allow-list style)
+
+# Always exclude
+node_modules/
+.expo/
+dist/
+web-build/
+ios/
+android/
+.git/
+.github/
+*.tgz
+.DS_Store
+.env*
+expo-env.d.ts
+tamagui.generated.css
+coverage/
+.cursor/

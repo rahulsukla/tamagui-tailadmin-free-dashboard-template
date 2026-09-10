@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.3] — 2026-09-10
+
+### Fixed
+- Modal / dropdown overlays on web (backdrop dismiss without nested Pressable)
+- Landing hero web gradient typing (`backgroundImage` cast for RN ViewStyle)
+
+### Added
+- Landing page (`/landing`) and Cards gallery (`/cards`) with ChatTile
+- Dashboard traffic pie chart (`TrafficPieCard` + `SimplePieChart`)
+- Smoke probe coverage for new routes/components
+
 ## [0.2.2] — 2026-09-10
 
 ### Changed

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Modal, Pressable, ScrollView, useWindowDimensions } from 'react-native'
+import { Modal, Pressable, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
 import { Text, XStack, YStack } from 'tamagui'
 
@@ -82,67 +82,74 @@ export function NotificationDropdown() {
 
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
         <PortalProviders>
-          <Pressable
-            onPress={() => setOpen(false)}
-            style={{
-              flex: 1,
-              backgroundColor: 'rgba(16,24,40,0.35)',
-              justifyContent: 'flex-start',
-              alignItems: 'flex-end',
-              paddingTop: 64,
-              paddingRight: 12,
-            }}
-          >
-            <Pressable onPress={() => {}}>
-              <YStack
-                width={panelW}
-                maxH={480}
-                bg="$backgroundStrong"
-                borderWidth={1}
+          <View style={styles.overlay}>
+            <Pressable
+              accessibilityLabel="Close notifications"
+              onPress={() => setOpen(false)}
+              style={StyleSheet.absoluteFill}
+            />
+            <YStack
+              width={panelW}
+              maxH={480}
+              bg="$backgroundStrong"
+              borderWidth={1}
+              borderColor="$borderColor"
+              rounded={16}
+              p="$3"
+              gap="$3"
+              z={1}
+              elevation={8}
+            >
+              <XStack
+                items="center"
+                justify="space-between"
+                pb="$2"
+                borderBottomWidth={1}
                 borderColor="$borderColor"
-                rounded={16}
-                p="$3"
-                gap="$3"
               >
-                <XStack items="center" justify="space-between" pb="$2" borderBottomWidth={1} borderColor="$borderColor">
-                  <Text fontSize={18} fontWeight="600" color="$color">
-                    Notification
+                <Text fontSize={18} fontWeight="600" color="$color">
+                  Notification
+                </Text>
+                <Pressable onPress={() => setOpen(false)}>
+                  <Text fontSize={18} color="$gray10">
+                    ✕
                   </Text>
-                  <Pressable onPress={() => setOpen(false)}>
-                    <Text fontSize={18} color="$gray10">
-                      ✕
-                    </Text>
-                  </Pressable>
-                </XStack>
-                <ScrollView style={{ maxHeight: 380 }}>
-                  <YStack gap="$1">
-                    {NOTES.map((n) => (
-                      <Pressable key={n.name} onPress={() => setOpen(false)}>
-                        <YStack
-                          p="$3"
-                          rounded={12}
-                          gap={6}
-                          hoverStyle={{ bg: '$backgroundHover' }}
-                        >
-                          <Text fontSize={14} color="$gray10">
-                            <Text fontWeight="600" color="$color">
-                              {n.name}{' '}
-                            </Text>
-                            {n.action}
+                </Pressable>
+              </XStack>
+              <ScrollView style={{ maxHeight: 380 }} keyboardShouldPersistTaps="handled">
+                <YStack gap="$1">
+                  {NOTES.map((n) => (
+                    <Pressable key={n.name} onPress={() => setOpen(false)}>
+                      <YStack p="$3" rounded={12} gap={6} hoverStyle={{ bg: '$backgroundHover' }}>
+                        <Text fontSize={14} color="$gray10">
+                          <Text fontWeight="600" color="$color">
+                            {n.name}{' '}
                           </Text>
-                          <Text fontSize={12} color="$gray8">
-                            {n.meta}
-                          </Text>
-                        </YStack>
-                      </Pressable>
-                    ))}
-                  </YStack>
-                </ScrollView>
-              </YStack>
-            </Pressable>
-          </Pressable>
+                          {n.action}
+                        </Text>
+                        <Text fontSize={12} color="$gray8">
+                          {n.meta}
+                        </Text>
+                      </YStack>
+                    </Pressable>
+                  ))}
+                </YStack>
+              </ScrollView>
+            </YStack>
+          </View>
         </PortalProviders>
       </Modal>
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(16,24,40,0.35)',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    paddingTop: 64,
+    paddingRight: 12,
+  },
+})

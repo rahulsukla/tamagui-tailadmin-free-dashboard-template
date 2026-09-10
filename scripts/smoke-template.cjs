@@ -50,8 +50,13 @@ const mustExist = [
   'components/ui/Button.tsx',
   'components/ui/ProgressBar.tsx',
   'components/ecommerce/KpiStatCards.tsx',
+  'components/ecommerce/TrafficPieCard.tsx',
+  'components/charts/SimplePieChart.tsx',
+  'components/cards/TileVariants.tsx',
   'components/PortalProviders.tsx',
   'app/(dashboard)/index.tsx',
+  'app/(dashboard)/landing.tsx',
+  'app/(dashboard)/cards.tsx',
   'docs/components.md',
 ]
 for (const rel of mustExist) {
@@ -62,6 +67,12 @@ const btn = fs.readFileSync(path.join(root, 'components/ui/Button.tsx'), 'utf8')
 assert.ok(btn.includes('export function AppButton'), 'AppButton export missing')
 const home = fs.readFileSync(path.join(root, 'app/(dashboard)/index.tsx'), 'utf8')
 assert.ok(home.includes('KpiStatCards'), 'home should compose KpiStatCards')
+assert.ok(home.includes('TrafficPieCard'), 'home should compose TrafficPieCard')
+const tiles = fs.readFileSync(path.join(root, 'components/cards/TileVariants.tsx'), 'utf8')
+assert.ok(tiles.includes('export function ChatTile'), 'ChatTile export missing')
+const nav = fs.readFileSync(path.join(root, 'navigation/navItems.ts'), 'utf8')
+assert.ok(nav.includes("/landing"), 'nav should link Landing')
+assert.ok(nav.includes("/cards"), 'nav should link Cards')
 console.log('UI inventory OK (' + mustExist.length + ' files)')
 `
   fs.writeFileSync(path.join(appDir, 'scripts-smoke-probe.cjs'), probe)

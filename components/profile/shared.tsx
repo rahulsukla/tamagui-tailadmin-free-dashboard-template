@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { Modal, Pressable } from 'react-native'
+import { Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
 import { PortalProviders } from '@/components/PortalProviders'
@@ -34,60 +34,74 @@ export function AppModal({
   return (
     <Modal visible={isOpen} transparent animationType="fade" onRequestClose={onClose}>
       <PortalProviders>
-        <Pressable
-          onPress={onClose}
-          style={{
-            flex: 1,
-            backgroundColor: 'rgba(16,24,40,0.45)',
-            justifyContent: 'center',
-            padding: 16,
-          }}
-        >
-          {/* Nested Pressable absorbs presses so the backdrop does not close the dialog. */}
-          <Pressable onPress={() => {}}>
-            <YStack
-              bg="$backgroundStrong"
-              rounded={24}
-              p="$5"
-              maxW={700}
-              width="100%"
-              self="center"
-              gap="$4"
-              maxH="90%"
-            >
-              <YStack gap="$2">
-                <Text fontSize={22} fontWeight="600" color="$color">
-                  {title}
+        <View style={styles.overlay}>
+          {/* Separate full-screen dismiss layer — avoids nested Pressable event bugs on web */}
+          <Pressable
+            accessibilityLabel="Close dialog"
+            onPress={onClose}
+            style={StyleSheet.absoluteFill}
+          />
+          <YStack
+            bg="$backgroundStrong"
+            borderWidth={1}
+            borderColor="$borderColor"
+            rounded={24}
+            p="$5"
+            maxW={700}
+            width="100%"
+            self="center"
+            gap="$4"
+            maxH="90%"
+            z={1}
+            elevation={8}
+          >
+            <YStack gap="$2">
+              <Text fontSize={22} fontWeight="600" color="$color">
+                {title}
+              </Text>
+              {subtitle ? (
+                <Text fontSize={14} color="$gray10">
+                  {subtitle}
                 </Text>
-                {subtitle ? (
-                  <Text fontSize={14} color="$gray10">
-                    {subtitle}
-                  </Text>
-                ) : null}
-              </YStack>
-              <YStack gap="$4">{children}</YStack>
-              <XStack gap="$3" justify="flex-end" flexWrap="wrap">
-                <AppButton variant="outline" size="sm" onPress={onClose}>
-                  Close
-                </AppButton>
-                <AppButton
-                  variant="primary"
-                  size="sm"
-                  onPress={() => {
-                    onSave?.()
-                    onClose()
-                  }}
-                >
-                  {saveLabel}
-                </AppButton>
-              </XStack>
+              ) : null}
             </YStack>
-          </Pressable>
-        </Pressable>
+            <ScrollView
+              style={{ maxHeight: 420 }}
+              contentContainerStyle={{ paddingBottom: 4 }}
+              keyboardShouldPersistTaps="handled"
+            >
+              <YStack gap="$4">{children}</YStack>
+            </ScrollView>
+            <XStack gap="$3" justify="flex-end" flexWrap="wrap">
+              <AppButton variant="outline" size="sm" onPress={onClose}>
+                Close
+              </AppButton>
+              <AppButton
+                variant="primary"
+                size="sm"
+                onPress={() => {
+                  onSave?.()
+                  onClose()
+                }}
+              >
+                {saveLabel}
+              </AppButton>
+            </XStack>
+          </YStack>
+        </View>
       </PortalProviders>
     </Modal>
   )
 }
+
+const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(16,24,40,0.45)',
+    justifyContent: 'center',
+    padding: 16,
+  },
+})
 
 export function EditPillButton({ onPress }: { onPress: () => void }) {
   return (

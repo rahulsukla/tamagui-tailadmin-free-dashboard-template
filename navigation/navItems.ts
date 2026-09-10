@@ -48,6 +48,7 @@ export const mainNav: NavItem[] = [
     name: 'Pages',
     icon: 'page',
     subItems: [
+      { name: 'Landing', href: '/landing' },
       { name: 'Blank Page', href: '/blank' },
       { name: '404 Error', href: '/error-404' },
     ],
@@ -71,6 +72,7 @@ export const othersNav: NavItem[] = [
       { name: 'Avatar', href: '/avatars' },
       { name: 'Badge', href: '/badge' },
       { name: 'Buttons', href: '/buttons' },
+      { name: 'Cards', href: '/cards' },
       { name: 'Images', href: '/images' },
       { name: 'Videos', href: '/videos' },
       { name: 'Progress', href: '/progress' },

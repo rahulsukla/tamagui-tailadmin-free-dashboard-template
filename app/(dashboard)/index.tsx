@@ -8,6 +8,7 @@ import { MonthlySalesChart } from '@/components/ecommerce/MonthlySalesChart'
 import { MonthlyTarget } from '@/components/ecommerce/MonthlyTarget'
 import { RecentOrders } from '@/components/ecommerce/RecentOrders'
 import { StatisticsChart } from '@/components/ecommerce/StatisticsChart'
+import { TrafficPieCard } from '@/components/ecommerce/TrafficPieCard'
 
 export default function HomeScreen() {
   const { width } = useWindowDimensions()
@@ -43,10 +44,12 @@ export default function HomeScreen() {
         <YStack flex={xl ? 5 : undefined} width={xl ? undefined : '100%'} minW={0}>
           <DemographicCard />
         </YStack>
-        <YStack flex={xl ? 7 : undefined} width={xl ? undefined : '100%'} minW={0}>
-          <RecentOrders />
+        <YStack flex={xl ? 5 : undefined} width={xl ? undefined : '100%'} minW={0}>
+          <TrafficPieCard />
         </YStack>
       </XStack>
+
+      <RecentOrders />
     </YStack>
   )
 }

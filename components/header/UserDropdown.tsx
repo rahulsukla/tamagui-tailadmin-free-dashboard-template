@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Image } from 'expo-image'
 import { useRouter } from 'expo-router'
-import { Modal, Pressable, useWindowDimensions } from 'react-native'
+import { Modal, Pressable, StyleSheet, View, useWindowDimensions } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
 import { PortalProviders } from '@/components/PortalProviders'
@@ -42,94 +42,100 @@ export function UserDropdown() {
 
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
         <PortalProviders>
-          <Pressable
-            onPress={() => setOpen(false)}
-            style={{
-              flex: 1,
-              backgroundColor: 'rgba(16,24,40,0.35)',
-              justifyContent: 'flex-start',
-              alignItems: 'flex-end',
-              paddingTop: 64,
-              paddingRight: 12,
-            }}
-          >
-            <Pressable onPress={() => {}}>
-              <YStack
-                width={280}
-                bg="$backgroundStrong"
-                borderWidth={1}
-                borderColor="$borderColor"
-                rounded={16}
-                p={16}
-                gap={12}
-              >
-                <YStack gap={4} pb={12} borderBottomWidth={1} borderColor="$borderColor">
-                  <Text fontSize={14} fontWeight="600" color="$color" lineHeight={20}>
-                    John Doe
-                  </Text>
-                  <Text fontSize={12} color="$gray10" lineHeight={18}>
-                    john.doe@example.com
-                  </Text>
-                </YStack>
-
-                <YStack gap={4}>
-                  {LINKS.map((item) => (
-                    <Pressable
-                      key={item.label}
-                      onPress={() => {
-                        setOpen(false)
-                        router.push(item.href)
-                      }}
-                    >
-                      <XStack
-                        width="100%"
-                        px={12}
-                        py={10}
-                        rounded={8}
-                        items="center"
-                        hoverStyle={{ bg: '$backgroundHover' }}
-                      >
-                        <Text fontSize={14} fontWeight="500" color="$gray11" lineHeight={20}>
-                          {item.label}
-                        </Text>
-                      </XStack>
-                    </Pressable>
-                  ))}
-                </YStack>
-
-                <Pressable
-                  onPress={() => {
-                    setOpen(false)
-                    router.push('/signin')
-                  }}
-                >
-                  <XStack
-                    width="100%"
-                    mt={4}
-                    px={12}
-                    py={10}
-                    rounded={8}
-                    borderWidth={1}
-                    borderColor="$borderColor"
-                    items="center"
-                    justify="center"
-                  >
-                    <Text
-                      fontSize={14}
-                      fontWeight="500"
-                      color={brandColor as any}
-                      lineHeight={20}
-                      text="center"
-                    >
-                      Sign out
-                    </Text>
-                  </XStack>
-                </Pressable>
+          <View style={styles.overlay}>
+            <Pressable
+              accessibilityLabel="Close user menu"
+              onPress={() => setOpen(false)}
+              style={StyleSheet.absoluteFill}
+            />
+            <YStack
+              width={280}
+              bg="$backgroundStrong"
+              borderWidth={1}
+              borderColor="$borderColor"
+              rounded={16}
+              p={16}
+              gap={12}
+              z={1}
+              elevation={8}
+            >
+              <YStack gap={4} pb={12} borderBottomWidth={1} borderColor="$borderColor">
+                <Text fontSize={14} fontWeight="600" color="$color" lineHeight={20}>
+                  John Doe
+                </Text>
+                <Text fontSize={12} color="$gray10" lineHeight={18}>
+                  john.doe@example.com
+                </Text>
               </YStack>
-            </Pressable>
-          </Pressable>
+
+              <YStack gap={4}>
+                {LINKS.map((item) => (
+                  <Pressable
+                    key={item.label}
+                    onPress={() => {
+                      setOpen(false)
+                      router.push(item.href)
+                    }}
+                  >
+                    <XStack
+                      width="100%"
+                      px={12}
+                      py={10}
+                      rounded={8}
+                      items="center"
+                      hoverStyle={{ bg: '$backgroundHover' }}
+                    >
+                      <Text fontSize={14} fontWeight="500" color="$gray11" lineHeight={20}>
+                        {item.label}
+                      </Text>
+                    </XStack>
+                  </Pressable>
+                ))}
+              </YStack>
+
+              <Pressable
+                onPress={() => {
+                  setOpen(false)
+                  router.push('/signin')
+                }}
+              >
+                <XStack
+                  width="100%"
+                  mt={4}
+                  px={12}
+                  py={10}
+                  rounded={8}
+                  borderWidth={1}
+                  borderColor="$borderColor"
+                  items="center"
+                  justify="center"
+                >
+                  <Text
+                    fontSize={14}
+                    fontWeight="500"
+                    color={brandColor as any}
+                    lineHeight={20}
+                    text="center"
+                  >
+                    Sign out
+                  </Text>
+                </XStack>
+              </Pressable>
+            </YStack>
+          </View>
         </PortalProviders>
       </Modal>
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(16,24,40,0.35)',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    paddingTop: 64,
+    paddingRight: 12,
+  },
+})

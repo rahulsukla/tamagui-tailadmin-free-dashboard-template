@@ -122,6 +122,24 @@ Cross-platform via `react-native-svg` — no ApexCharts.
 | `DocumentsTable` | `/documents` (tweakcn Light Green–inspired checklist) |
 | `RecentOrders` | Home ecommerce widget |
 
+## Cards / tiles
+
+Import from `@/components/cards/TileVariants`:
+
+| Component | Role |
+|-----------|------|
+| `MetricTile` | KPI number + delta |
+| `AccentTile` | Brand callout with CTA |
+| `StatusTile` | Title + health badge |
+| `FeatureTile` | Icon + short description |
+| `ChatTile` | Dummy chat thread + composer |
+
+Demo route: `/cards`
+
+## Landing page
+
+Marketing-style hero + feature strip inside the admin shell: `/landing` (Pages → Landing).
+
 ## Ecommerce widgets
 
 | Component | Role |
@@ -133,6 +151,7 @@ Cross-platform via `react-native-svg` — no ApexCharts.
 | `StatisticsChart` | Dual series area chart |
 | `DemographicCard` | Map silhouette + country bars |
 | `RecentOrders` | Product orders table |
+| `TrafficPieCard` | Donut / pie traffic split (`SimplePieChart`) |
 
 Compose them like [`app/(dashboard)/index.tsx`](https://github.com/rahulsukla/verdant-tamagui-admin-template/blob/main/app/(dashboard)/index.tsx).
 

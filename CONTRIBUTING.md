@@ -27,12 +27,14 @@ npm run export:web
 
 ## Publishing
 
-This repo is an **Expo template** distributed in two places:
+Same template, two registries:
 
-| Registry | Package name |
-|----------|----------------|
-| [npmjs.org](https://www.npmjs.com/package/verdant-tamagui-admin-template) | `verdant-tamagui-admin-template` |
-| [GitHub Packages](https://github.com/rahulsukla/verdant-tamagui-admin-template/pkgs/npm/verdant-tamagui-admin-template) | `@rahulsukla/verdant-tamagui-admin-template` |
+| Registry | Package name | For |
+|----------|----------------|-----|
+| [npmjs.org](https://www.npmjs.com/package/verdant-tamagui-admin-template) | `verdant-tamagui-admin-template` | Simple `create-expo-app --template …` (no auth) |
+| [GitHub Packages](https://github.com/rahulsukla/verdant-tamagui-admin-template/pkgs/npm/verdant-tamagui-admin-template) | `@rahulsukla/verdant-tamagui-admin-template` | Repo Packages sidebar only |
+
+`create-expo-app` talks to the public npm registry by default. GitHub Packages needs a scoped registry + token, so it is **not** a simple install path.
 
 ```bash
 npm run smoke:template
@@ -40,9 +42,7 @@ npm publish --access public                                          # npmjs
 NODE_AUTH_TOKEN=$(gh auth token) npm run release:github-packages     # GitHub Packages
 ```
 
-Prefer **npmjs** for `create-expo-app --template`. GitHub Packages is mainly so the repo Packages sidebar lists the package.
-
-CI: `.github/workflows/publish-npm.yml` publishes both on release / manual dispatch (`NPM_TOKEN` for npmjs; `GITHUB_TOKEN` for GitHub Packages).
+CI: `.github/workflows/publish-packages.yml` (`NPM_TOKEN` for npmjs; `GITHUB_TOKEN` for GitHub Packages).
 
 ## Intentionally omitted heavy deps
 

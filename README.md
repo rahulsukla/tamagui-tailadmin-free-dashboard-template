@@ -36,7 +36,7 @@ Built with [Expo](https://expo.dev) SDK 57, [Expo Router](https://docs.expo.dev/
 
 ## Quick start
 
-### Option A — Expo template from npm (recommended)
+The **simple install** (no auth, no extra config):
 
 ```bash
 npx create-expo-app@latest my-admin --template verdant-tamagui-admin-template
@@ -44,33 +44,29 @@ cd my-admin
 npm run web
 ```
 
-Package on npm: https://www.npmjs.com/package/verdant-tamagui-admin-template
+That pulls from **npmjs.org**: https://www.npmjs.com/package/verdant-tamagui-admin-template
 
-Also mirrored to [GitHub Packages](https://github.com/rahulsukla/verdant-tamagui-admin-template/pkgs/npm/verdant-tamagui-admin-template) as `@rahulsukla/verdant-tamagui-admin-template` (repo Packages sidebar).
+### Other ways (same template)
 
-### Option B — Expo template from GitHub
+| Method | Command | Notes |
+|--------|---------|--------|
+| GitHub repo URL | `npx create-expo-app@latest my-admin --template https://github.com/rahulsukla/verdant-tamagui-admin-template` | Also simple; clones the repo as a template |
+| Clone | `git clone … && npm install && npm run web` | Full repo checkout |
+| Local pack | `npm pack` then `--template ./….tgz` | Offline / CI smoke |
 
-```bash
-npx create-expo-app@latest my-admin --template https://github.com/rahulsukla/verdant-tamagui-admin-template
-cd my-admin
-npm run web
-```
+### npmjs vs GitHub Packages
 
-### Option C — Clone from GitHub
+Same app template, two registries:
 
-```bash
-git clone https://github.com/rahulsukla/verdant-tamagui-admin-template.git
-cd verdant-tamagui-admin-template
-npm install
-npm run web
-```
+| | **npmjs** | **GitHub Packages** |
+|--|-----------|---------------------|
+| Name | `verdant-tamagui-admin-template` | `@rahulsukla/verdant-tamagui-admin-template` |
+| Simple `create-expo-app`? | Yes | No — needs GitHub registry + token in `.npmrc` |
+| Why it exists | Public install everyone uses | Shows under the repo **Packages** sidebar |
 
-### Option D — Local tarball (offline / CI smoke)
+Use **npmjs** (or the GitHub **repo URL**) day to day. GitHub Packages is a mirror for GitHub UI, not the install path we recommend.
 
-```bash
-npm pack
-npx create-expo-app@latest my-admin --template ./verdant-tamagui-admin-template-*.tgz
-```
+Package pages: [npmjs](https://www.npmjs.com/package/verdant-tamagui-admin-template) · [GitHub Packages](https://github.com/rahulsukla/verdant-tamagui-admin-template/pkgs/npm/verdant-tamagui-admin-template)
 
 ## Scripts
 

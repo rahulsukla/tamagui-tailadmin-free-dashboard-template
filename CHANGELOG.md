@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2] — 2026-09-10
+
+### Changed
+- README / docs links use absolute GitHub URLs (fixes broken links on npm & GitHub Packages pages)
+- Expanded `docs/components.md` (install, portals, routes, widgets)
+
 ## [0.2.1] — 2026-09-10
 
 ### Changed

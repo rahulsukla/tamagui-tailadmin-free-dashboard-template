@@ -18,16 +18,21 @@ export default function FormElementsPage() {
   const twoCol = width >= 1280
 
   return (
-    <YStack gap="$5" flex={1}>
+    <YStack gap={20} flex={1} width="100%">
       <PageBreadcrumb pageTitle="Form Elements" />
-      <XStack flexWrap="wrap" gap="$5">
-        <YStack width={twoCol ? '48%' : '100%'} gap="$5" grow={1}>
+      <XStack
+        flexDirection={twoCol ? 'row' : 'column'}
+        gap={20}
+        width="100%"
+        items="flex-start"
+      >
+        <YStack flex={1} width={twoCol ? undefined : '100%'} gap={20} minW={0}>
           <DefaultInputs />
           <SelectInputs />
           <TextAreaInput />
           <InputStates />
         </YStack>
-        <YStack width={twoCol ? '48%' : '100%'} gap="$5" grow={1}>
+        <YStack flex={1} width={twoCol ? undefined : '100%'} gap={20} minW={0}>
           <InputGroup />
           <FileInputExample />
           <CheckboxComponents />

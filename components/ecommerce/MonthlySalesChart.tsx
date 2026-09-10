@@ -12,13 +12,15 @@ export function MonthlySalesChart() {
       borderWidth={1}
       borderColor="$borderColor"
       bg="$backgroundStrong"
-      px="$5"
-      pt="$5"
-      pb="$4"
+      px={20}
+      pt={20}
+      pb={24}
       overflow="hidden"
     >
       <ChartCardHeader title="Monthly Sales" right={<MoreMenu />} />
-      <SimpleBarChart data={sales} height={180} />
+      <YStack mt={12}>
+        <SimpleBarChart data={sales} height={180} />
+      </YStack>
     </YStack>
   )
 }

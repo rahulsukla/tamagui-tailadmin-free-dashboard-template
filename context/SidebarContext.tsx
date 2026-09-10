@@ -55,9 +55,16 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const effectiveExpanded = isMobile ? false : isExpanded
+  // Match TailAdmin: content margin follows expanded OR hovered width.
   const showWide = effectiveExpanded || isHovered || isMobileOpen
   const sidebarWidth = showWide ? EXPANDED_WIDTH : COLLAPSED_WIDTH
-  const contentOffset = isDesktopSidebar ? sidebarWidth : 0
+  // Keep main column offset stable on hover (sidebar overlays when collapsed+hover)
+  // so pages do not jump horizontally while browsing the menu.
+  const contentOffset = isDesktopSidebar
+    ? effectiveExpanded
+      ? EXPANDED_WIDTH
+      : COLLAPSED_WIDTH
+    : 0
 
   const value = useMemo(
     () => ({

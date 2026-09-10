@@ -1,5 +1,5 @@
 import { Slot } from 'expo-router'
-import { ScrollView, useWindowDimensions } from 'react-native'
+import { Platform, ScrollView, useWindowDimensions } from 'react-native'
 import { YStack } from 'tamagui'
 
 import { ConfigPanel } from '@/components/ConfigPanel'
@@ -14,7 +14,7 @@ function LayoutContent() {
   const { contentOffset } = useSidebar()
   const { width } = useWindowDimensions()
   const { config } = useTemplateConfig()
-  const pad = config.density === 'compact' ? '$3' : width >= 768 ? '$5' : '$4'
+  const pad = config.density === 'compact' ? 12 : width >= 768 ? 24 : 16
 
   const page = (
     <YStack
@@ -33,7 +33,16 @@ function LayoutContent() {
       <AppSidebar />
       <Backdrop />
       <ConfigPanel />
-      <YStack flex={1} pl={contentOffset} style={{ minHeight: '100%' }}>
+      <YStack
+        flex={1}
+        pl={contentOffset}
+        style={
+          {
+            minHeight: '100%',
+            ...(Platform.OS === 'web' ? { transition: 'padding-left 0.3s ease' } : {}),
+          } as any
+        }
+      >
         {config.stickyHeader ? (
           <>
             <AppHeader />

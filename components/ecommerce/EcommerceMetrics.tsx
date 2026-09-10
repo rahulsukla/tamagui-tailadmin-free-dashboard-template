@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { useWindowDimensions } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
 import { Text, XStack, YStack } from 'tamagui'
@@ -36,57 +37,61 @@ function MetricIcon({ kind }: { kind: 'users' | 'orders' }) {
   )
 }
 
+function MetricCard({
+  kind,
+  label,
+  value,
+  badge,
+}: {
+  kind: 'users' | 'orders'
+  label: string
+  value: string
+  badge: ReactNode
+}) {
+  return (
+    <YStack
+      flex={1}
+      minW={240}
+      rounded={16}
+      borderWidth={1}
+      borderColor="$borderColor"
+      bg="$backgroundStrong"
+      p={20}
+    >
+      <MetricIcon kind={kind} />
+      <XStack mt={20} items="flex-end" justify="space-between" gap={12}>
+        <YStack flex={1} minW={0}>
+          <Text fontSize={14} color="$gray10">
+            {label}
+          </Text>
+          <Text mt={8} fontSize={28} fontWeight="700" color="$color" letterSpacing={-0.4}>
+            {value}
+          </Text>
+        </YStack>
+        {badge}
+      </XStack>
+    </YStack>
+  )
+}
+
 export function EcommerceMetrics() {
   const { width } = useWindowDimensions()
   const two = width >= 640
 
   return (
-    <XStack flexWrap="wrap" gap="$4">
-      <YStack
-        width={two ? '48%' : '100%'}
-        grow={1}
-        rounded={16}
-        borderWidth={1}
-        borderColor="$borderColor"
-        bg="$backgroundStrong"
-        p="$5"
-      >
-        <MetricIcon kind="users" />
-        <XStack mt="$5" items="flex-end" justify="space-between">
-          <YStack>
-            <Text fontSize={14} color="$gray10">
-              Customers
-            </Text>
-            <Text mt="$2" fontSize={28} fontWeight="700" color="$color" letterSpacing={-0.4}>
-              3,782
-            </Text>
-          </YStack>
-          <Badge color="success">↑ 11.01%</Badge>
-        </XStack>
-      </YStack>
-
-      <YStack
-        width={two ? '48%' : '100%'}
-        grow={1}
-        rounded={16}
-        borderWidth={1}
-        borderColor="$borderColor"
-        bg="$backgroundStrong"
-        p="$5"
-      >
-        <MetricIcon kind="orders" />
-        <XStack mt="$5" items="flex-end" justify="space-between">
-          <YStack>
-            <Text fontSize={14} color="$gray10">
-              Orders
-            </Text>
-            <Text mt="$2" fontSize={28} fontWeight="700" color="$color" letterSpacing={-0.4}>
-              5,359
-            </Text>
-          </YStack>
-          <Badge color="error">↓ 9.05%</Badge>
-        </XStack>
-      </YStack>
+    <XStack flexDirection={two ? 'row' : 'column'} gap={16} width="100%">
+      <MetricCard
+        kind="users"
+        label="Customers"
+        value="3,782"
+        badge={<Badge color="success">↑ 11.01%</Badge>}
+      />
+      <MetricCard
+        kind="orders"
+        label="Orders"
+        value="5,359"
+        badge={<Badge color="error">↓ 9.05%</Badge>}
+      />
     </XStack>
   )
 }

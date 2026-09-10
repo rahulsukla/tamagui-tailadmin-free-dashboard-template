@@ -8,29 +8,40 @@ import { MonthlyTarget } from '@/components/ecommerce/MonthlyTarget'
 import { RecentOrders } from '@/components/ecommerce/RecentOrders'
 import { StatisticsChart } from '@/components/ecommerce/StatisticsChart'
 
+/** Mirrors TailAdmin free Home: 12-col grid → 7 / 5 on xl. */
 export default function HomeScreen() {
   const { width } = useWindowDimensions()
   const xl = width >= 1280
 
   return (
-    <YStack gap="$4" flex={1}>
-      <XStack flexWrap="wrap" gap="$4">
-        <YStack width={xl ? '58%' : '100%'} gap="$4" grow={1}>
+    <YStack gap={16} flex={1} width="100%">
+      <XStack
+        flexDirection={xl ? 'row' : 'column'}
+        gap={16}
+        width="100%"
+        items="stretch"
+      >
+        <YStack flex={xl ? 7 : undefined} width={xl ? undefined : '100%'} gap={24} minW={0}>
           <EcommerceMetrics />
           <MonthlySalesChart />
         </YStack>
-        <YStack width={xl ? '38%' : '100%'} grow={1}>
+        <YStack flex={xl ? 5 : undefined} width={xl ? undefined : '100%'} minW={0}>
           <MonthlyTarget />
         </YStack>
       </XStack>
 
       <StatisticsChart />
 
-      <XStack flexWrap="wrap" gap="$4">
-        <YStack width={xl ? '38%' : '100%'} grow={1}>
+      <XStack
+        flexDirection={xl ? 'row' : 'column'}
+        gap={16}
+        width="100%"
+        items="stretch"
+      >
+        <YStack flex={xl ? 5 : undefined} width={xl ? undefined : '100%'} minW={0}>
           <DemographicCard />
         </YStack>
-        <YStack width={xl ? '58%' : '100%'} grow={1}>
+        <YStack flex={xl ? 7 : undefined} width={xl ? undefined : '100%'} minW={0}>
           <RecentOrders />
         </YStack>
       </XStack>

@@ -54,23 +54,20 @@ export function MonthlyTarget() {
         </Text>
       </YStack>
 
-      <XStack justify="center" items="center" gap="$5" px="$5" py="$4">
+      <XStack justify="space-evenly" items="center" px={20} py={20} gap={12} width="100%">
         {[
           { label: 'Target', value: '$20K', down: true },
           { label: 'Revenue', value: '$20K', down: false },
           { label: 'Today', value: '$20K', down: false },
-        ].map((item, i) => (
-          <XStack key={item.label} items="center" gap="$5">
-            {i > 0 ? <YStack width={1} height={28} bg="$borderColor" /> : null}
-            <YStack items="center">
-              <Text fontSize={13} color="$gray10" mb={4}>
-                {item.label}
-              </Text>
-              <Text fontSize={16} fontWeight="600" color="$color">
-                {item.value} {item.down ? '↓' : '↑'}
-              </Text>
-            </YStack>
-          </XStack>
+        ].map((item) => (
+          <YStack key={item.label} items="center" flex={1} gap={4}>
+            <Text fontSize={13} color="$gray10">
+              {item.label}
+            </Text>
+            <Text fontSize={16} fontWeight="600" color="$color">
+              {item.value} {item.down ? '↓' : '↑'}
+            </Text>
+          </YStack>
         ))}
       </XStack>
     </YStack>

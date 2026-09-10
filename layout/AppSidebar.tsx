@@ -8,6 +8,7 @@ import { NavIcon } from '@/components/icons'
 import { useSidebar } from '@/context/SidebarContext'
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode } from '@/context/ThemeContext'
+import { SidebarWidget } from '@/layout/SidebarWidget'
 import { mainNav, othersNav, type NavItem } from '@/navigation/navItems'
 
 function pathMatches(pathname: string, href: string) {
@@ -45,8 +46,6 @@ export function AppSidebar() {
 
   const activeColor = brandColor
   const inactiveIcon = resolvedTheme === 'dark' ? '#98a2b3' : '#667085'
-
-  // Off-canvas on < lg when closed
   const hiddenOffCanvas = !isLg && !isMobileOpen
 
   const hoverHandlers =
@@ -60,17 +59,29 @@ export function AppSidebar() {
       : {}
 
   const renderGroup = (title: string, items: NavItem[]) => (
-    <YStack gap="$3" key={title}>
-      <XStack items="center" justify={wide ? 'flex-start' : 'center'} px="$1">
+    <YStack key={title} gap={0}>
+      <XStack
+        items="center"
+        justify={wide ? 'flex-start' : 'center'}
+        mb={16}
+        px={wide ? 0 : 0}
+      >
         {wide ? (
-          <Text fontSize={12} fontWeight="500" color="$gray8" textTransform="uppercase">
+          <Text
+            fontSize={12}
+            fontWeight="500"
+            color="$gray8"
+            textTransform="uppercase"
+            lineHeight={20}
+          >
             {title}
           </Text>
         ) : (
           <NavIcon name="dots" color={inactiveIcon} size={20} />
         )}
       </XStack>
-      <YStack gap="$1">
+      {/* TailAdmin free: ul gap-4 between items; menu-item px-3 py-2 */}
+      <YStack gap={16}>
         {items.map((item) => {
           const hasSubs = !!item.subItems?.length
           const isOpen = openKey === item.name
@@ -86,17 +97,22 @@ export function AppSidebar() {
                   onPress={closeMobileSidebar}
                   flexDirection="row"
                   items="center"
-                  gap="$3"
-                  px="$3"
-                  py={10}
+                  gap={12}
+                  px={12}
+                  py={8}
                   rounded={8}
+                  width="100%"
                   bg={active ? '$accentBackground' : 'transparent'}
                   hoverStyle={{ bg: active ? '$accentBackground' : '$backgroundHover' }}
                   justify={wide ? 'flex-start' : 'center'}
                 >
                   <NavIcon name={item.icon} color={active ? activeColor : inactiveIcon} />
                   {wide ? (
-                    <Text fontSize={14} fontWeight="500" color={(active ? activeColor : '$gray11') as any}>
+                    <Text
+                      fontSize={14}
+                      fontWeight="500"
+                      color={(active ? activeColor : '$gray11') as any}
+                    >
                       {item.name}
                     </Text>
                   ) : null}
@@ -106,16 +122,17 @@ export function AppSidebar() {
           }
 
           return (
-            <YStack key={item.name}>
+            <YStack key={item.name} width="100%">
               <Button
                 unstyled
                 onPress={() => setOpenKey(isOpen ? null : item.name)}
                 flexDirection="row"
                 items="center"
-                gap="$3"
-                px="$3"
-                py={10}
+                gap={12}
+                px={12}
+                py={8}
                 rounded={8}
+                width="100%"
                 bg={active || isOpen ? '$accentBackground' : 'transparent'}
                 hoverStyle={{ bg: '$backgroundHover' }}
                 justify={wide ? 'flex-start' : 'center'}
@@ -146,7 +163,7 @@ export function AppSidebar() {
                 ) : null}
               </Button>
               {wide && isOpen && item.subItems ? (
-                <YStack mt="$1" ml={36} gap="$1">
+                <YStack mt={8} ml={36} gap={4}>
                   {item.subItems.map((sub) => {
                     const subActive = pathMatches(pathname, sub.href)
                     return (
@@ -157,9 +174,10 @@ export function AppSidebar() {
                           closeMobileSidebar()
                           router.push(sub.href as any)
                         }}
-                        px="$3"
-                        py="$2"
+                        px={12}
+                        py={10}
                         rounded={8}
+                        width="100%"
                         items="flex-start"
                         bg={subActive ? '$accentBackground' : 'transparent'}
                         hoverStyle={{ bg: '$backgroundHover' }}
@@ -194,22 +212,25 @@ export function AppSidebar() {
       bg="$backgroundStrong"
       borderRightWidth={1}
       borderColor="$borderColor"
-      px="$4"
+      px={20}
       style={
         {
           transform: [{ translateX: hiddenOffCanvas ? -sidebarWidth : 0 }],
-          ...(Platform.OS === 'web' ? { position: 'fixed' } : {}),
+          ...(Platform.OS === 'web'
+            ? { position: 'fixed', transition: 'width 0.3s ease' }
+            : {}),
         } as any
       }
       {...(hoverHandlers as any)}
     >
-      <YStack py="$6" items={wide ? 'flex-start' : 'center'}>
+      <YStack py={32} items={wide ? 'flex-start' : 'center'}>
         <BrandLogo />
       </YStack>
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
-        <YStack gap="$5" pb="$8">
+        <YStack gap={24} pb={24}>
           {renderGroup('Menu', mainNav)}
           {renderGroup('Others', othersNav)}
+          {wide ? <SidebarWidget /> : null}
         </YStack>
       </ScrollView>
     </YStack>

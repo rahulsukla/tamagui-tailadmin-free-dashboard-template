@@ -1,0 +1,80 @@
+name: Publish packages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish-npmjs:
+    name: Publish to npmjs.org
+    runs-on: ubuntu-latest
+    # Soft-fail when NPM_TOKEN is missing (GitHub Packages job still runs).
+    continue-on-error: true
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (npmjs)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck + page audit
+        run: |
+          npm run typecheck
+          npm run audit:pages
+
+      - name: Publish to npmjs
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-github-packages:
+    name: Publish to GitHub Packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (GitHub Packages)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: '@rahulsukla'
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck + page audit
+        run: |
+          npm run typecheck
+          npm run audit:pages
+
+      - name: Scope package for GitHub Packages
+        run: |
+          node -e "
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          p.name = '@rahulsukla/verdant-tamagui-admin-template';
+          p.publishConfig = { registry: 'https://npm.pkg.github.com', access: 'public' };
+          fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');
+          "
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

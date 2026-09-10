@@ -27,18 +27,22 @@ npm run export:web
 
 ## Publishing
 
-This repo is an **Expo template** npm package (`verdant-tamagui-admin-template`).
+This repo is an **Expo template** distributed in two places:
+
+| Registry | Package name |
+|----------|----------------|
+| [npmjs.org](https://www.npmjs.com/package/verdant-tamagui-admin-template) | `verdant-tamagui-admin-template` |
+| [GitHub Packages](https://github.com/rahulsukla/verdant-tamagui-admin-template/pkgs/npm/verdant-tamagui-admin-template) | `@rahulsukla/verdant-tamagui-admin-template` |
 
 ```bash
 npm run smoke:template
-npm publish --access public
+npm publish --access public                                          # npmjs
+NODE_AUTH_TOKEN=$(gh auth token) npm run release:github-packages     # GitHub Packages
 ```
 
-Consumers scaffold with:
+Prefer **npmjs** for `create-expo-app --template`. GitHub Packages is mainly so the repo Packages sidebar lists the package.
 
-```bash
-npx create-expo-app@latest my-admin --template verdant-tamagui-admin-template
-```
+CI: `.github/workflows/publish-npm.yml` publishes both on release / manual dispatch (`NPM_TOKEN` for npmjs; `GITHUB_TOKEN` for GitHub Packages).
 
 ## Intentionally omitted heavy deps
 

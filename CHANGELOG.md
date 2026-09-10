@@ -8,6 +8,7 @@
 
 ### Added
 - `npm run smoke:template` (pack → scaffold → typecheck + UI inventory)
+- Dual publish: npmjs + GitHub Packages (`@rahulsukla/verdant-tamagui-admin-template`)
 
 ## [0.2.0] — 2026-09-10
 

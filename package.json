@@ -91,6 +91,7 @@
     "serve:web": "expo serve",
     "prepack": "npm run typecheck && npm run audit:pages",
     "smoke:template": "node scripts/smoke-template.cjs",
-    "release:npm": "npm publish --access public"
+    "release:npm": "npm publish --access public",
+    "release:github-packages": "node scripts/publish-github-packages.cjs"
   }
 }

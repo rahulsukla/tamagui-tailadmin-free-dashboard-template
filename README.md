@@ -46,6 +46,8 @@ npm run web
 
 Package on npm: https://www.npmjs.com/package/verdant-tamagui-admin-template
 
+Also mirrored to [GitHub Packages](https://github.com/rahulsukla/verdant-tamagui-admin-template/pkgs/npm/verdant-tamagui-admin-template) as `@rahulsukla/verdant-tamagui-admin-template` (repo Packages sidebar).
+
 ### Option B — Expo template from GitHub
 
 ```bash

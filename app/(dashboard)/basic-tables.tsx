@@ -1,13 +1,16 @@
-import { Text } from 'tamagui'
+import { YStack } from 'tamagui'
 
-import { PageShell } from '@/components/PageShell'
+import { PageBreadcrumb } from '@/components/PageBreadcrumb'
+import { BasicTableOne } from '@/components/tables/BasicTableOne'
+import { ComponentCard } from '@/components/ui/ComponentCard'
 
-export default function Page() {
+export default function BasicTablesPage() {
   return (
-    <PageShell title="Basic Tables">
-      <Text color="$gray10" fontSize={14}>
-        Basic Tables — content ported in a later phase. Navigation and theme shell are live.
-      </Text>
-    </PageShell>
+    <YStack gap="$5" flex={1}>
+      <PageBreadcrumb pageTitle="Basic Tables" />
+      <ComponentCard title="Basic Table 1">
+        <BasicTableOne />
+      </ComponentCard>
+    </YStack>
   )
 }

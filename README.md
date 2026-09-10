@@ -1,7 +1,7 @@
-# Verdant — Universal Admin Template
+# Verdant — Tamagui Admin Template
 
-[![Demo](https://img.shields.io/badge/demo-GitHub%20Pages-3d8b6e?style=flat-square)](https://rahulsukla.github.io/tamagui-tailadmin-free-dashboard-template/)
-[![Release](https://img.shields.io/badge/release-v0.2.0-0d9488?style=flat-square)](https://github.com/rahulsukla/tamagui-tailadmin-free-dashboard-template/releases)
+[![Demo](https://img.shields.io/badge/demo-GitHub%20Pages-3d8b6e?style=flat-square)](https://rahulsukla.github.io/verdant-tamagui-admin-template/)
+[![Release](https://img.shields.io/badge/release-v0.2.0-0d9488?style=flat-square)](https://github.com/rahulsukla/verdant-tamagui-admin-template/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-gray?style=flat-square)](./LICENSE)
 
 **Verdant** is a universal (iOS / Android / Web) admin dashboard template built with **Expo SDK 57**, **Expo Router**, and **Tamagui**.
@@ -10,7 +10,7 @@
 
 ## Live demo
 
-**https://rahulsukla.github.io/tamagui-tailadmin-free-dashboard-template/**
+**https://rahulsukla.github.io/verdant-tamagui-admin-template/**
 
 Static Expo web export on GitHub Pages (`gh-pages`). Redeploys on push to `main` and on published releases.
 

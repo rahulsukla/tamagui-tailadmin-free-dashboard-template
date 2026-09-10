@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { Modal, Pressable } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
+import { PortalProviders } from '@/components/PortalProviders'
 import { AppButton } from '@/components/ui/Button'
 
 export function useModal(initial = false) {
@@ -32,56 +33,58 @@ export function AppModal({
 }) {
   return (
     <Modal visible={isOpen} transparent animationType="fade" onRequestClose={onClose}>
-      <Pressable
-        onPress={onClose}
-        style={{
-          flex: 1,
-          backgroundColor: 'rgba(16,24,40,0.45)',
-          justifyContent: 'center',
-          padding: 16,
-        }}
-      >
-        {/* Nested Pressable absorbs presses so the backdrop does not close the dialog. */}
-        <Pressable onPress={() => {}}>
-          <YStack
-            bg="$backgroundStrong"
-            rounded={24}
-            p="$5"
-            maxW={700}
-            width="100%"
-            self="center"
-            gap="$4"
-            maxH="90%"
-          >
-            <YStack gap="$2">
-              <Text fontSize={22} fontWeight="600" color="$color">
-                {title}
-              </Text>
-              {subtitle ? (
-                <Text fontSize={14} color="$gray10">
-                  {subtitle}
+      <PortalProviders>
+        <Pressable
+          onPress={onClose}
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(16,24,40,0.45)',
+            justifyContent: 'center',
+            padding: 16,
+          }}
+        >
+          {/* Nested Pressable absorbs presses so the backdrop does not close the dialog. */}
+          <Pressable onPress={() => {}}>
+            <YStack
+              bg="$backgroundStrong"
+              rounded={24}
+              p="$5"
+              maxW={700}
+              width="100%"
+              self="center"
+              gap="$4"
+              maxH="90%"
+            >
+              <YStack gap="$2">
+                <Text fontSize={22} fontWeight="600" color="$color">
+                  {title}
                 </Text>
-              ) : null}
+                {subtitle ? (
+                  <Text fontSize={14} color="$gray10">
+                    {subtitle}
+                  </Text>
+                ) : null}
+              </YStack>
+              <YStack gap="$4">{children}</YStack>
+              <XStack gap="$3" justify="flex-end" flexWrap="wrap">
+                <AppButton variant="outline" size="sm" onPress={onClose}>
+                  Close
+                </AppButton>
+                <AppButton
+                  variant="primary"
+                  size="sm"
+                  onPress={() => {
+                    onSave?.()
+                    onClose()
+                  }}
+                >
+                  {saveLabel}
+                </AppButton>
+              </XStack>
             </YStack>
-            <YStack gap="$4">{children}</YStack>
-            <XStack gap="$3" justify="flex-end" flexWrap="wrap">
-              <AppButton variant="outline" size="sm" onPress={onClose}>
-                Close
-              </AppButton>
-              <AppButton
-                variant="primary"
-                size="sm"
-                onPress={() => {
-                  onSave?.()
-                  onClose()
-                }}
-              >
-                {saveLabel}
-              </AppButton>
-            </XStack>
-          </YStack>
+          </Pressable>
         </Pressable>
-      </Pressable>
+      </PortalProviders>
     </Modal>
   )
 }

@@ -1,6 +1,7 @@
 import { Modal, Pressable, useWindowDimensions } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
+import { PortalProviders } from '@/components/PortalProviders'
 import { useConfigPanel } from '@/context/ConfigPanelContext'
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 import { useThemeMode, type ColorMode } from '@/context/ThemeContext'
@@ -71,150 +72,152 @@ export function ConfigPanel() {
 
   return (
     <Modal visible={isOpen} transparent animationType="fade" onRequestClose={close}>
-      <Pressable
-        onPress={close}
-        style={{
-          flex: 1,
-          backgroundColor: 'rgba(16,24,40,0.4)',
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-        }}
-      >
-        <Pressable onPress={() => {}} style={{ width: panelW, height: '100%' }}>
-          <YStack
-            flex={1}
-            bg="$backgroundStrong"
-            borderLeftWidth={1}
-            borderColor="$borderColor"
-            p="$5"
-            gap="$5"
-          >
-            <XStack items="center" justify="space-between">
-              <YStack gap={4}>
-                <Text fontSize={18} fontWeight="600" color="$color">
-                  Template settings
-                </Text>
-                <Text fontSize={13} color="$gray10">
-                  Preview brand, density, and layout options
-                </Text>
+      <PortalProviders>
+        <Pressable
+          onPress={close}
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(16,24,40,0.4)',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <Pressable onPress={() => {}} style={{ width: panelW, height: '100%' }}>
+            <YStack
+              flex={1}
+              bg="$backgroundStrong"
+              borderLeftWidth={1}
+              borderColor="$borderColor"
+              p="$5"
+              gap="$5"
+            >
+              <XStack items="center" justify="space-between">
+                <YStack gap={4}>
+                  <Text fontSize={18} fontWeight="600" color="$color">
+                    Template settings
+                  </Text>
+                  <Text fontSize={13} color="$gray10">
+                    Preview brand, density, and layout options
+                  </Text>
+                </YStack>
+                <Pressable onPress={close}>
+                  <XStack
+                    width={36}
+                    height={36}
+                    rounded={8}
+                    borderWidth={1}
+                    borderColor="$borderColor"
+                    items="center"
+                    justify="center"
+                  >
+                    <Text fontSize={16} color="$gray11">
+                      ✕
+                    </Text>
+                  </XStack>
+                </Pressable>
+              </XStack>
+
+              <YStack gap="$3">
+                <SectionTitle>Theme mode</SectionTitle>
+                <XStack gap="$2" flexWrap="wrap">
+                  {(['light', 'dark', 'system'] as ColorMode[]).map((mode) => (
+                    <ChoiceChip
+                      key={mode}
+                      label={mode}
+                      active={colorMode === mode}
+                      onPress={() => setColorMode(mode)}
+                    />
+                  ))}
+                </XStack>
               </YStack>
-              <Pressable onPress={close}>
+
+              <YStack gap="$3">
+                <SectionTitle>Brand preset</SectionTitle>
+                <XStack gap="$2" flexWrap="wrap">
+                  {(Object.keys(brandPresets) as BrandPreset[]).map((preset) => (
+                    <ChoiceChip
+                      key={preset}
+                      label={preset}
+                      color={brandPresets[preset]}
+                      active={config.brandPreset === preset}
+                      onPress={() => setBrandPreset(preset)}
+                    />
+                  ))}
+                </XStack>
                 <XStack
-                  width={36}
-                  height={36}
+                  height={8}
+                  rounded={999}
+                  bg={brandColor as any}
+                  width="100%"
+                />
+              </YStack>
+
+              <YStack gap="$3">
+                <SectionTitle>Density</SectionTitle>
+                <XStack gap="$2" flexWrap="wrap">
+                  <ChoiceChip
+                    label="Comfortable"
+                    active={config.density === 'comfortable'}
+                    onPress={() => setDensity('comfortable')}
+                  />
+                  <ChoiceChip
+                    label="Compact"
+                    active={config.density === 'compact'}
+                    onPress={() => setDensity('compact')}
+                  />
+                </XStack>
+              </YStack>
+
+              <YStack gap="$3">
+                <SectionTitle>Sticky header</SectionTitle>
+                <XStack gap="$2" flexWrap="wrap">
+                  <ChoiceChip
+                    label="On"
+                    active={config.stickyHeader}
+                    onPress={() => setStickyHeader(true)}
+                  />
+                  <ChoiceChip
+                    label="Off"
+                    active={!config.stickyHeader}
+                    onPress={() => setStickyHeader(false)}
+                  />
+                </XStack>
+              </YStack>
+
+              <YStack gap="$3">
+                <SectionTitle>Content max width</SectionTitle>
+                <XStack gap="$2" flexWrap="wrap">
+                  {WIDTH_OPTIONS.map((opt) => (
+                    <ChoiceChip
+                      key={opt.label}
+                      label={opt.label}
+                      active={config.contentMaxWidth === opt.value}
+                      onPress={() => updateConfig({ contentMaxWidth: opt.value })}
+                    />
+                  ))}
+                </XStack>
+              </YStack>
+
+              <Pressable onPress={resetConfig}>
+                <XStack
+                  mt="$2"
+                  height={44}
                   rounded={8}
                   borderWidth={1}
                   borderColor="$borderColor"
                   items="center"
                   justify="center"
+                  hoverStyle={{ bg: '$backgroundHover' }}
                 >
-                  <Text fontSize={16} color="$gray11">
-                    ✕
+                  <Text fontSize={14} fontWeight="500" color="$gray11">
+                    Reset to defaults
                   </Text>
                 </XStack>
               </Pressable>
-            </XStack>
-
-            <YStack gap="$3">
-              <SectionTitle>Theme mode</SectionTitle>
-              <XStack gap="$2" flexWrap="wrap">
-                {(['light', 'dark', 'system'] as ColorMode[]).map((mode) => (
-                  <ChoiceChip
-                    key={mode}
-                    label={mode}
-                    active={colorMode === mode}
-                    onPress={() => setColorMode(mode)}
-                  />
-                ))}
-              </XStack>
             </YStack>
-
-            <YStack gap="$3">
-              <SectionTitle>Brand preset</SectionTitle>
-              <XStack gap="$2" flexWrap="wrap">
-                {(Object.keys(brandPresets) as BrandPreset[]).map((preset) => (
-                  <ChoiceChip
-                    key={preset}
-                    label={preset}
-                    color={brandPresets[preset]}
-                    active={config.brandPreset === preset}
-                    onPress={() => setBrandPreset(preset)}
-                  />
-                ))}
-              </XStack>
-              <XStack
-                height={8}
-                rounded={999}
-                bg={brandColor as any}
-                width="100%"
-              />
-            </YStack>
-
-            <YStack gap="$3">
-              <SectionTitle>Density</SectionTitle>
-              <XStack gap="$2" flexWrap="wrap">
-                <ChoiceChip
-                  label="Comfortable"
-                  active={config.density === 'comfortable'}
-                  onPress={() => setDensity('comfortable')}
-                />
-                <ChoiceChip
-                  label="Compact"
-                  active={config.density === 'compact'}
-                  onPress={() => setDensity('compact')}
-                />
-              </XStack>
-            </YStack>
-
-            <YStack gap="$3">
-              <SectionTitle>Sticky header</SectionTitle>
-              <XStack gap="$2" flexWrap="wrap">
-                <ChoiceChip
-                  label="On"
-                  active={config.stickyHeader}
-                  onPress={() => setStickyHeader(true)}
-                />
-                <ChoiceChip
-                  label="Off"
-                  active={!config.stickyHeader}
-                  onPress={() => setStickyHeader(false)}
-                />
-              </XStack>
-            </YStack>
-
-            <YStack gap="$3">
-              <SectionTitle>Content max width</SectionTitle>
-              <XStack gap="$2" flexWrap="wrap">
-                {WIDTH_OPTIONS.map((opt) => (
-                  <ChoiceChip
-                    key={opt.label}
-                    label={opt.label}
-                    active={config.contentMaxWidth === opt.value}
-                    onPress={() => updateConfig({ contentMaxWidth: opt.value })}
-                  />
-                ))}
-              </XStack>
-            </YStack>
-
-            <Pressable onPress={resetConfig}>
-              <XStack
-                mt="$2"
-                height={44}
-                rounded={8}
-                borderWidth={1}
-                borderColor="$borderColor"
-                items="center"
-                justify="center"
-                hoverStyle={{ bg: '$backgroundHover' }}
-              >
-                <Text fontSize={14} fontWeight="500" color="$gray11">
-                  Reset to defaults
-                </Text>
-              </XStack>
-            </Pressable>
-          </YStack>
+          </Pressable>
         </Pressable>
-      </Pressable>
+      </PortalProviders>
     </Modal>
   )
 }

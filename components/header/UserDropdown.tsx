@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Image } from 'expo-image'
-import { Link } from 'expo-router'
+import { useRouter } from 'expo-router'
 import { Modal, Pressable, useWindowDimensions } from 'react-native'
 import { Text, XStack, YStack } from 'tamagui'
 
+import { PortalProviders } from '@/components/PortalProviders'
 import { useTemplateConfig } from '@/context/TemplateConfigContext'
 
 const LINKS = [
@@ -16,6 +17,7 @@ export function UserDropdown() {
   const [open, setOpen] = useState(false)
   const { width } = useWindowDimensions()
   const { brandColor } = useTemplateConfig()
+  const router = useRouter()
   const showName = width >= 640
 
   return (
@@ -39,40 +41,46 @@ export function UserDropdown() {
       </Pressable>
 
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
-        <Pressable
-          onPress={() => setOpen(false)}
-          style={{
-            flex: 1,
-            backgroundColor: 'rgba(16,24,40,0.35)',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-end',
-            paddingTop: 64,
-            paddingRight: 12,
-          }}
-        >
-          <Pressable onPress={() => {}}>
-            <YStack
-              width={280}
-              bg="$backgroundStrong"
-              borderWidth={1}
-              borderColor="$borderColor"
-              rounded={16}
-              p={16}
-              gap={12}
-            >
-              <YStack gap={4} pb={12} borderBottomWidth={1} borderColor="$borderColor">
-                <Text fontSize={14} fontWeight="600" color="$color" lineHeight={20}>
-                  John Doe
-                </Text>
-                <Text fontSize={12} color="$gray10" lineHeight={18}>
-                  john.doe@example.com
-                </Text>
-              </YStack>
+        <PortalProviders>
+          <Pressable
+            onPress={() => setOpen(false)}
+            style={{
+              flex: 1,
+              backgroundColor: 'rgba(16,24,40,0.35)',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-end',
+              paddingTop: 64,
+              paddingRight: 12,
+            }}
+          >
+            <Pressable onPress={() => {}}>
+              <YStack
+                width={280}
+                bg="$backgroundStrong"
+                borderWidth={1}
+                borderColor="$borderColor"
+                rounded={16}
+                p={16}
+                gap={12}
+              >
+                <YStack gap={4} pb={12} borderBottomWidth={1} borderColor="$borderColor">
+                  <Text fontSize={14} fontWeight="600" color="$color" lineHeight={20}>
+                    John Doe
+                  </Text>
+                  <Text fontSize={12} color="$gray10" lineHeight={18}>
+                    john.doe@example.com
+                  </Text>
+                </YStack>
 
-              <YStack gap={4}>
-                {LINKS.map((item) => (
-                  <Link key={item.label} href={item.href} asChild>
-                    <Pressable onPress={() => setOpen(false)}>
+                <YStack gap={4}>
+                  {LINKS.map((item) => (
+                    <Pressable
+                      key={item.label}
+                      onPress={() => {
+                        setOpen(false)
+                        router.push(item.href)
+                      }}
+                    >
                       <XStack
                         width="100%"
                         px={12}
@@ -86,12 +94,15 @@ export function UserDropdown() {
                         </Text>
                       </XStack>
                     </Pressable>
-                  </Link>
-                ))}
-              </YStack>
+                  ))}
+                </YStack>
 
-              <Link href="/signin" asChild>
-                <Pressable onPress={() => setOpen(false)}>
+                <Pressable
+                  onPress={() => {
+                    setOpen(false)
+                    router.push('/signin')
+                  }}
+                >
                   <XStack
                     width="100%"
                     mt={4}
@@ -114,10 +125,10 @@ export function UserDropdown() {
                     </Text>
                   </XStack>
                 </Pressable>
-              </Link>
-            </YStack>
+              </YStack>
+            </Pressable>
           </Pressable>
-        </Pressable>
+        </PortalProviders>
       </Modal>
     </>
   )

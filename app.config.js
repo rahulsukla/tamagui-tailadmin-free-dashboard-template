@@ -1,4 +1,4 @@
-const repoName = 'tamagui-tailadmin-free-dashboard-template'
+const repoName = 'verdant-tamagui-admin-template'
 const forGithubPages = process.env.GITHUB_PAGES === '1'
 
 /** @type {import('expo/config').ExpoConfig} */

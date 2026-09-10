@@ -4,10 +4,12 @@
 
 ### Changed
 - Rebrand UI to **Verdant** (generic admin template); TailAdmin mentioned only as inspiration
+- GitHub repo renamed to `verdant-tamagui-admin-template`
 - Default brand preset → verdant green (tweakcn Light Green–inspired mood)
 - Profile demo data → John Doe with generated dummy avatars/products
 - Remove sidebar “Purchase Plan” promo widget
 - Fix user dropdown alignment; tighten Demographic + Recent Orders tiles
+- Fix modal/dropdown fonts (re-mount Tamagui theme inside RN Modal portals)
 - README rewritten (no phase checklist); component docs in `docs/components.md`
 
 ### Added
